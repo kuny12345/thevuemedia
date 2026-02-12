@@ -48,6 +48,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+      <meta name="google-site-verification" content="1xTUpkBJesKd1AbKgBsWrAXkYWcmqRQT9Sy9hBpzjk8" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
