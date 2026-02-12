@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "더뷰미디어 | AI가 당신의 브랜드를 추천하게 만듭니다",
+  title: "AIO, AI 최적화 솔루션 | 더뷰미디어 - ChatGPT 브랜드 추천 1위 만들기",
   description:
-    "ChatGPT, Gemini, Copilot이 고객에게 귀사를 먼저 추천하도록. 더뷰미디어의 AIO 전략이 브랜드의 AI 인지도를 설계합니다.",
+    "AIO전문 서비스. Google오버뷰, ChatGPT, Gemini, Copilot이 고객에게 귀사를 업계 1위로 추천하도록 설계합니다. AI 브랜드 인지도 진단부터 멀티채널 전략까지, 실시간 성과 대시보드로 검증되는 AIO 솔루션을 제공합니다.",
 };
 
 export default function RootLayout({

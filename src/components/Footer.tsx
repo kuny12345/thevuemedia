@@ -10,7 +10,7 @@ export default function Footer() {
               className="flex items-center gap-0.5 text-xl font-extrabold tracking-tight mb-4"
             >
               <span className="text-white">THE</span>
-              <span className="text-primary">VIEW</span>
+              <span className="text-primary">VUE</span>
               <span className="text-white">MEDIA</span>
             </a>
             <p className="text-gray-500 text-sm leading-relaxed">
@@ -63,16 +63,16 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm">문의</h4>
             <ul className="space-y-2.5 text-gray-500 text-sm">
-              <li>contact@thevuemedia.co.kr</li>
-              <li>02-XXX-XXXX</li>
-              <li>서울특별시 강남구</li>
+              <li>kuny12345@gmail.com</li>
+              <li>010-6663-</li>
+              <li>대구 수성구 청수로 20길 13 프롬앤드 206</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 pt-8 text-center">
           <p className="text-gray-600 text-sm">
-            &copy; 2026 더뷰미디어(THE VIEW MEDIA). All rights reserved.
+            &copy; 2026 더뷰미디어(THEVUEMEDIA). All rights reserved.
           </p>
         </div>
       </div>
