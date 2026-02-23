@@ -1,10 +1,34 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const siteUrl = "https://thevuemedia.com";
+
 export const metadata: Metadata = {
-  title: "AIO, AI 최적화 솔루션 | 더뷰미디어 - ChatGPT 브랜드 추천 1위 만들기",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default:
+      "AIO, AI 최적화 솔루션 | 더뷰미디어 - ChatGPT 브랜드 추천 1위 만들기",
+    template: "%s | 더뷰미디어",
+  },
   description:
     "AIO전문 서비스. Google오버뷰, ChatGPT, Gemini, Copilot이 고객에게 귀사를 업계 1위로 추천하도록 설계합니다. AI 브랜드 인지도 진단부터 멀티채널 전략까지, 실시간 성과 대시보드로 검증되는 AIO 솔루션을 제공합니다.",
+  openGraph: {
+    title:
+      "AIO, AI 최적화 솔루션 | 더뷰미디어 - ChatGPT 브랜드 추천 1위 만들기",
+    description:
+      "AIO전문 서비스. Google오버뷰, ChatGPT, Gemini, Copilot이 고객에게 귀사를 업계 1위로 추천하도록 설계합니다. AI 브랜드 인지도 진단부터 멀티채널 전략까지, 실시간 성과 대시보드로 검증되는 AIO 솔루션을 제공합니다.",
+    url: "/",
+    siteName: "더뷰미디어",
+    locale: "ko_KR",
+    type: "website",
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
