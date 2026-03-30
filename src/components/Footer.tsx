@@ -148,9 +148,7 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm">문의</h4>
             <ul className="space-y-2.5 text-gray-500 text-sm">
-              <li>kuny12345@gmail.com</li>
-              <li>010-6663-</li>
-              <li>대구 수성구 청수로 20길 13 프롬앤드 206</li>
+              <li>문의는 SNS 채널을 이용해주세요</li>
             </ul>
           </div>
         </div>

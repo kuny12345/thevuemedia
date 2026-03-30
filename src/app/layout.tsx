@@ -56,16 +56,7 @@ export default function RootLayout({
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      email: "kuny12345@gmail.com",
-      telephone: "010-6663-0000",
       contactType: "customer service",
-    },
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "대구",
-      addressRegion: "수성구",
-      streetAddress: "청수로 20길 13 프롬앤드 206",
-      addressCountry: "KR",
     },
   };
 
