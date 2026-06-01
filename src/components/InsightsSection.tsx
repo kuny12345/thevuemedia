@@ -13,11 +13,11 @@ const articles = postsByDate()
 
 export default function InsightsSection() {
   return (
-    <section id="insights" className="py-20 lg:py-28 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="insights" className="py-24 lg:py-32 bg-white border-t border-gray-100">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm mb-3 tracking-widest uppercase">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
             Insights
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
@@ -34,11 +34,11 @@ export default function InsightsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {articles.map((a) => (
             <Link key={a.title} href={a.href}>
-              <article className="group bg-white rounded-2xl border border-gray-100 border-t-4 border-t-primary/30 p-7 hover:shadow-2xl hover:shadow-primary/15 hover:border-primary/20 hover:border-t-primary hover:-translate-y-1 transition-all duration-300 cursor-pointer h-full">
-                <span className="inline-block px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-bold mb-4">
+              <article className="group rounded-xl border border-gray-200 bg-white p-7 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer h-full">
+                <span className="inline-block text-xs font-bold text-primary mb-3">
                   {a.tag}
                 </span>
-                <h3 className="text-lg font-bold text-gray-900 mb-3 leading-snug group-hover:text-primary transition-colors">
+                <h3 className="text-base font-bold text-ink mb-3 leading-snug group-hover:text-primary transition-colors">
                   {a.title}
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed mb-5">
@@ -46,7 +46,7 @@ export default function InsightsSection() {
                 </p>
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-400">{a.date}</span>
-                  <span className="text-primary font-semibold group-hover:translate-x-1 transition-transform">
+                  <span className="text-gray-700 font-semibold group-hover:text-primary group-hover:translate-x-0.5 transition-all">
                     읽어보기 &rarr;
                   </span>
                 </div>

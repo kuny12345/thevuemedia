@@ -77,16 +77,15 @@ export default function ProductsPage() {
       <JsonLd data={faqPageSchema(faq)} />
 
       {/* Hero */}
-      <header className="bg-dark pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
-        <div className="absolute top-1/3 -right-32 w-[460px] h-[460px] bg-primary/20 rounded-full blur-[120px]" />
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary-light text-sm font-bold mb-5">
+      <header className="pt-32 pb-16 lg:pt-40 lg:pb-20 border-b border-gray-100">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <span className="inline-block text-xs font-bold tracking-[0.14em] uppercase text-primary mb-4">
             Products & Solutions
           </span>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-ink leading-tight mb-6">
             AIO를 <span className="text-gradient">직접 만들어</span> 씁니다
           </h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
             더뷰미디어는 AI 가시성 추적·SEO/GEO 진단·사이트 리빌딩 도구를 직접
             개발해 운영합니다. 우리가 매일 쓰는 도구로 고객의 AI 노출을
             설계합니다.
@@ -197,7 +196,7 @@ export default function ProductsPage() {
             현재 AI가 우리 브랜드를 어떻게 인식하는지 무료로 진단해 드립니다.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="/#contact" className="inline-block px-8 py-4 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25">
+            <a href="/#contact" className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors">
               무료 AI 인식도 진단받기
             </a>
             <Link href="/hospital-marketing" className="inline-block px-8 py-4 rounded-full border border-gray-300 text-gray-700 font-semibold hover:border-primary/40 hover:text-primary transition-colors">

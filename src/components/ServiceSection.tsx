@@ -64,11 +64,11 @@ const platforms = [
 
 export default function ServiceSection() {
   return (
-    <section id="service" className="py-20 lg:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="service" className="py-24 lg:py-32 bg-white border-t border-gray-100">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm mb-3 tracking-widest uppercase">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
             Service
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
@@ -84,27 +84,25 @@ export default function ServiceSection() {
           </p>
         </div>
 
-        <p className="text-center text-sm font-bold text-primary/60 tracking-widest uppercase mb-10">
-          One Source, Multi-Channel AI Dominance
+        <p className="text-center text-xs font-medium text-gray-400 tracking-[0.15em] uppercase mb-12">
+          One Source · Multi-Channel AI Dominance
         </p>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {platforms.map((p) => (
             <div
               key={p.name}
-              className="group relative bg-gray-50 border border-gray-100 border-t-4 border-t-primary/40 rounded-2xl p-7 hover:bg-white hover:shadow-2xl hover:shadow-primary/15 hover:border-primary/20 hover:border-t-primary hover:-translate-y-1 transition-all duration-300"
+              className="group rounded-xl border border-gray-200 bg-white p-7 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white group-hover:scale-105 transition-all duration-300">
+              <div className="w-11 h-11 rounded-lg bg-gray-100 text-gray-900 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
                 {p.icon}
               </div>
-              <h3 className="text-lg font-bold mb-2 text-gray-900">
-                {p.name}
-              </h3>
+              <h3 className="text-base font-bold mb-2 text-ink">{p.name}</h3>
               <p className="text-gray-500 text-sm leading-relaxed mb-4">
                 {p.desc}
               </p>
-              <span className="inline-block px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-semibold">
+              <span className="inline-block text-xs font-semibold text-primary">
                 {p.badge}
               </span>
             </div>

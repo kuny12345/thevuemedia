@@ -113,23 +113,23 @@ export default function AioServicePage() {
       <JsonLd data={faqPageSchema(faq)} />
 
       {/* Hero */}
-      <header className="bg-dark pt-32 pb-20 lg:pt-40 lg:pb-28">
+      <header className="pt-32 pb-16 lg:pt-40 lg:pb-20 border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary-light text-sm font-bold mb-5">
+          <span className="inline-block text-xs font-bold tracking-[0.14em] uppercase text-primary mb-4">
             AIO Service
           </span>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-ink leading-tight mb-6">
             AI가 당신의 브랜드를 <span className="text-gradient">추천하게</span>{" "}
             만듭니다
           </h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
             AIO(AI Optimization)는 ChatGPT·Gemini·Perplexity·Copilot 같은 생성형
             AI가 답변을 만들 때, 우리 브랜드를 추천 출처로 선택하게 만드는
             최적화입니다. 진단부터 실시간 추적까지 4단계로 설계합니다.
           </p>
           <a
             href="/#contact"
-            className="inline-block px-8 py-4 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25"
+            className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
           >
             무료 AI 인식도 진단받기
           </a>
@@ -272,7 +272,7 @@ export default function AioServicePage() {
           </p>
           <a
             href="/#contact"
-            className="inline-block px-8 py-4 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25"
+            className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
           >
             무료 AI 인식도 진단받기
           </a>

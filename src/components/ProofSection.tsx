@@ -7,11 +7,11 @@ const stats = [
 
 export default function ProofSection() {
   return (
-    <section id="proof" className="py-20 lg:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="proof" className="py-24 lg:py-32 bg-white border-t border-gray-100">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm mb-3 tracking-wide uppercase">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
             Proof
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
@@ -116,9 +116,9 @@ export default function ProofSection() {
           {stats.map((s) => (
             <div
               key={s.label}
-              className="text-center bg-gray-50 rounded-2xl p-6 border border-gray-100"
+              className="text-center rounded-xl border border-gray-200 bg-white p-6"
             >
-              <div className="text-3xl lg:text-4xl font-extrabold text-gradient mb-2">
+              <div className="text-3xl lg:text-4xl font-extrabold text-ink mb-2 tracking-tight">
                 {s.value}
               </div>
               <div className="text-sm text-gray-500 font-medium">

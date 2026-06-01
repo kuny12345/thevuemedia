@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-dark-secondary border-t border-gray-800">
+    <footer className="bg-gray-50 border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-6 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
@@ -9,9 +9,9 @@ export default function Footer() {
               href="/"
               className="flex items-center gap-0.5 text-xl font-extrabold tracking-tight mb-4"
             >
-              <span className="text-white">THE</span>
+              <span className="text-ink">THE</span>
               <span className="text-primary">VUE</span>
-              <span className="text-white">MEDIA</span>
+              <span className="text-ink">MEDIA</span>
             </a>
             <p className="text-gray-500 text-sm leading-relaxed mb-6">
               AI가 브랜드를 추천하게 만듭니다.
@@ -92,7 +92,7 @@ export default function Footer() {
                       target="_blank"
                       rel="me noopener noreferrer"
                       aria-label={`더뷰미디어 ${social.name} 채널`}
-                      className="w-10 h-10 rounded-lg bg-gray-800 hover:bg-primary text-gray-400 hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110"
+                      className="w-10 h-10 rounded-lg bg-gray-100 hover:bg-gray-900 text-gray-500 hover:text-white flex items-center justify-center transition-all duration-200 hover:scale-110"
                       title={`더뷰미디어 ${social.name} 채널`}
                     >
                       {social.icon}
@@ -105,7 +105,7 @@ export default function Footer() {
 
           {/* Service links */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-sm">서비스</h4>
+            <h4 className="text-ink font-semibold mb-4 text-sm">서비스</h4>
             <ul className="space-y-2.5">
               {[
                 { href: "/aio", label: "AIO 서비스" },
@@ -127,7 +127,7 @@ export default function Footer() {
 
           {/* Product links */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-sm">제품</h4>
+            <h4 className="text-ink font-semibold mb-4 text-sm">제품</h4>
             <ul className="space-y-2.5">
               {[
                 { href: "https://airank.lol", label: "airank — AI 가시성 추적", ext: true },
@@ -152,7 +152,7 @@ export default function Footer() {
 
           {/* Company links */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-sm">회사</h4>
+            <h4 className="text-ink font-semibold mb-4 text-sm">회사</h4>
             <ul className="space-y-2.5">
               {[
                 { href: "/products", label: "회사 소개" },
@@ -172,8 +172,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center">
-          <p className="text-gray-600 text-sm">
+        <div className="border-t border-gray-200 pt-8 text-center">
+          <p className="text-gray-400 text-sm">
             &copy; 2026 더뷰미디어(THEVUEMEDIA). All rights reserved.
           </p>
         </div>

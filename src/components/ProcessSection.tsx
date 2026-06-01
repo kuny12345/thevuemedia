@@ -27,11 +27,11 @@ const steps = [
 
 export default function ProcessSection() {
   return (
-    <section id="process" className="py-20 lg:py-28 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="process" className="py-24 lg:py-32 bg-white border-t border-gray-100">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm mb-3 tracking-widest uppercase">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
             Process
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
@@ -47,22 +47,22 @@ export default function ProcessSection() {
         {/* Steps */}
         <div className="relative max-w-3xl mx-auto">
           {/* Vertical line */}
-          <div className="absolute left-6 lg:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary/20 hidden md:block" />
+          <div className="absolute left-6 lg:left-7 top-0 bottom-0 w-px bg-gray-200 hidden md:block" />
 
-          <div className="space-y-10 md:space-y-14">
+          <div className="space-y-10 md:space-y-12">
             {steps.map((step) => (
               <div key={step.num} className="group flex gap-6 lg:gap-8 items-start">
-                <div className="relative flex-shrink-0 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center text-lg lg:text-xl font-extrabold shadow-lg shadow-primary/25 z-10 group-hover:scale-105 transition-transform duration-300">
+                <div className="relative flex-shrink-0 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-ink text-white flex items-center justify-center text-base lg:text-lg font-extrabold z-10 ring-4 ring-white">
                   {step.num}
                 </div>
-                <div className="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-sm flex-1 hover:shadow-xl hover:shadow-primary/10 group-hover:-translate-y-0.5 transition-all duration-300">
-                  <span className="inline-block px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-3">
+                <div className="rounded-xl p-6 lg:p-7 border border-gray-200 bg-white flex-1 hover:border-gray-300 hover:shadow-sm transition-all duration-200">
+                  <span className="inline-block text-xs font-bold text-primary uppercase tracking-[0.12em] mb-2">
                     {step.phase}
                   </span>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-lg font-bold text-ink mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-gray-500 leading-relaxed">{step.desc}</p>
+                  <p className="text-gray-500 leading-relaxed text-sm">{step.desc}</p>
                 </div>
               </div>
             ))}

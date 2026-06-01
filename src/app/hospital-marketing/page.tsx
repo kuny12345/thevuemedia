@@ -91,23 +91,23 @@ export default function HospitalMarketingPage() {
       <JsonLd data={faqPageSchema(faq)} />
 
       {/* Hero */}
-      <header className="bg-dark pt-32 pb-20 lg:pt-40 lg:pb-28">
+      <header className="pt-32 pb-16 lg:pt-40 lg:pb-20 border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary-light text-sm font-bold mb-5">
+          <span className="inline-block text-xs font-bold tracking-[0.14em] uppercase text-primary mb-4">
             병원 마케팅 · 의료 AIO
           </span>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-ink leading-tight mb-6">
             AI가 <span className="text-gradient">우리 병원</span>을 추천하게
             만듭니다
           </h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed mb-8">
             환자는 이제 “○○ 잘하는 병원”을 검색창이 아니라 AI에게 묻습니다.
             의료광고법을 준수하며 네이버·구글 검색과 ChatGPT·Gemini·Perplexity
             답변에서 우리 병원이 추천되도록 설계합니다.
           </p>
           <a
             href="/#contact"
-            className="inline-block px-8 py-4 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25"
+            className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
           >
             무료 병원 AI 노출 진단받기
           </a>
@@ -126,15 +126,15 @@ export default function HospitalMarketingPage() {
 
         {/* 시그니처 지표 */}
         <section className="mb-20">
-          <div className="rounded-3xl bg-dark text-white p-8 lg:p-14 text-center">
-            <div className="text-5xl lg:text-7xl font-extrabold mb-3">
+          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8 lg:p-14 text-center">
+            <div className="text-5xl lg:text-7xl font-extrabold mb-3 tracking-tight">
               <span className="text-gradient">{SIGNATURE.value}</span>
-              <span className="text-2xl lg:text-3xl align-top text-primary-light">
+              <span className="text-2xl lg:text-3xl align-top text-primary">
                 {SIGNATURE.suffix}
               </span>
             </div>
-            <p className="text-lg lg:text-xl font-semibold mb-2">{SIGNATURE.label}</p>
-            <p className="text-gray-400 text-sm max-w-xl mx-auto">{SIGNATURE.note}</p>
+            <p className="text-lg lg:text-xl font-semibold text-ink mb-2">{SIGNATURE.label}</p>
+            <p className="text-gray-500 text-sm max-w-xl mx-auto">{SIGNATURE.note}</p>
           </div>
         </section>
 
@@ -241,7 +241,7 @@ export default function HospitalMarketingPage() {
         <div className="max-w-3xl mx-auto px-6 py-16 text-center">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-3">우리 병원은 AI에게 추천받고 있을까?</h2>
           <p className="text-gray-500 mb-6">진료과·지역 기준 AI 노출 진단 리포트를 무료로 받아보세요.</p>
-          <a href="/#contact" className="inline-block px-8 py-4 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25">
+          <a href="/#contact" className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors">
             무료 병원 AI 노출 진단받기
           </a>
         </div>

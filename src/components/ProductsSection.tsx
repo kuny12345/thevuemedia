@@ -6,12 +6,12 @@ export default function ProductsSection() {
   return (
     <section
       id="products"
-      className="py-20 lg:py-28 bg-gradient-to-b from-white via-primary/[0.02] to-white"
+      className="py-24 lg:py-32 bg-gray-50 border-t border-gray-100"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm mb-3 tracking-widest uppercase">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
             What we build
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
@@ -28,16 +28,13 @@ export default function ProductsSection() {
           {products.map((p) => (
             <div
               key={p.slug}
-              className="group relative bg-white rounded-2xl border border-gray-100 border-t-4 border-t-primary/50 p-8 hover:shadow-2xl hover:shadow-primary/15 hover:border-t-primary transition-all duration-300 overflow-hidden flex flex-col"
+              className="group rounded-xl border border-gray-200 bg-white p-8 hover:border-gray-300 hover:shadow-sm transition-all duration-200 flex flex-col"
             >
-              {/* hover gradient wash */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              <div className="relative flex flex-col h-full">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white group-hover:scale-105 transition-all duration-300">
+              <div className="flex flex-col h-full">
+                <div className="w-12 h-12 rounded-lg bg-gray-100 text-gray-900 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors duration-200">
                   <ProductIcon iconKey={p.iconKey} />
                 </div>
-                <h3 className="text-xl font-extrabold text-gray-900">{p.name}</h3>
+                <h3 className="text-lg font-extrabold text-ink">{p.name}</h3>
                 <p className="text-primary text-sm font-semibold mb-3">
                   {p.tagline}
                 </p>
@@ -89,7 +86,7 @@ export default function ProductsSection() {
         <div className="text-center mt-12">
           <Link
             href="/products"
-            className="inline-block px-7 py-3 rounded-full bg-primary text-white font-semibold hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25"
+            className="inline-block px-6 py-3 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
           >
             제품·솔루션 자세히 보기 &rarr;
           </Link>

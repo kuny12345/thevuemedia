@@ -63,15 +63,15 @@ export default function BlogIndexPage() {
       <JsonLd data={breadcrumb} />
       <JsonLd data={collection} />
 
-      <header className="bg-dark pt-32 pb-16 lg:pt-40 lg:pb-20">
+      <header className="pt-32 pb-14 lg:pt-40 lg:pb-16 border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <p className="text-primary-light font-semibold text-sm mb-3 tracking-wide uppercase">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
             Insights
           </p>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-5">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-ink mb-5">
             AIO·GEO 인사이트
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
             AI가 브랜드를 추천하게 만드는 모든 전략을 한곳에 모았습니다.
             개념부터 엔진별·업종별 실전까지.
           </p>
