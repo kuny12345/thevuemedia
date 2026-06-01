@@ -28,31 +28,36 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "ChatGPT가 우리 회사를 추천하게 만드는 법",
-  description:
-    "AI 챗봇이 브랜드를 추천하는 원리와 실전 적용 가능한 5가지 AIO 전략을 단계별로 안내합니다.",
-  datePublished: "2026-02-05T09:00:00+09:00",
-  author: {
-    "@type": "Organization",
-    name: "더뷰미디어",
+const faq = [
+  {
+    q: "AIO 전략은 얼마나 빨리 효과가 나타나나요?",
+    a: "업종과 현재 온라인 인지도에 따라 다르지만, 일반적으로 4~8주 내에 AI 언급 빈도의 변화가 감지되기 시작합니다. 본격적인 성과는 3개월부터 나타나며, 6개월 이후에는 안정적인 AI 추천 위치를 확보할 수 있습니다.",
   },
-  publisher: {
-    "@type": "Organization",
-    name: "더뷰미디어",
+  {
+    q: "ChatGPT 외에 다른 AI에도 적용되나요?",
+    a: "네. AIO 전략은 특정 AI에 국한되지 않습니다. ChatGPT, Google Gemini, Microsoft Copilot, Perplexity, Claude 등 모든 주요 AI 플랫폼에 동시에 작용합니다. AI들이 참조하는 데이터 소스가 상당 부분 겹치기 때문입니다.",
   },
-};
+  {
+    q: "소규모 기업도 AIO가 가능한가요?",
+    a: "오히려 소규모 기업이 AIO를 먼저 시작하면 선점 효과를 얻을 수 있습니다. 아직 많은 기업이 AIO를 도입하지 않은 상태이므로, 지금 시작하면 업종 내에서 AI 추천 순위를 선점하기 훨씬 쉽습니다.",
+  },
+  {
+    q: "기존 SEO를 중단해야 하나요?",
+    a: "아닙니다. AIO는 SEO를 대체하는 것이 아니라 보완하는 전략입니다. 기존 SEO 위에 AIO를 레이어링하면 검색 엔진과 AI 양쪽에서 브랜드 노출을 극대화할 수 있습니다.",
+  },
+];
 
 export default function ChatgptBrandRecommendationPage() {
   return (
     <BlogArticle
+      slug="chatgpt-brand-recommendation"
       tag="가이드"
       title="ChatGPT가 우리 회사를 추천하게 만드는 법"
       date="2026.02.05"
+      datePublished="2026-02-05T09:00:00+09:00"
       readTime="읽기 15분"
-      jsonLd={jsonLd}
+      description="AI 챗봇이 브랜드를 추천하는 원리와 실전 적용 가능한 5가지 AIO 전략을 단계별로 안내합니다."
+      faq={faq}
     >
       <p className="text-xl text-gray-600 leading-relaxed mb-8">
         &ldquo;이 업종에서 추천할 만한 회사가 있을까요?&rdquo; 이제 고객은
@@ -295,57 +300,6 @@ export default function ChatgptBrandRecommendationPage() {
               독보적인 성과를 보여주고 있습니다.&rdquo;
             </p>
           </div>
-        </div>
-      </div>
-
-      <h2 className="text-2xl font-extrabold text-gray-900 mt-12 mb-4">
-        자주 묻는 질문 (FAQ)
-      </h2>
-
-      <div className="space-y-4 mb-8">
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-          <h4 className="font-bold text-gray-900 mb-2">
-            Q. AIO 전략은 얼마나 빨리 효과가 나타나나요?
-          </h4>
-          <p className="text-gray-600 text-sm">
-            업종과 현재 온라인 인지도에 따라 다르지만, 일반적으로{" "}
-            <strong>4~8주 내</strong>에 AI 언급 빈도의 변화가 감지되기
-            시작합니다. 본격적인 성과는 3개월부터 나타나며, 6개월 이후에는
-            안정적인 AI 추천 위치를 확보할 수 있습니다.
-          </p>
-        </div>
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-          <h4 className="font-bold text-gray-900 mb-2">
-            Q. ChatGPT 외에 다른 AI에도 적용되나요?
-          </h4>
-          <p className="text-gray-600 text-sm">
-            네. AIO 전략은 특정 AI에 국한되지 않습니다. ChatGPT, Google Gemini,
-            Microsoft Copilot, Perplexity, Claude 등{" "}
-            <strong>모든 주요 AI 플랫폼</strong>에 동시에 작용합니다. AI들이
-            참조하는 데이터 소스가 상당 부분 겹치기 때문입니다.
-          </p>
-        </div>
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-          <h4 className="font-bold text-gray-900 mb-2">
-            Q. 소규모 기업도 AIO가 가능한가요?
-          </h4>
-          <p className="text-gray-600 text-sm">
-            물론입니다. 오히려 소규모 기업이 AIO를 먼저 시작하면{" "}
-            <strong>선점 효과</strong>를 얻을 수 있습니다. 아직 많은 기업이
-            AIO를 도입하지 않은 상태이므로, 지금 시작하면 업종 내에서 AI 추천
-            순위를 선점하기 훨씬 쉽습니다.
-          </p>
-        </div>
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-          <h4 className="font-bold text-gray-900 mb-2">
-            Q. 기존 SEO를 중단해야 하나요?
-          </h4>
-          <p className="text-gray-600 text-sm">
-            아닙니다. AIO는 SEO를 대체하는 것이 아니라{" "}
-            <strong>보완</strong>하는 전략입니다. 기존 SEO 위에 AIO를
-            레이어링하면 검색 엔진과 AI 양쪽에서 브랜드 노출을 극대화할 수
-            있습니다.
-          </p>
         </div>
       </div>
 

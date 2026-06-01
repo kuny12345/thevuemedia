@@ -1,36 +1,29 @@
 import type { MetadataRoute } from "next";
+import { posts, postUrl } from "@/lib/posts";
 
 const siteUrl = "https://thevuemedia.com";
 
+// Static (non-blog) routes. Keep in sync with app/ landing pages.
+const staticRoutes: { path: string; lastModified: string; priority: number }[] = [
+  { path: "", lastModified: "2026-06-01T00:00:00+09:00", priority: 1 },
+  { path: "/aio", lastModified: "2026-06-01T00:00:00+09:00", priority: 0.9 },
+  { path: "/blog", lastModified: "2026-06-01T00:00:00+09:00", priority: 0.8 },
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    {
-      path: "",
-      lastModified: new Date("2026-02-23T00:00:00+09:00"),
-    },
-    {
-      path: "/blog",
-      lastModified: new Date("2026-02-23T00:00:00+09:00"),
-    },
-    {
-      path: "/blog/chatgpt-brand-recommendation",
-      lastModified: new Date("2026-02-05T09:00:00+09:00"),
-    },
-    {
-      path: "/blog/youtube-shorts-aio-correlation",
-      lastModified: new Date("2026-01-28T09:00:00+09:00"),
-    },
-    {
-      path: "/blog/google-sge-strategy-2026",
-      lastModified: new Date("2026-02-10T09:00:00+09:00"),
-    },
-  ];
-
-  return routes.map((route) => ({
-    url: `${siteUrl}${route.path}`,
-    lastModified: route.lastModified,
+  const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((r) => ({
+    url: `${siteUrl}${r.path}`,
+    lastModified: new Date(r.lastModified),
     changeFrequency: "weekly",
-    priority: route.path === "" ? 1 : 0.8,
+    priority: r.priority,
   }));
-}
 
+  const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
+    url: `${siteUrl}${postUrl(p.slug)}`,
+    lastModified: new Date(p.iso),
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...postEntries];
+}

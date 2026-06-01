@@ -30,31 +30,32 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "2026년 Google SGE 대응 전략: 검색의 패러다임이 바뀐다",
-  description:
-    "Google SGE 시대, AI 생성 답변에 브랜드를 포함시키는 AIO 전략을 단계별로 안내합니다.",
-  datePublished: "2026-02-10T09:00:00+09:00",
-  author: {
-    "@type": "Organization",
-    name: "더뷰미디어",
+const faq = [
+  {
+    q: "SGE(AI 오버뷰)에 우리 브랜드가 노출되려면 핵심이 무엇인가요?",
+    a: "AI가 답변을 생성할 때 참조하는 '출처'로 선택되는 것이 핵심입니다. E-E-A-T 기반 전문 콘텐츠, FAQ·HowTo·Organization 등 구조화 데이터, 질문형 키워드 설계, 멀티채널 일관 노출이 함께 작동해야 합니다.",
   },
-  publisher: {
-    "@type": "Organization",
-    name: "더뷰미디어",
+  {
+    q: "기존 SEO를 잘해두면 SGE에도 자동으로 노출되나요?",
+    a: "부분적으로 도움이 되지만 충분하지 않습니다. 검색 순위 1위라도 AI 스냅숏 아래로 밀릴 수 있어, AI가 인용하는 출처가 되도록 콘텐츠 구조와 구조화 데이터를 별도로 최적화해야 합니다.",
   },
-};
+  {
+    q: "효과는 언제부터 나타나나요?",
+    a: "콘텐츠 발행과 색인 반영 주기에 따라 다르지만, 일반적으로 수 주에서 수개월에 걸쳐 AI 답변 인용에 변화가 나타납니다. 지속적인 모니터링과 콘텐츠 보강이 필요합니다.",
+  },
+];
 
 export default function GoogleSgeStrategyPage() {
   return (
     <BlogArticle
+      slug="google-sge-strategy-2026"
       tag="전략"
       title="2026년 Google SGE 대응 전략: 검색의 패러다임이 바뀐다"
       date="2026.02.10"
+      datePublished="2026-02-10T09:00:00+09:00"
       readTime="읽기 12분"
-      jsonLd={jsonLd}
+      description="Google SGE 시대, AI 생성 답변에 브랜드를 포함시키는 AIO 전략을 단계별로 안내합니다."
+      faq={faq}
     >
       <p className="text-xl text-gray-600 leading-relaxed mb-8">
         2026년, Google은 <strong>Search Generative Experience(SGE)</strong>를

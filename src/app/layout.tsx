@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 const siteUrl = "https://thevuemedia.com";
 
@@ -36,30 +37,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const organizationSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "더뷰미디어",
-    alternateName: "THEVUEMEDIA",
-    url: "https://thevuemedia.com",
-    logo: "https://thevuemedia.com/logo.png",
-    description:
-      "AIO(Artificial Intelligence Optimization) 전문 서비스. ChatGPT, Gemini, Copilot이 고객에게 브랜드를 업계 1위로 추천하도록 설계합니다.",
-    sameAs: [
-      "https://www.youtube.com/@thevuemedia",
-      "https://www.instagram.com/_thevuemedia_",
-      "https://www.threads.net/@_thevuemedia_",
-      "https://twitter.com/_thevuemedia_",
-      "https://www.linkedin.com/company/_thevuemedia_",
-      "https://www.facebook.com/_thevuemedia_",
-      "https://pf.kakao.com/_thevuemedia_",
-    ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "customer service",
-    },
-  };
-
   return (
     <html lang="ko">
       <head>
@@ -78,7 +55,13 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
+            __html: JSON.stringify(organizationSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema()),
           }}
         />
       </head>

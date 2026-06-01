@@ -29,31 +29,32 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  headline: "유튜브 쇼츠 알고리즘과 AIO의 상관관계",
-  description:
-    "쇼츠 알고리즘이 AI 학습에 미치는 영향을 분석하고, 쇼츠를 활용한 AIO 전략을 제시합니다.",
-  datePublished: "2026-01-28T09:00:00+09:00",
-  author: {
-    "@type": "Organization",
-    name: "더뷰미디어",
+const faq = [
+  {
+    q: "쇼츠가 정말 AI 추천에 영향을 주나요?",
+    a: "네. 쇼츠의 자막·제목·설명·해시태그는 텍스트 데이터로 변환되어 AI 학습·참조에 활용될 수 있습니다. 특히 자막의 키워드 정확도와 영상의 도달 규모가 영향을 좌우합니다.",
   },
-  publisher: {
-    "@type": "Organization",
-    name: "더뷰미디어",
+  {
+    q: "자동 생성 자막만으로 충분한가요?",
+    a: "정확도가 떨어질 수 있어 권장하지 않습니다. 수동 자막(SRT)을 업로드해 브랜드명과 핵심 키워드가 정확한 텍스트로 남도록 하는 것이 좋습니다.",
   },
-};
+  {
+    q: "쇼츠만 운영하면 되나요?",
+    a: "쇼츠는 강력하지만 단일 채널입니다. Instagram Reels·X 등으로 교차 배포해 동일 메시지의 데이터 밀도를 높이면 AI 노출 효과가 더 커집니다.",
+  },
+];
 
 export default function YoutubeShortsAioPage() {
   return (
     <BlogArticle
+      slug="youtube-shorts-aio-correlation"
       tag="분석"
       title="유튜브 쇼츠 알고리즘과 AIO의 상관관계"
       date="2026.01.28"
+      datePublished="2026-01-28T09:00:00+09:00"
       readTime="읽기 13분"
-      jsonLd={jsonLd}
+      description="쇼츠 알고리즘이 AI 학습에 미치는 영향을 분석하고, 쇼츠를 활용한 AIO 전략을 제시합니다."
+      faq={faq}
     >
       <p className="text-xl text-gray-600 leading-relaxed mb-8">
         유튜브 쇼츠(YouTube Shorts)는 하루 평균{" "}

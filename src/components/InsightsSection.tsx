@@ -1,31 +1,15 @@
 import Link from "next/link";
+import { postsByDate, postUrl } from "@/lib/posts";
 
-const articles = [
-  {
-    tag: "전략",
-    title: "2026년 Google SGE 대응 전략: 검색의 패러다임이 바뀐다",
-    excerpt:
-      "Google의 Search Generative Experience가 본격 확대되면서, 기존 SEO만으로는 충분하지 않습니다. AI가 생성하는 답변에 브랜드가 포함되려면...",
-    date: "2026.02.10",
-    href: "/blog/google-sge-strategy-2026",
-  },
-  {
-    tag: "가이드",
-    title: "ChatGPT가 우리 회사를 추천하게 만드는 법",
-    excerpt:
-      "AI 챗봇이 특정 브랜드를 추천하는 메커니즘을 분석하고, 실제 적용 가능한 5가지 전략을 단계별로 안내합니다...",
-    date: "2026.02.05",
-    href: "/blog/chatgpt-brand-recommendation",
-  },
-  {
-    tag: "분석",
-    title: "유튜브 쇼츠 알고리즘과 AIO의 상관관계",
-    excerpt:
-      "유튜브 쇼츠의 추천 알고리즘이 AI 학습 데이터에 미치는 영향을 분석하고, 이를 활용한 AIO 전략을 제시합니다...",
-    date: "2026.01.28",
-    href: "/blog/youtube-shorts-aio-correlation",
-  },
-];
+const articles = postsByDate()
+  .slice(0, 3)
+  .map((p) => ({
+    tag: p.tag,
+    title: p.title,
+    excerpt: p.excerpt,
+    date: p.date,
+    href: postUrl(p.slug),
+  }));
 
 export default function InsightsSection() {
   return (
@@ -69,6 +53,15 @@ export default function InsightsSection() {
               </article>
             </Link>
           ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link
+            href="/blog"
+            className="inline-block px-7 py-3 rounded-full border border-gray-200 text-gray-700 font-semibold hover:border-primary/30 hover:text-primary transition-colors"
+          >
+            모든 인사이트 보기 &rarr;
+          </Link>
         </div>
       </div>
     </section>
