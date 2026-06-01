@@ -1,6 +1,7 @@
 // Centralized JSON-LD (schema.org) builders for GEO/AIO optimization.
 // All structured data flows through these helpers so every page emits
 // consistent, valid markup that AI engines and search crawlers can parse.
+import { products, type Product } from "@/lib/products";
 
 export const SITE = {
   url: "https://thevuemedia.com",
@@ -71,6 +72,20 @@ export function organizationSchema(): Json {
       contactType: "customer service",
       areaServed: "KR",
       availableLanguage: ["Korean"],
+    },
+    // 자체 제품·솔루션을 보유함을 구조화 — 역량 기반 권위 신호.
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "AIO 제품·솔루션",
+      itemListElement: products.map((p) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": p.kind,
+          name: p.name,
+          url: p.url,
+          description: p.tagline,
+        },
+      })),
     },
   };
 }
@@ -178,6 +193,55 @@ export function howToSchema(opts: {
       name: s.name,
       text: s.text,
     })),
+  };
+}
+
+/** SoftwareApplication (또는 Service) node for a product. */
+export function productSchema(p: Product): Json {
+  const base: Json = {
+    "@context": "https://schema.org",
+    "@type": p.kind,
+    name: p.name,
+    url: p.url,
+    description: p.description,
+    provider: { "@id": ORG_ID },
+  };
+  if (p.kind === "SoftwareApplication") {
+    base.applicationCategory = "BusinessApplication";
+    base.operatingSystem = "Web";
+    base.publisher = { "@id": ORG_ID };
+  } else {
+    base.serviceType = p.tagline;
+    base.areaServed = { "@type": "Country", name: "대한민국" };
+  }
+  return base;
+}
+
+/** CollectionPage node listing items (e.g. the /products page). */
+export function collectionPageSchema(opts: {
+  name: string;
+  description: string;
+  path: string;
+  items: { name: string; url: string }[];
+}): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: opts.name,
+    description: opts.description,
+    url: abs(opts.path),
+    inLanguage: "ko-KR",
+    isPartOf: { "@id": WEBSITE_ID },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: opts.items.length,
+      itemListElement: opts.items.map((it, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: it.name,
+        url: abs(it.url),
+      })),
+    },
   };
 }
 

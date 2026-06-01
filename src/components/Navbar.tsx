@@ -32,6 +32,7 @@ export default function Navbar() {
           {[
             { href: "/aio", label: "AIO 서비스" },
             { href: "/hospital-marketing", label: "병원 마케팅" },
+            { href: "/products", label: "제품" },
             { href: "/blog", label: "인사이트" },
           ].map((item) => (
             <li key={item.href}>

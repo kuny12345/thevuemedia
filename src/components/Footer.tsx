@@ -6,7 +6,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <a
-              href="#"
+              href="/"
               className="flex items-center gap-0.5 text-xl font-extrabold tracking-tight mb-4"
             >
               <span className="text-white">THE</span>
@@ -108,10 +108,10 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4 text-sm">서비스</h4>
             <ul className="space-y-2.5">
               {[
-                { href: "#service", label: "AIO 전략" },
-                { href: "#process", label: "도입 프로세스" },
-                { href: "#proof", label: "성과 사례" },
-                { href: "#contact", label: "무료 진단" },
+                { href: "/aio", label: "AIO 서비스" },
+                { href: "/hospital-marketing", label: "병원 마케팅" },
+                { href: "/blog", label: "인사이트" },
+                { href: "/#contact", label: "무료 진단" },
               ].map((link) => (
                 <li key={link.href}>
                   <a
@@ -125,30 +125,49 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Product links */}
+          <div>
+            <h4 className="text-white font-semibold mb-4 text-sm">제품</h4>
+            <ul className="space-y-2.5">
+              {[
+                { href: "https://airank.lol", label: "airank — AI 가시성 추적", ext: true },
+                { href: "https://schemaworks.thevuemedia.com", label: "schemaworks — SEO/GEO 진단", ext: true },
+                { href: "/products", label: "GEO 사이트 리빌딩", ext: false },
+                { href: "/products", label: "제품 전체 보기", ext: false },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    {...(link.ext
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className="text-gray-500 text-sm hover:text-gray-300 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Company links */}
           <div>
             <h4 className="text-white font-semibold mb-4 text-sm">회사</h4>
             <ul className="space-y-2.5">
-              {["회사 소개", "블로그", "채용", "개인정보처리방침"].map(
-                (label) => (
-                  <li key={label}>
-                    <a
-                      href="#"
-                      className="text-gray-500 text-sm hover:text-gray-300 transition-colors"
-                    >
-                      {label}
-                    </a>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-sm">문의</h4>
-            <ul className="space-y-2.5 text-gray-500 text-sm">
-              <li>문의는 SNS 채널을 이용해주세요</li>
+              {[
+                { href: "/products", label: "회사 소개" },
+                { href: "/blog", label: "블로그" },
+                { href: "/#contact", label: "문의하기" },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-gray-500 text-sm hover:text-gray-300 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

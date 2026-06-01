@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { SIGNATURE } from "@/lib/brand";
 
 function AnimatedNumber({
   target,
@@ -23,7 +24,7 @@ function AnimatedNumber({
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       start = Math.round(eased * target);
-      if (el) el.textContent = start.toString();
+      if (el) el.textContent = start.toLocaleString();
       if (progress < 1) requestAnimationFrame(animate);
     }
     requestAnimationFrame(animate);
@@ -84,21 +85,21 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Stats */}
+          {/* Stats — 실제 근거 */}
           <div className="flex items-center justify-center lg:justify-start gap-8 lg:gap-12">
             <div className="text-center">
-              <AnimatedNumber target={450} suffix="%" />
-              <p className="text-xs text-gray-500 mt-1">평균 AI 노출량 증가</p>
+              <AnimatedNumber target={5} suffix="개" />
+              <p className="text-xs text-gray-500 mt-1">실시간 추적 AI 엔진</p>
             </div>
             <div className="w-px h-12 bg-gray-700" />
             <div className="text-center">
-              <AnimatedNumber target={200} suffix="+" />
-              <p className="text-xs text-gray-500 mt-1">누적 프로젝트 수</p>
+              <AnimatedNumber target={SIGNATURE.valueNum} suffix={SIGNATURE.suffix} />
+              <p className="text-xs text-gray-500 mt-1">{SIGNATURE.label}</p>
             </div>
             <div className="w-px h-12 bg-gray-700" />
             <div className="text-center">
-              <AnimatedNumber target={6} suffix="개" />
-              <p className="text-xs text-gray-500 mt-1">멀티채널 동시 운영</p>
+              <AnimatedNumber target={3} suffix="종" />
+              <p className="text-xs text-gray-500 mt-1">자체 개발 AIO 도구</p>
             </div>
           </div>
         </div>
@@ -106,11 +107,21 @@ export default function Hero() {
         {/* Dashboard visual */}
         <div className="flex-1 relative max-w-lg w-full">
           <div className="bg-dark-secondary border border-gray-700/50 rounded-2xl p-6 shadow-2xl">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
-              <span className="text-sm text-gray-400 font-medium">
-                AI Mention Score
-              </span>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                <span className="text-sm text-gray-400 font-medium">
+                  AI Mention Score
+                </span>
+              </div>
+              <a
+                href="https://airank.lol"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-primary-light hover:text-white transition-colors"
+              >
+                airank
+              </a>
             </div>
             <div className="text-5xl font-extrabold text-white mb-1">87.4</div>
             <div className="text-sm text-green-400 font-medium mb-6">
@@ -139,7 +150,7 @@ export default function Hero() {
               />
             </svg>
             <div className="flex flex-wrap gap-2">
-              {["ChatGPT", "Gemini", "Copilot", "Perplexity"].map((p) => (
+              {["Google AIO", "ChatGPT", "Perplexity", "Gemini", "Grok"].map((p) => (
                 <span
                   key={p}
                   className="px-3 py-1 rounded-full bg-gray-700/50 text-gray-300 text-xs font-medium"

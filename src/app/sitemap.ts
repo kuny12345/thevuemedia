@@ -8,6 +8,7 @@ const staticRoutes: { path: string; lastModified: string; priority: number }[] =
   { path: "", lastModified: "2026-06-01T00:00:00+09:00", priority: 1 },
   { path: "/aio", lastModified: "2026-06-01T00:00:00+09:00", priority: 0.9 },
   { path: "/hospital-marketing", lastModified: "2026-06-01T00:00:00+09:00", priority: 0.9 },
+  { path: "/products", lastModified: "2026-06-01T00:00:00+09:00", priority: 0.9 },
   { path: "/blog", lastModified: "2026-06-01T00:00:00+09:00", priority: 0.8 },
 ];
 

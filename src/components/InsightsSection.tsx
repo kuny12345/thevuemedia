@@ -17,7 +17,7 @@ export default function InsightsSection() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm mb-3 tracking-wide uppercase">
+          <p className="text-primary font-semibold text-sm mb-3 tracking-widest uppercase">
             Insights
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
@@ -34,7 +34,7 @@ export default function InsightsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {articles.map((a) => (
             <Link key={a.title} href={a.href}>
-              <article className="group bg-white rounded-2xl border border-gray-100 p-7 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20 transition-all duration-300 cursor-pointer h-full">
+              <article className="group bg-white rounded-2xl border border-gray-100 border-t-4 border-t-primary/30 p-7 hover:shadow-2xl hover:shadow-primary/15 hover:border-primary/20 hover:border-t-primary hover:-translate-y-1 transition-all duration-300 cursor-pointer h-full">
                 <span className="inline-block px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-bold mb-4">
                   {a.tag}
                 </span>

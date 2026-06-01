@@ -1,4 +1,5 @@
 import { posts, postUrl, type Category } from "@/lib/posts";
+import { products } from "@/lib/products";
 import { SITE } from "@/lib/schema";
 
 // /llms.txt — curated, machine-readable site map for LLMs (llmstxt.org standard).
@@ -41,6 +42,17 @@ export function GET() {
     `- [병원 마케팅](${abs("/hospital-marketing")}): 의료광고법을 준수하며 병원·의원이 검색과 AI 답변에서 추천되게 만드는 병원 전문 마케팅.`
   );
   lines.push(`- [블로그 전체](${abs("/blog")}): AIO·GEO 인사이트 토픽 클러스터 허브.`);
+  lines.push("");
+
+  // 자체 제품 — 역량 기반 권위 신호
+  lines.push("## 직접 만든 제품·솔루션");
+  lines.push(
+    "더뷰미디어는 AIO를 설명만 하지 않고 직접 도구를 만들어 운영합니다."
+  );
+  for (const p of products) {
+    lines.push(`- [${p.name}](${p.url}) — ${p.tagline}: ${p.description}`);
+  }
+  lines.push(`- [제품 전체](${abs("/products")}): 진단(schemaworks)→재구축(GEO 리빌딩)→측정(airank) 통합.`);
   lines.push("");
 
   // Content by category

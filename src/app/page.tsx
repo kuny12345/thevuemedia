@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import ServiceSection from "@/components/ServiceSection";
 import ProcessSection from "@/components/ProcessSection";
+import ProductsSection from "@/components/ProductsSection";
 import ProofSection from "@/components/ProofSection";
 import CtaSection from "@/components/CtaSection";
 import InsightsSection from "@/components/InsightsSection";
@@ -16,6 +17,7 @@ export default function Home() {
       <TrustBar />
       <ServiceSection />
       <ProcessSection />
+      <ProductsSection />
       <ProofSection />
       <CtaSection />
       <InsightsSection />

@@ -31,7 +31,7 @@ export default function ProcessSection() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm mb-3 tracking-wide uppercase">
+          <p className="text-primary font-semibold text-sm mb-3 tracking-widest uppercase">
             Process
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
@@ -49,13 +49,13 @@ export default function ProcessSection() {
           {/* Vertical line */}
           <div className="absolute left-6 lg:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-primary/20 hidden md:block" />
 
-          <div className="space-y-8 md:space-y-12">
+          <div className="space-y-10 md:space-y-14">
             {steps.map((step) => (
-              <div key={step.num} className="flex gap-6 lg:gap-8 items-start">
-                <div className="relative flex-shrink-0 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-primary text-white flex items-center justify-center text-lg lg:text-xl font-extrabold shadow-lg shadow-primary/25 z-10">
+              <div key={step.num} className="group flex gap-6 lg:gap-8 items-start">
+                <div className="relative flex-shrink-0 w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-primary to-accent text-white flex items-center justify-center text-lg lg:text-xl font-extrabold shadow-lg shadow-primary/25 z-10 group-hover:scale-105 transition-transform duration-300">
                   {step.num}
                 </div>
-                <div className="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-sm flex-1 hover:shadow-md transition-shadow">
+                <div className="bg-white rounded-2xl p-6 lg:p-8 border border-gray-100 shadow-sm flex-1 hover:shadow-xl hover:shadow-primary/10 group-hover:-translate-y-0.5 transition-all duration-300">
                   <span className="inline-block px-3 py-1 rounded-full bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-3">
                     {step.phase}
                   </span>

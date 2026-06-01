@@ -1,8 +1,8 @@
 const stats = [
-  { value: "4.5x", label: "검색 노출량 증가" },
-  { value: "87%", label: "AI 추천 정확도" },
-  { value: "3.2x", label: "문의 전환률 증가" },
-  { value: "Top 3", label: "업계 AI 추천 순위" },
+  { value: "5개", label: "실시간 추적 AI 엔진" },
+  { value: "4,595+", label: "누적 병원·의원 운영" },
+  { value: "3종", label: "자체 개발 AIO 도구" },
+  { value: "매일", label: "AI 가시성 자동 추적" },
 ];
 
 export default function ProofSection() {
@@ -15,12 +15,12 @@ export default function ProofSection() {
             Proof
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
-            실제 데이터가 증명하는
+            추측이 아니라,
             <br />
-            <span className="text-gradient">AIO의 힘</span>
+            <span className="text-gradient">측정으로 증명</span>합니다
           </h2>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
-            추상적인 약속이 아닌, 실제 리포트 기반의 성과를 보여드립니다.
+            직접 만든 도구로 AI 가시성을 추적하고, 그 변화를 데이터로 확인합니다.
           </p>
         </div>
 
@@ -52,8 +52,8 @@ export default function ProofSection() {
             </div>
             <div>
               <div className="flex justify-between text-xs mb-1.5">
-                <span className="text-gray-400">AI 언급률</span>
-                <span className="font-bold text-gray-400">15%</span>
+                <span className="text-gray-400">AI 추천 노출</span>
+                <span className="font-bold text-gray-400">낮음</span>
               </div>
               <div className="h-2.5 bg-gray-200 rounded-full overflow-hidden">
                 <div className="h-full bg-gray-400 rounded-full w-[15%]" />
@@ -101,8 +101,8 @@ export default function ProofSection() {
             </div>
             <div>
               <div className="flex justify-between text-xs mb-1.5">
-                <span className="text-gray-500">AI 언급률</span>
-                <span className="font-bold text-primary">92%</span>
+                <span className="text-gray-500">AI 추천 노출</span>
+                <span className="font-bold text-primary">높음</span>
               </div>
               <div className="h-2.5 bg-primary/10 rounded-full overflow-hidden">
                 <div className="h-full bg-primary rounded-full w-[92%]" />

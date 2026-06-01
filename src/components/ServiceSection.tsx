@@ -68,7 +68,7 @@ export default function ServiceSection() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm mb-3 tracking-wide uppercase">
+          <p className="text-primary font-semibold text-sm mb-3 tracking-widest uppercase">
             Service
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
@@ -93,9 +93,9 @@ export default function ServiceSection() {
           {platforms.map((p) => (
             <div
               key={p.name}
-              className="group relative bg-gray-50 border border-gray-100 rounded-2xl p-7 hover:bg-white hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20 transition-all duration-300"
+              className="group relative bg-gray-50 border border-gray-100 border-t-4 border-t-primary/40 rounded-2xl p-7 hover:bg-white hover:shadow-2xl hover:shadow-primary/15 hover:border-primary/20 hover:border-t-primary hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white group-hover:scale-105 transition-all duration-300">
                 {p.icon}
               </div>
               <h3 className="text-lg font-bold mb-2 text-gray-900">
