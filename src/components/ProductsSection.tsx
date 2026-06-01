@@ -62,15 +62,25 @@ export default function ProductsSection() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href={p.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all"
-                >
-                  {p.urlLabel}
-                  <span aria-hidden>&#8599;</span>
-                </a>
+                {p.external ? (
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto inline-flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all"
+                  >
+                    {p.urlLabel}
+                    <span aria-hidden>&#8599;</span>
+                  </a>
+                ) : (
+                  <Link
+                    href={p.url}
+                    className="mt-auto inline-flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all"
+                  >
+                    {p.urlLabel}
+                    <span aria-hidden>&rarr;</span>
+                  </Link>
+                )}
               </div>
             </div>
           ))}

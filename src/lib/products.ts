@@ -12,8 +12,9 @@ export interface Product {
   description: string; // 무엇을 하는가
   features: string[]; // 실제 기능
   audience: string;
-  url: string; // 라이브/데모
+  url: string; // 외부 라이브(SaaS) 또는 내부 경로
   urlLabel: string;
+  external: boolean; // true면 외부 SaaS 링크(_blank)
   kind: ProductKind;
   iconKey: "chart" | "scan" | "rebuild";
 }
@@ -36,6 +37,7 @@ export const products: Product[] = [
     audience: "AI 가시성을 관리·증명해야 하는 브랜드와 대행사",
     url: "https://airank.lol",
     urlLabel: "airank.lol",
+    external: true,
     kind: "SoftwareApplication",
     iconKey: "chart",
   },
@@ -56,6 +58,7 @@ export const products: Product[] = [
     audience: "병원·기관 마케팅팀과 GEO 대행사",
     url: "https://schemaworks.thevuemedia.com",
     urlLabel: "schemaworks.thevuemedia.com",
+    external: true,
     kind: "SoftwareApplication",
     iconKey: "scan",
   },
@@ -74,8 +77,9 @@ export const products: Product[] = [
       "주소·좌표 등 지역(Geo) 신호로 로컬 노출 강화",
     ],
     audience: "검색·AI 양쪽 노출이 필요한 병원·브랜드",
-    url: "https://kuny12345.github.io/ctlspine/",
-    urlLabel: "리빌딩 사례 — 허리나은병원",
+    url: "/hospital-marketing",
+    urlLabel: "병원 마케팅 리빌딩 알아보기",
+    external: false,
     kind: "Service",
     iconKey: "rebuild",
   },

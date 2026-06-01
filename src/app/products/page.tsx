@@ -133,14 +133,23 @@ export default function ProductsPage() {
                   <span className="inline-block px-3 py-1 rounded-full bg-gray-100 text-gray-500 text-xs font-semibold mb-4">
                     {p.kind === "SoftwareApplication" ? "SaaS 도구" : "리빌딩 서비스"}
                   </span>
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-primary font-semibold text-sm hover:underline"
-                  >
-                    {p.urlLabel} &#8599;
-                  </a>
+                  {p.external ? (
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-primary font-semibold text-sm hover:underline"
+                    >
+                      {p.urlLabel} &#8599;
+                    </a>
+                  ) : (
+                    <Link
+                      href={p.url}
+                      className="block text-primary font-semibold text-sm hover:underline"
+                    >
+                      {p.urlLabel} &rarr;
+                    </Link>
+                  )}
                 </div>
                 <div className="lg:w-2/3">
                   <p className="text-gray-500 text-sm mb-3">

@@ -50,7 +50,8 @@ export function GET() {
     "더뷰미디어는 AIO를 설명만 하지 않고 직접 도구를 만들어 운영합니다."
   );
   for (const p of products) {
-    lines.push(`- [${p.name}](${p.url}) — ${p.tagline}: ${p.description}`);
+    const purl = p.external ? p.url : abs(p.url);
+    lines.push(`- [${p.name}](${purl}) — ${p.tagline}: ${p.description}`);
   }
   lines.push(`- [제품 전체](${abs("/products")}): 진단(schemaworks)→재구축(GEO 리빌딩)→측정(airank) 통합.`);
   lines.push("");
