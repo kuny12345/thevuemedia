@@ -25,6 +25,8 @@ export const metadata: Metadata = {
     authors: ["더뷰미디어"],
   },
   alternates: { canonical: "/blog/aio-agency-comparison-2026" },
+  // DRAFT: 경쟁사 실명·공개사실 입력 + 초안 배너 제거 후 아래 robots 줄을 삭제하면 색인됩니다.
+  robots: { index: false, follow: true },
 };
 
 // ──────────────────────────────────────────────────────────────
