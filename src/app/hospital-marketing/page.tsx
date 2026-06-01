@@ -7,6 +7,7 @@ import {
   breadcrumbSchema,
 } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
+import { SIGNATURE } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "병원 마케팅 — AI가 우리 병원을 추천하게 만드는 의료 마케팅",
@@ -123,6 +124,20 @@ export default function HospitalMarketingPage() {
           </p>
         </div>
 
+        {/* 시그니처 지표 */}
+        <section className="mb-20">
+          <div className="rounded-3xl bg-dark text-white p-8 lg:p-14 text-center">
+            <div className="text-5xl lg:text-7xl font-extrabold mb-3">
+              <span className="text-gradient">{SIGNATURE.value}</span>
+              <span className="text-2xl lg:text-3xl align-top text-primary-light">
+                {SIGNATURE.suffix}
+              </span>
+            </div>
+            <p className="text-lg lg:text-xl font-semibold mb-2">{SIGNATURE.label}</p>
+            <p className="text-gray-400 text-sm max-w-xl mx-auto">{SIGNATURE.note}</p>
+          </div>
+        </section>
+
         {/* 왜 바뀌었나 */}
         <section className="mb-20">
           <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4">
@@ -202,7 +217,9 @@ export default function HospitalMarketingPage() {
               <p className="text-gray-600 text-sm leading-relaxed">AI Mention Score로 노출을 정량 추적하고 산출 근거를 공개합니다.</p>
             </div>
           </div>
-          {/* TODO(게시 전): 보유한 실제 성과/규모 수치가 있으면 여기 시그니처 지표로 추가(예: 누적 협업 병원 수, 평균 노출 개선). 허위 수치 금지. */}
+          <p className="text-gray-500 text-sm mt-6 text-center">
+            {SIGNATURE.label} <strong className="text-gray-800">{SIGNATURE.value}{SIGNATURE.suffix}</strong>의 운영 경험을 바탕으로 진료과·지역 특성에 맞춰 설계합니다.
+          </p>
         </section>
 
         {/* FAQ */}

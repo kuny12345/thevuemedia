@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
+import { SIGNATURE } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "병원 마케팅 대행사 추천 — AI 시대 선택 가이드 (2026) | 더뷰미디어",
@@ -141,6 +142,14 @@ export default function Page() {
       <h2 className="text-2xl font-extrabold text-gray-900 mt-12 mb-4">
         더뷰미디어는 이 기준을 어떻게 충족하나
       </h2>
+      <div className="bg-primary/5 border border-primary/10 rounded-2xl p-6 mb-6 text-center">
+        <div className="text-4xl font-extrabold text-gradient mb-1">
+          {SIGNATURE.value}
+          <span className="text-xl align-top text-primary">{SIGNATURE.suffix}</span>
+        </div>
+        <p className="text-gray-700 font-semibold text-sm">{SIGNATURE.label}</p>
+        <p className="text-gray-500 text-xs mt-1">{SIGNATURE.note}</p>
+      </div>
       <p className="text-gray-600 leading-relaxed mb-4">
         더뷰미디어는 의료광고법 검토를 콘텐츠 설계 단계에 내장하고, 검색·네이버
         플레이스·생성형 AI를 하나의 전략으로 통합합니다. 진단·전략·실행·추적{" "}
