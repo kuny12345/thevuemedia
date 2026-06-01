@@ -61,7 +61,7 @@ const engines = [
 ];
 
 const verticals = [
-  { name: "병원·의료", href: "/blog/hospital-aio-guide" },
+  { name: "병원·의료", href: "/hospital-marketing" },
   { name: "로펌·법률", href: "/blog/law-firm-aio-guide" },
   { name: "프랜차이즈", href: "/blog/franchise-aio-guide" },
   { name: "이커머스·쇼핑몰", href: "/blog/ecommerce-aio-guide" },

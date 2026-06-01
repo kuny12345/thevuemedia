@@ -21,7 +21,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 lg:h-20">
-        <a href="#" className="flex items-center gap-0.5 text-xl font-extrabold tracking-tight">
+        <a href="/" className="flex items-center gap-0.5 text-xl font-extrabold tracking-tight">
           <span className={scrolled ? "text-gray-900" : "text-white"}>THE</span>
           <span className="text-primary">VUE</span>
           <span className={scrolled ? "text-gray-900" : "text-white"}>MEDIA</span>
@@ -30,10 +30,9 @@ export default function Navbar() {
         {/* Desktop */}
         <ul className="hidden md:flex items-center gap-8 text-sm font-medium">
           {[
-            { href: "#service", label: "서비스" },
-            { href: "#process", label: "프로세스" },
-            { href: "#proof", label: "성과" },
-            { href: "#insights", label: "인사이트" },
+            { href: "/aio", label: "AIO 서비스" },
+            { href: "/hospital-marketing", label: "병원 마케팅" },
+            { href: "/blog", label: "인사이트" },
           ].map((item) => (
             <li key={item.href}>
               <a
@@ -48,7 +47,7 @@ export default function Navbar() {
           ))}
           <li>
             <a
-              href="#contact"
+              href="/#contact"
               className="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-colors"
             >
               무료 진단받기
@@ -95,7 +94,7 @@ export default function Navbar() {
             ))}
             <li className="mt-2">
               <a
-                href="#contact"
+                href="/#contact"
                 className="block text-center px-4 py-3 bg-primary text-white rounded-full font-semibold"
                 onClick={() => setMobileOpen(false)}
               >

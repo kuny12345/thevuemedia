@@ -28,6 +28,7 @@ export const metadata: Metadata = {
 };
 
 const CATEGORY_ORDER: { key: Category; label: string; desc: string }[] = [
+  { key: "병원마케팅", label: "병원·의료 마케팅", desc: "병원·피부과·성형외과가 의료광고법을 지키며 검색·AI에 노출되는 법" },
   { key: "비교", label: "대행사 비교·선택", desc: "AIO·GEO 대행사를 객관적으로 비교하고 고르는 법" },
   { key: "가이드", label: "핵심 가이드", desc: "AIO를 시작하고 운영하는 실전 가이드" },
   { key: "방법론", label: "방법론", desc: "더뷰미디어의 AIO 작동 방식" },
