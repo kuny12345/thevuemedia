@@ -1,66 +1,125 @@
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 import { postsByDate, postUrl } from "@/lib/posts";
 
-const articles = postsByDate()
-  .slice(0, 3)
-  .map((p) => ({
-    tag: p.tag,
-    title: p.title,
-    excerpt: p.excerpt,
-    date: p.date,
-    href: postUrl(p.slug),
-  }));
+// 최신 글 3편 (블로그 권위 신호) — posts.ts 단일 출처에서 읽어 자동 동기화.
+const latest = postsByDate().slice(0, 3);
 
 export default function InsightsSection() {
   return (
-    <section id="insights" className="py-24 lg:py-32 bg-white border-t border-gray-100">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4">
-            Insights
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight">
-            AIO <span className="text-gradient">전문가 인사이트</span>
-          </h2>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
-            더뷰미디어는 끊임없이 공부하는 전문가 집단입니다.
-            <br className="hidden sm:block" />
-            최신 AI 트렌드와 실전 전략을 공유합니다.
-          </p>
-        </div>
+    <section
+      id="insights"
+      aria-labelledby="insights-heading"
+      className="section-pad bg-surface relative overflow-hidden"
+    >
+      <div className="aura aura-soft" aria-hidden="true" />
+      <div className="container-x relative z-10">
+        {/* Header — 첫 문장은 검색자/문제에 말 건다 */}
+        <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
+            <p className="eyebrow">// INSIGHTS</p>
+            <h2
+              id="insights-heading"
+              className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink leading-tight"
+            >
+              <span className="text-gradient">AI 검색</span> 인사이트
+            </h2>
+            <div className="accent-bar mt-4" aria-hidden />
+            <p className="mt-4 text-base sm:text-lg text-text-soft leading-relaxed">
+              AI가 어떤 기준으로 브랜드를 추천하는지, 엔진별 인용 전략과 측정
+              방법을 실무 관점에서 정리합니다.
+            </p>
+          </div>
 
-        {/* Articles */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {articles.map((a) => (
-            <Link key={a.title} href={a.href}>
-              <article className="group rounded-xl border border-gray-200 bg-white p-7 hover:border-gray-300 hover:shadow-sm transition-all duration-200 cursor-pointer h-full">
-                <span className="inline-block text-xs font-bold text-primary mb-3">
-                  {a.tag}
-                </span>
-                <h3 className="text-base font-bold text-ink mb-3 leading-snug group-hover:text-primary transition-colors">
-                  {a.title}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-5">
-                  {a.excerpt}
-                </p>
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-400">{a.date}</span>
-                  <span className="text-gray-700 font-semibold group-hover:text-primary group-hover:translate-x-0.5 transition-all">
-                    읽어보기 &rarr;
+          <Link
+            href="/blog"
+            className="hidden sm:inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-brand hover:gap-2.5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 rounded-sm"
+          >
+            인사이트 전체 보기
+            <svg
+              className="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </Link>
+        </Reveal>
+
+        {/* 최신 글 카드 */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+          {latest.map((p, i) => (
+            <Reveal key={p.slug} as="article" delay={i * 80} className="h-full">
+              <Link
+                href={postUrl(p.slug)}
+                aria-label={`${p.title} — 자세히 읽기`}
+                className="card card-hover group flex h-full flex-col p-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className="pill-brand mono text-[0.65rem] font-semibold tracking-wider uppercase">
+                    {p.tag}
+                  </span>
+                  <span className="mono text-xs text-text-soft">
+                    {p.readTime}
                   </span>
                 </div>
-              </article>
-            </Link>
+
+                <h3 className="mt-5 text-lg font-extrabold text-ink leading-snug group-hover:text-brand transition-colors">
+                  {p.title}
+                </h3>
+                <p className="mt-3 text-sm text-text-soft leading-relaxed line-clamp-3">
+                  {p.excerpt}
+                </p>
+
+                <div className="mt-auto pt-6 flex items-center justify-between">
+                  <time dateTime={p.iso} className="mono text-xs text-text-soft">
+                    {p.date}
+                  </time>
+                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand group-hover:gap-2.5 transition-all">
+                    읽어보기
+                    <svg
+                      className="w-4 h-4"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Link
-            href="/blog"
-            className="inline-block px-7 py-3 rounded-full border border-gray-200 text-gray-700 font-semibold hover:border-primary/30 hover:text-primary transition-colors"
-          >
-            모든 인사이트 보기 &rarr;
+        {/* 모바일 전용 전체 보기 (헤더 링크는 sm 이상에서만 노출) */}
+        <div className="mt-10 sm:hidden">
+          <Link href="/blog" className="btn btn-ghost w-full">
+            인사이트 전체 보기
+            <svg
+              className="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
           </Link>
         </div>
       </div>

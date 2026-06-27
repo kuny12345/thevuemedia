@@ -1,24 +1,21 @@
 // Centralized JSON-LD (schema.org) builders for GEO/AIO optimization.
 // All structured data flows through these helpers so every page emits
 // consistent, valid markup that AI engines and search crawlers can parse.
+//
+// ⭐ GBP ↔ 홈페이지 정합성: Organization 노드를 LocalBusiness로 확장해
+//    상호·주소·전화·영업시간·좌표를 GBP와 동일하게 emit한다(= 같은 엔티티).
 import { products, type Product } from "@/lib/products";
+import { services } from "@/lib/services";
+import { NAP, SAME_AS, postalAddress, openingHoursSpec } from "@/lib/nap";
 
 export const SITE = {
-  url: "https://thevuemedia.com",
-  name: "더뷰미디어",
-  alternateName: "THEVUEMEDIA",
-  logo: "https://thevuemedia.com/logo.png",
+  url: NAP.url,
+  name: NAP.name,
+  alternateName: NAP.alternateName,
+  logo: `${NAP.url}/logo.png`,
   description:
-    "AIO(AI 최적화) 전문 대행사. ChatGPT·Gemini·Perplexity·Copilot 등 생성형 AI가 브랜드를 업계 1위로 추천하도록 설계합니다.",
-  sameAs: [
-    "https://www.youtube.com/@thevuemedia",
-    "https://www.instagram.com/_thevuemedia_",
-    "https://www.threads.net/@_thevuemedia_",
-    "https://twitter.com/_thevuemedia_",
-    "https://www.linkedin.com/company/_thevuemedia_",
-    "https://www.facebook.com/_thevuemedia_",
-    "https://pf.kakao.com/_thevuemedia_",
-  ],
+    "AIO(AI 검색 최적화) 전문 대행사. ChatGPT·Gemini·Perplexity·구글 AI 개요 등 생성형 AI가 브랜드를 먼저 추천하도록 설계합니다.",
+  sameAs: SAME_AS,
 } as const;
 
 const ORG_ID = `${SITE.url}/#organization`;
@@ -33,59 +30,88 @@ export function abs(path: string): string {
 }
 
 /**
- * Organization + ProfessionalService identity node.
- * knowsAbout / serviceType / areaServed are verifiable capability signals
- * (no fabricated metrics) that strengthen entity authority for AI engines.
+ * Organization + ProfessionalService + LocalBusiness identity node.
+ * NAP(상호/주소/전화/영업시간/좌표)는 GBP와 100% 동일하게 emit한다.
+ * knowsAbout / serviceType / areaServed 는 검증 가능한 역량 신호(허위 수치 없음).
  */
 export function organizationSchema(): Json {
   return {
     "@context": "https://schema.org",
-    "@type": ["Organization", "ProfessionalService"],
+    "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
     "@id": ORG_ID,
     name: SITE.name,
     alternateName: SITE.alternateName,
+    legalName: NAP.legalName,
     url: SITE.url,
     logo: SITE.logo,
     image: SITE.logo,
     description: SITE.description,
-    slogan: "AI가 당신의 브랜드를 추천하게 만듭니다",
-    areaServed: { "@type": "Country", name: "대한민국" },
+    slogan: NAP.tagline,
+    // --- NAP (GBP 동일) ---
+    telephone: NAP.phoneE164,
+    address: postalAddress(),
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: NAP.geo.lat,
+      longitude: NAP.geo.lng,
+    },
+    hasMap: `https://www.google.com/maps/place/${encodeURIComponent(NAP.name)}/@${NAP.geo.lat},${NAP.geo.lng},17z`,
+    openingHoursSpecification: openingHoursSpec(),
+    foundingDate: NAP.foundingDate,
+    priceRange: NAP.priceRange,
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "대구광역시" },
+      { "@type": "AdministrativeArea", name: "경상북도" },
+      { "@type": "Country", name: "대한민국" },
+    ],
     knowsAbout: [
-      "AIO(AI 최적화)",
+      "AIO(AI 검색 최적화)",
       "GEO(생성형 엔진 최적화)",
       "ChatGPT 브랜드 추천 최적화",
       "Perplexity 인용 최적화",
       "Google AI Overview(SGE) 대응",
-      "AI Mention Score 측정",
       "Schema.org 구조화 데이터",
-      "멀티채널 콘텐츠 전략",
+      "병원·의료 마케팅",
+      "네이버 플레이스·SEO",
+      "대구 AI 검색 마케팅",
     ],
     serviceType: [
+      ...services.map((s) => s.serviceType),
       "AIO 컨설팅",
-      "생성형 엔진 최적화(GEO)",
-      "AI 브랜드 인지도 진단",
-      "멀티채널 콘텐츠 운영",
     ],
     sameAs: [...SITE.sameAs],
     contactPoint: {
       "@type": "ContactPoint",
+      telephone: NAP.phoneE164,
       contactType: "customer service",
       areaServed: "KR",
       availableLanguage: ["Korean"],
     },
-    // 자체 제품·솔루션을 보유함을 구조화 — 역량 기반 권위 신호.
+    // 제공 서비스(GBP 미러) + 자체 도구를 한 카탈로그로 — 역량 기반 권위 신호.
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "AIO 제품·솔루션",
-      itemListElement: products.map((p) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": p.kind,
-          name: p.name,
-          url: p.url,
-          description: p.tagline,
-        },
-      })),
+      name: "서비스 · 자체 AIO 도구",
+      itemListElement: [
+        ...services.map((s) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: s.name,
+            url: abs(s.href),
+            description: s.short,
+            serviceType: s.serviceType,
+          },
+        })),
+        ...products.map((p) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": p.kind,
+            name: p.name,
+            url: p.external ? p.url : abs(p.url),
+            description: p.tagline,
+          },
+        })),
+      ],
     },
   };
 }
@@ -202,7 +228,7 @@ export function productSchema(p: Product): Json {
     "@context": "https://schema.org",
     "@type": p.kind,
     name: p.name,
-    url: p.url,
+    url: p.external ? p.url : abs(p.url),
     description: p.description,
     provider: { "@id": ORG_ID },
   };

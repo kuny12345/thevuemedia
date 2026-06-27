@@ -5,8 +5,11 @@ import {
   breadcrumbSchema,
 } from "@/lib/schema";
 import { postUrl, relatedPosts } from "@/lib/posts";
-import FaqSection, { type FaqItem } from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
+
+// 글 단위 FAQ 항목(스키마는 본문 하단에서 직접 emit). 홈 FaqSection은
+// 무인자 섹션이므로, 블로그 본문은 자체 FAQ 블록으로 렌더한다.
+export type FaqItem = { q: string; a: string };
 
 interface BlogArticleProps {
   slug: string;
@@ -78,7 +81,45 @@ export default function BlogArticle({
         {/* Body */}
         <div className="max-w-2xl mx-auto px-6 py-14 lg:py-20 text-[17px] leading-8">
           {children}
-          <FaqSection items={faq} />
+          {faq.length > 0 && (
+            <section className="mt-14" aria-labelledby="article-faq-heading">
+              <h2
+                id="article-faq-heading"
+                className="text-2xl font-extrabold text-ink mb-5"
+              >
+                자주 묻는 질문
+              </h2>
+              <ul className="flex flex-col gap-3">
+                {faq.map((it) => (
+                  <li key={it.q}>
+                    <details className="group rounded-xl border border-gray-200 bg-white open:shadow-sm">
+                      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 min-h-[44px] rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary [&::-webkit-details-marker]:hidden">
+                        <span className="font-bold text-ink leading-snug text-[17px]">
+                          {it.q}
+                        </span>
+                        <svg
+                          aria-hidden="true"
+                          focusable="false"
+                          className="w-5 h-5 mt-0.5 flex-shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-180"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M6 9l6 6 6-6" />
+                        </svg>
+                      </summary>
+                      <p className="px-5 pb-5 text-gray-600 text-[15px] leading-relaxed">
+                        {it.a}
+                      </p>
+                    </details>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
 
         {/* CTA */}

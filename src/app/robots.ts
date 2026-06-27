@@ -14,6 +14,7 @@ const aiAndSearchBots = [
   "PerplexityBot",
   "Perplexity-User",
   "ClaudeBot",
+  "Claude-Web",
   "Claude-User",
   "Google-Extended",
   "Googlebot",

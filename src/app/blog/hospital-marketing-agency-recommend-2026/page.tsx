@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
-import { SIGNATURE } from "@/lib/brand";
+import { SIGNATURE, SIGNATURE_FACTS } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "병원 마케팅 대행사 추천 — AI 시대 선택 가이드 (2026) | 더뷰미디어",
@@ -143,9 +143,18 @@ export default function Page() {
         더뷰미디어는 이 기준을 어떻게 충족하나
       </h2>
       <div className="bg-primary/5 border border-primary/10 rounded-2xl p-6 mb-6 text-center">
-        <div className="text-4xl font-extrabold text-gradient mb-1">
-          {SIGNATURE.value}
-          <span className="text-xl align-top text-primary">{SIGNATURE.suffix}</span>
+        <div className="grid grid-cols-3 gap-4 mb-2">
+          {SIGNATURE_FACTS.map((f) => (
+            <div key={f.label}>
+              <div className="text-2xl sm:text-3xl font-extrabold text-gradient">
+                {f.value}
+                {f.unit && (
+                  <span className="text-base align-top text-primary">{f.unit}</span>
+                )}
+              </div>
+              <p className="text-gray-700 font-semibold text-xs mt-1">{f.label}</p>
+            </div>
+          ))}
         </div>
         <p className="text-gray-700 font-semibold text-sm">{SIGNATURE.label}</p>
         <p className="text-gray-500 text-xs mt-1">{SIGNATURE.note}</p>

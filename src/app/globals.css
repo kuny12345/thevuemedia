@@ -1,11 +1,51 @@
 @import "tailwindcss";
 
+/* ============================================================================
+   THEVUEMEDIA — "Measured Authority v2" Design System
+   Pretendard 한글 + 딥 네이비 + 멀티 액센트(블루·인디고·바이올렛·시안).
+   쿨톤 틴티드 서피스 / 그라데이션 딥잉크 / 컬러 섀도우 / 액센트 아이콘 칩.
+   ============================================================================ */
+
 @theme inline {
+  --font-sans: "Pretendard Variable", "Pretendard", "Noto Sans KR",
+    -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Menlo", monospace;
+
+  /* ---- Brand / multi-accent ---- */
   --color-primary: #2563eb;
   --color-primary-dark: #1d4ed8;
   --color-primary-light: #3b82f6;
+  --color-brand: #2563eb;
+  --color-brand-bright: #3b82f6;
+  --color-brand-deep: #1d4ed8;
+  --color-indigo: #4f46e5;
+  --color-violet: #7c5cfc;
   --color-accent: #06b6d4;
-  --color-ink: #0a0a0a;
+  --color-cyan: #06b6d4;
+  --color-up: #10b981;
+
+  /* accent tints (icon chips / soft fills) */
+  --color-brand-50: #eef3ff;
+  --color-indigo-50: #eeedfe;
+  --color-violet-50: #f1edfe;
+  --color-cyan-50: #e4f8fc;
+  --color-up-50: #e6f7f0;
+
+  /* ---- Ink / surfaces (cool-tinted light base + deep navy) ---- */
+  --color-ink: #0b1220;          /* rich deep navy — headings & dark sections */
+  --color-ink-soft: #121a2b;
+  --color-paper: #ffffff;
+  --color-surface: #f3f5fb;      /* cool-tinted alt section (not flat gray) */
+  --color-surface-2: #e9edf7;
+  --color-line: #e3e8f2;         /* cool borders on light */
+  --color-line-strong: #d0d7e6;
+  --color-text: #2b3344;         /* body on light */
+  --color-text-soft: #5b6678;    /* muted on light */
+  --color-on-dark: #e9edf6;      /* text on dark sections */
+  --color-on-dark-soft: #97a2b6;
+  --color-line-dark: rgba(255, 255, 255, 0.1);
+
+  /* legacy grays (backward compat) */
   --color-dark: #0f172a;
   --color-dark-secondary: #1e293b;
   --color-gray-50: #fafafa;
@@ -18,6 +58,12 @@
   --color-gray-700: #3f3f46;
   --color-gray-800: #27272a;
   --color-gray-900: #18181b;
+
+  --radius-card: 16px;
+  --shadow-sm: 0 1px 2px rgba(11, 18, 32, 0.05), 0 2px 8px rgba(11, 18, 32, 0.04);
+  --shadow-md: 0 12px 32px -14px rgba(11, 18, 32, 0.22);
+  --shadow-lg: 0 36px 80px -28px rgba(11, 18, 32, 0.34);
+  --shadow-brand: 0 18px 44px -18px rgba(37, 99, 235, 0.4);
 }
 
 :root {
@@ -33,42 +79,309 @@ html {
 }
 
 body {
-  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-sans);
   background: #ffffff;
-  color: #3f3f46;
+  color: var(--color-text);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern";
+  word-break: keep-all; /* 한글 단어 단위 줄바꿈 */
 }
 
-/* 정제된 헤딩 — 타이트한 트래킹, 진한 잉크색 */
 h1,
 h2,
 h3,
 h4 {
-  color: #0a0a0a;
-  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  letter-spacing: -0.03em; /* Pretendard 타이트 트래킹 */
   font-weight: 800;
+  text-wrap: balance;
+  word-break: keep-all;
 }
 
 ::selection {
-  background: rgba(37, 99, 235, 0.14);
-  color: #0a0a0a;
+  background: rgba(37, 99, 235, 0.18);
+  color: #0b1220;
 }
 
-/* 절제된 액센트 그라데이션 — 핵심 단어에만 */
+/* ---- AI 액센트 그라데이션 ---- */
 .text-gradient {
-  background: linear-gradient(120deg, #2563eb, #06b6d4);
+  background: linear-gradient(116deg, #2563eb 0%, #4f46e5 45%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* 얇은 라인 구분선 */
+/* 그라데이션 액센트 바 (헤딩/eyebrow 아래 장식) */
+.accent-bar {
+  display: block;
+  width: 44px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #06b6d4);
+}
+
+/* ---- 모노 데이터 라벨 / eyebrow ---- */
+.mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+.dark-section .eyebrow {
+  color: #7fb0ff;
+}
+.stat-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* ---- 레이아웃 헬퍼 ---- */
+.container-x {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+.section-pad {
+  padding-block: clamp(4rem, 9vw, 7.5rem);
+}
+
+/* ---- 아이콘 칩 (멀티 액센트로 색감 변화) ---- */
+.icon-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 14px;
+  flex: 0 0 auto;
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-hover:hover .icon-chip {
+  transform: translateY(-2px) scale(1.04);
+}
+.chip-brand  { background: var(--color-brand-50);  color: var(--color-brand);  box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.12); }
+.chip-indigo { background: var(--color-indigo-50); color: var(--color-indigo); box-shadow: inset 0 0 0 1px rgba(79, 70, 229, 0.12); }
+.chip-violet { background: var(--color-violet-50); color: var(--color-violet); box-shadow: inset 0 0 0 1px rgba(124, 92, 252, 0.12); }
+.chip-cyan   { background: var(--color-cyan-50);   color: #0e7490;             box-shadow: inset 0 0 0 1px rgba(6, 182, 212, 0.16); }
+.chip-up     { background: var(--color-up-50);     color: #047857;             box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.14); }
+/* 다크 섹션용 칩 */
+.chip-dark {
+  background: rgba(255, 255, 255, 0.06);
+  color: #9fc1ff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* ---- 딥잉크 데이터 섹션 (그라데이션 + 글로우) ---- */
+.dark-section {
+  background: linear-gradient(180deg, #0e1626 0%, #080c16 100%);
+  color: var(--color-on-dark);
+  position: relative;
+  isolation: isolate;
+}
+.dark-section h1,
+.dark-section h2,
+.dark-section h3,
+.dark-section h4 {
+  color: #ffffff;
+}
+.grid-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 38%, #000 30%, transparent 78%);
+}
+.glow::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 65%;
+  height: 65%;
+  top: -12%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(37, 99, 235, 0.6), transparent 72%);
+  filter: blur(64px);
+  pointer-events: none;
+  animation: glowPulse 11s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* ---- 히어로 오라 (멀티 컬러 메시, 은은) ---- */
+.aura {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  /* 보이는 멀티컬러 베이스 메시 (전체가 천천히 움직임) */
+  background:
+    radial-gradient(42rem 32rem at 80% -6%, rgba(37, 99, 235, 0.26), transparent 60%),
+    radial-gradient(34rem 30rem at 6% 14%, rgba(124, 92, 252, 0.22), transparent 60%),
+    radial-gradient(30rem 26rem at 58% 118%, rgba(6, 182, 212, 0.20), transparent 60%);
+  animation: auraBase 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+/* 콘텐츠 섹션용 — 텍스트 가독성 위해 약간 옅게 */
+.aura-soft {
+  background:
+    radial-gradient(40rem 30rem at 84% -8%, rgba(37, 99, 235, 0.15), transparent 62%),
+    radial-gradient(32rem 28rem at 6% 12%, rgba(124, 92, 252, 0.13), transparent 62%),
+    radial-gradient(30rem 24rem at 55% 116%, rgba(6, 182, 212, 0.12), transparent 62%);
+}
+.aura::before,
+.aura::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(68px);
+}
+.aura::before {
+  width: 32rem;
+  height: 32rem;
+  top: -6rem;
+  right: -3rem;
+  background: radial-gradient(closest-side, rgba(37, 99, 235, 0.44), transparent 70%);
+  animation: auraDrift1 17s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.aura::after {
+  width: 27rem;
+  height: 27rem;
+  top: 3rem;
+  left: -5rem;
+  background: radial-gradient(closest-side, rgba(124, 92, 252, 0.34), transparent 70%);
+  animation: auraDrift2 21s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.aura-soft::before {
+  background: radial-gradient(closest-side, rgba(37, 99, 235, 0.22), transparent 70%);
+}
+.aura-soft::after {
+  background: radial-gradient(closest-side, rgba(124, 92, 252, 0.18), transparent 70%);
+}
+
+/* ---- 카드 (미세 그라데이션 + 컬러 호버 섀도우) ---- */
+.card {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.24s ease, border-color 0.24s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 50px -22px rgba(37, 99, 235, 0.26);
+  border-color: rgba(37, 99, 235, 0.35);
+}
+.card-dark {
+  background: linear-gradient(180deg, #141d2e 0%, #0f1626 100%);
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius-card);
+  position: relative;
+}
+.card-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(127, 176, 255, 0.5), transparent);
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+}
+
+/* ---- 버튼 ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease,
+    color 0.18s ease, border-color 0.18s ease, filter 0.18s ease;
+  min-height: 48px;
+}
+.btn:active {
+  transform: scale(0.98);
+}
+.btn-primary {
+  background: linear-gradient(120deg, #2563eb, #4f46e5);
+  color: #fff;
+  box-shadow: var(--shadow-brand);
+}
+.btn-primary:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 22px 50px -16px rgba(37, 99, 235, 0.6);
+}
+.btn-ink {
+  background: var(--color-ink);
+  color: #fff;
+}
+.btn-ink:hover {
+  background: #16203a;
+}
+.btn-ghost {
+  background: #fff;
+  color: var(--color-ink);
+  border: 1px solid var(--color-line-strong);
+}
+.btn-ghost:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+  background: var(--color-brand-50);
+}
+.btn-on-dark {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid var(--color-line-dark);
+}
+.btn-on-dark:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ---- 핀/배지 ---- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  color: var(--color-text-soft);
+}
+.pill-brand {
+  border-color: rgba(37, 99, 235, 0.22);
+  background: var(--color-brand-50);
+  color: var(--color-brand-deep);
+}
+
 .divider {
-  border-top: 1px solid #e7e7ea;
+  border-top: 1px solid var(--color-line);
 }
 
 /* 차트(airank 목업) */
@@ -84,47 +397,122 @@ h4 {
   opacity: 0.1;
 }
 
+/* ============================================================================
+   MOTION
+   ============================================================================ */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in-up {
   animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.animation-delay-100 {
-  animation-delay: 0.1s;
-}
-.animation-delay-200 {
-  animation-delay: 0.2s;
-}
-.animation-delay-300 {
-  animation-delay: 0.3s;
-}
-.animation-delay-400 {
-  animation-delay: 0.4s;
-}
-.animation-delay-600 {
-  animation-delay: 0.6s;
-}
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-600 { animation-delay: 0.6s; }
 
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
-.animate-float {
-  animation: float 4s ease-in-out infinite;
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-float-delay { animation: float 4s ease-in-out 2s infinite; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
 }
-.animate-float-delay {
-  animation: float 4s ease-in-out 2s infinite;
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 28s linear infinite; }
+
+/* ---- 배경 애니메이션 그라데이션 (연하게, 사이트 전역) ---- */
+/* 라이트 섹션(투명/페이퍼) 뒤에서 아주 옅게 흐르는 멀티컬러 메시. */
+/* 두 겹의 '고정' 애니메이션 그라데이션 = 페이지 전체 배경(스크롤해도 고정). */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: -12%;
+  z-index: -1;
+  pointer-events: none;
+  will-change: transform;
+}
+body::before {
+  background:
+    radial-gradient(46% 46% at 14% 14%, rgba(37, 99, 235, 0.18), transparent 68%),
+    radial-gradient(42% 42% at 88% 16%, rgba(124, 92, 252, 0.16), transparent 68%),
+    radial-gradient(50% 48% at 62% 90%, rgba(6, 182, 212, 0.16), transparent 68%);
+  animation: bgShift 24s ease-in-out infinite alternate;
+}
+body::after {
+  background:
+    radial-gradient(40% 40% at 80% 58%, rgba(79, 70, 229, 0.13), transparent 70%),
+    radial-gradient(38% 38% at 18% 82%, rgba(37, 99, 235, 0.12), transparent 70%);
+  animation: bgShift2 31s ease-in-out infinite alternate;
+}
+
+/* 라이트 섹션은 투명 → 고정 배경이 끊기지 않고 이어진다. 다크 섹션만 패널. */
+section:not(.dark-section) {
+  background-color: transparent !important;
+}
+/* 섹션마다 박았던 오라는 제거(중복·이음새 원인). 단일 고정 배경만 사용. */
+.aura,
+.aura-soft {
+  display: none !important;
+}
+
+@keyframes bgShift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(5%, -7%, 0) scale(1.22); }
+}
+@keyframes bgShift2 {
+  0% { transform: translate3d(0, 0, 0) scale(1.06); }
+  100% { transform: translate3d(-6%, 7%, 0) scale(1.2); }
+}
+@keyframes auraBase {
+  0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  100% { transform: translate3d(4%, -4%, 0) scale(1.14) rotate(3deg); }
+}
+@keyframes auraDrift1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-15%, 15%, 0) scale(1.34); }
+}
+@keyframes auraDrift2 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(18%, 10%, 0) scale(1.3); }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.32); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after { animation: none !important; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

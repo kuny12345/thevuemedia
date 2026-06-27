@@ -1,11 +1,16 @@
-import type { Product } from "@/lib/products";
+import type { ProductIconKey } from "@/lib/products";
 
-// Clean stroke icons matching the brand (no extra deps).
+/**
+ * 도구 4종 라인 아이콘 (inline SVG, stroke 1.8, currentColor).
+ * 이모지 금지 — 한 세트 톤 유지.
+ *  chart   = 추적(상승 그래프) · scan = 진단(스캔)
+ *  publish = 생산·발행(전송) · factory = AI 인용 자산(연결된 그래프)
+ */
 export default function ProductIcon({
   iconKey,
   className = "w-7 h-7",
 }: {
-  iconKey: Product["iconKey"];
+  iconKey: ProductIconKey;
   className?: string;
 }) {
   const common = {
@@ -16,7 +21,10 @@ export default function ProductIcon({
     strokeWidth: 1.8,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    focusable: false,
   };
+
   if (iconKey === "chart") {
     // 가시성 추적 — 상승 그래프
     return (
@@ -27,6 +35,7 @@ export default function ProductIcon({
       </svg>
     );
   }
+
   if (iconKey === "scan") {
     // 자동 진단 — 스캔/검색
     return (
@@ -37,11 +46,26 @@ export default function ProductIcon({
       </svg>
     );
   }
-  // rebuild — 재구축/레이어
+
+  if (iconKey === "publish") {
+    // 생산·발행 — 멀티채널 전송
+    return (
+      <svg {...common}>
+        <path d="M22 2 11 13" />
+        <path d="M22 2 15 22l-4-9-9-4 20-7Z" />
+      </svg>
+    );
+  }
+
+  // factory — AI 인용 자산: @id로 연결된 구조화 데이터 그래프
   return (
     <svg {...common}>
-      <path d="M12 3 3 8l9 5 9-5-9-5Z" />
-      <path d="M3 13l9 5 9-5M3 8v5M21 8v5" />
+      <circle cx="5" cy="7" r="2.2" />
+      <circle cx="19" cy="7" r="2.2" />
+      <circle cx="12" cy="18" r="2.2" />
+      <path d="M7.2 7h9.6" />
+      <path d="M6.4 8.9 10.6 16.1" />
+      <path d="M17.6 8.9 13.4 16.1" />
     </svg>
   );
 }

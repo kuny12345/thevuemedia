@@ -7,7 +7,7 @@ import {
   breadcrumbSchema,
 } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
-import { SIGNATURE } from "@/lib/brand";
+import { SIGNATURE, SIGNATURE_FACTS } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "병원 마케팅 — AI가 우리 병원을 추천하게 만드는 의료 마케팅",
@@ -127,14 +127,22 @@ export default function HospitalMarketingPage() {
         {/* 시그니처 지표 */}
         <section className="mb-20">
           <div className="rounded-2xl border border-gray-200 bg-gray-50 p-8 lg:p-14 text-center">
-            <div className="text-5xl lg:text-7xl font-extrabold mb-3 tracking-tight">
-              <span className="text-gradient">{SIGNATURE.value}</span>
-              <span className="text-2xl lg:text-3xl align-top text-primary">
-                {SIGNATURE.suffix}
-              </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+              {SIGNATURE_FACTS.map((f) => (
+                <div key={f.label}>
+                  <div className="text-4xl lg:text-5xl font-extrabold tracking-tight">
+                    <span className="text-gradient">{f.value}</span>
+                    {f.unit && (
+                      <span className="text-xl lg:text-2xl align-top text-primary ml-0.5">
+                        {f.unit}
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-2 text-base font-semibold text-ink">{f.label}</p>
+                  <p className="mt-1 text-gray-500 text-xs leading-relaxed">{f.note}</p>
+                </div>
+              ))}
             </div>
-            <p className="text-lg lg:text-xl font-semibold text-ink mb-2">{SIGNATURE.label}</p>
-            <p className="text-gray-500 text-sm max-w-xl mx-auto">{SIGNATURE.note}</p>
           </div>
         </section>
 
@@ -218,7 +226,7 @@ export default function HospitalMarketingPage() {
             </div>
           </div>
           <p className="text-gray-500 text-sm mt-6 text-center">
-            {SIGNATURE.label} <strong className="text-gray-800">{SIGNATURE.value}{SIGNATURE.suffix}</strong>의 운영 경험을 바탕으로 진료과·지역 특성에 맞춰 설계합니다.
+            <strong className="text-gray-800">{SIGNATURE.label}</strong>을 바탕으로 진료과·지역 특성에 맞춰 설계합니다.
           </p>
         </section>
 
