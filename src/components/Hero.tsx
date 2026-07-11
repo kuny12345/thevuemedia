@@ -198,7 +198,7 @@ export default function Hero() {
               </div>
 
               {/* 사실 배지 — 역량 기반 시그니처(SIGNATURE_FACTS) */}
-              <div className="mt-12 grid grid-cols-3 gap-6 border-t border-line pt-7">
+              <div className="mt-12 grid grid-cols-3 gap-3 border-t border-line pt-7 sm:gap-6">
                 {SIGNATURE_FACTS.map((f) => (
                   <div key={f.label}>
                     <p className="stat-num text-2xl text-[#f5f1e6] sm:text-3xl">
@@ -209,7 +209,7 @@ export default function Hero() {
                         </span>
                       )}
                     </p>
-                    <p className="mt-1.5 text-[13px] leading-snug text-on-dark-soft">
+                    <p className="mt-1.5 break-keep text-[12px] leading-snug text-on-dark-soft sm:text-[13px]">
                       {f.label}
                     </p>
                   </div>

@@ -56,7 +56,7 @@ export default function ToolsSection() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
           {products.map((p, i) => (
             <Reveal key={p.slug} delay={i * 90} className="h-full">
-              <article className="card-dark flex h-full flex-col p-6 transition-colors duration-200 hover:border-line-strong sm:p-8">
+              <article className="card-dark flex h-full flex-col p-5 transition-colors duration-200 hover:border-line-strong sm:p-8">
                 {/* 아이콘 + 역할 배지 */}
                 <div className="flex items-center justify-between gap-3">
                   <span className="icon-chip chip-dark">
