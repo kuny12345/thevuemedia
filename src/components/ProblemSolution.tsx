@@ -73,7 +73,7 @@ export default function ProblemSolution() {
                   USER
                 </p>
                 <p className="break-keep text-sm text-on-dark">
-                  “대구에서 믿을 만한 ○○ 업체 추천해줘.”
+                  “우리 지역에서 믿을 만한 ○○ 업체 추천해줘.”
                 </p>
               </div>
 
