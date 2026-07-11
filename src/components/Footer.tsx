@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Logo from "@/components/Logo";
 import { NAP } from "@/lib/nap";
 import { services } from "@/lib/services";
 import { products } from "@/lib/products";
@@ -46,13 +47,8 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           {/* 브랜드 + 풀 NAP 블록 */}
           <div className="lg:col-span-5">
-            <Link href="/" className="inline-flex flex-col" aria-label="더뷰미디어 홈">
-              <span className="text-xl font-extrabold tracking-tight text-white">
-                더뷰미디어
-              </span>
-              <span className="mono mt-1 text-[0.7rem] tracking-[0.18em] text-on-dark-soft">
-                THEVUEMEDIA
-              </span>
+            <Link href="/" className="inline-flex" aria-label="더뷰미디어 홈">
+              <Logo markSize={36} />
             </Link>
 
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-on-dark-soft">

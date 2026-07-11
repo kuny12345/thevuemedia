@@ -25,7 +25,7 @@ export const SIGNATURE_FACTS = [
   {
     value: "2023",
     unit: "",
-    label: "설립 · 대구 수성구",
+    label: "설립",
     note: "AI 검색 최적화(GEO·AIO) 전문",
   },
 ] as const;

@@ -89,12 +89,11 @@ export default function ServiceSeoPage() {
             <p className="eyebrow">// SERVICE</p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <span className="pill">{service.serviceType}</span>
-              <span className="pill">대구 · 대한민국</span>
             </div>
             <h1 className="mt-5 max-w-3xl text-3xl font-extrabold leading-[1.15] text-ink sm:text-4xl lg:text-[3rem]">
               {service.name},
               <br />
-              대구·전국 검색과{" "}
+              전국 검색과{" "}
               <span className="text-gradient">AI 인용</span>의 기반을 함께
               세웁니다
             </h1>

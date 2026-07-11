@@ -89,13 +89,12 @@ export default function ServiceWebRebuildPage() {
             <p className="eyebrow">// SERVICE</p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <span className="pill">{service.serviceType}</span>
-              <span className="pill">대구 · 대한민국</span>
             </div>
             <h1 className="mt-5 max-w-3xl text-3xl font-extrabold leading-[1.15] text-ink sm:text-4xl lg:text-[3rem]">
               {service.name},
               <br />
               사람과 <span className="text-gradient">AI</span>가 함께 읽는
-              사이트로 대구에서 새로 짓습니다
+              사이트로 새로 짓습니다
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-soft">
               오래된 사이트가 검색에도 AI에도 닿지 않는다면, 디자인이 아니라

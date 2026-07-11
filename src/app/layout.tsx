@@ -4,22 +4,26 @@ import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 const siteUrl = "https://thevuemedia.com";
 
+export const viewport = {
+  themeColor: "#081120",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default:
-      "AI 검색 최적화 GEO·AIO 전문 | 더뷰미디어 — 대구 AIO 마케팅",
+      "AI 검색 최적화 GEO·AIO 전문 | 더뷰미디어 — AIO 마케팅 에이전시",
     template: "%s | 더뷰미디어",
   },
   description:
-    "대구 더뷰미디어는 ChatGPT·Gemini·Perplexity·구글 AI 개요가 브랜드를 먼저 추천하도록 설계하는 AI 검색 최적화(GEO·AIO) 전문 회사입니다. 자체 도구 AIRank·SchemaWorks·AutoPost로 진단·추적·발행을 직접 실행합니다.",
+    "더뷰미디어는 ChatGPT·Gemini·Perplexity·구글 AI 개요가 브랜드를 먼저 추천하도록 설계하는 AI 검색 최적화(GEO·AIO) 전문 에이전시입니다. 자체 도구 AIRank·SchemaWorks·AutoPost로 진단·추적·발행을 직접 실행합니다.",
   keywords: [
     "AI 검색 최적화",
     "GEO",
     "AIO",
     "생성형 엔진 최적화",
     "ChatGPT 브랜드 추천",
-    "대구 마케팅",
+    "AIO 마케팅",
     "병원 마케팅",
     "더뷰미디어",
   ],
@@ -27,9 +31,9 @@ export const metadata: Metadata = {
   creator: "더뷰미디어",
   publisher: "더뷰미디어",
   openGraph: {
-    title: "AI 검색 최적화 GEO·AIO 전문 | 더뷰미디어 — 대구 AIO 마케팅",
+    title: "AI 검색 최적화 GEO·AIO 전문 | 더뷰미디어 — AIO 마케팅 에이전시",
     description:
-      "ChatGPT·Gemini·Perplexity가 브랜드를 먼저 추천하도록 설계합니다. 자체 도구로 진단·추적·발행을 직접 실행하는 대구의 AI 검색 최적화(GEO·AIO) 전문.",
+      "ChatGPT·Gemini·Perplexity가 브랜드를 먼저 추천하도록 설계합니다. 자체 도구로 진단·추적·발행을 직접 실행하는 AI 검색 최적화(GEO·AIO) 전문 에이전시.",
     url: "/",
     siteName: "더뷰미디어",
     locale: "ko_KR",
@@ -39,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AI 검색 최적화 GEO·AIO 전문 | 더뷰미디어",
     description:
-      "ChatGPT·Gemini·Perplexity가 브랜드를 먼저 추천하도록 설계하는 대구의 AIO 전문.",
+      "ChatGPT·Gemini·Perplexity가 브랜드를 먼저 추천하도록 설계하는 AIO 전문 에이전시.",
   },
   alternates: {
     canonical: siteUrl,

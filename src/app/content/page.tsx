@@ -89,13 +89,12 @@ export default function ServiceContentPage() {
             <p className="eyebrow">// SERVICE</p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <span className="pill">{service.serviceType}</span>
-              <span className="pill">대구 · 대한민국</span>
             </div>
             <h1 className="mt-5 max-w-3xl text-3xl font-extrabold leading-[1.15] text-ink sm:text-4xl lg:text-[3rem]">
               {service.name},
               <br />
               <span className="text-gradient">AI가 인용할</span> 콘텐츠를
-              대구에서 꾸준히 발행합니다
+              꾸준히 발행합니다
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-soft">
               좋은 콘텐츠를 여러 채널에 꾸준히 올리는 일은 현실적으로 버겁습니다.

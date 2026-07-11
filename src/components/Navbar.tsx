@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { NAP } from "@/lib/nap";
+import Logo from "@/components/Logo";
 
 // 다크 베이스 위 헤더 — "Retained Counsel". 세리프 워드마크 + 골드 헤어라인.
 // 데스크톱 메뉴 — 섹션 id와 1:1로 맞춰 앵커가 해석되게 유지.
@@ -56,9 +57,9 @@ export default function Navbar() {
         <a
           href="/"
           aria-label={`${NAP.name} 홈`}
-          className="font-serif text-lg font-bold tracking-tight text-[#f5f1e6] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+          className="focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
         >
-          더뷰미디어
+          <Logo />
         </a>
 
         {/* 데스크톱 메뉴 */}

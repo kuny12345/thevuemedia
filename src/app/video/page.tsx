@@ -89,13 +89,12 @@ export default function ServiceVideoPage() {
             <p className="eyebrow">// SERVICE</p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <span className="pill">{service.serviceType}</span>
-              <span className="pill">대구 · 대한민국</span>
             </div>
             <h1 className="mt-5 max-w-3xl text-3xl font-extrabold leading-[1.15] text-ink sm:text-4xl lg:text-[3rem]">
               {service.name},
               <br />
               영상으로 사람과 <span className="text-gradient">AI 추천
-              신호</span>를 대구에서 함께 키웁니다
+              신호</span>를 함께 키웁니다
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-soft">
               고객은 글보다 짧은 영상을 먼저 봅니다. 유튜브 쇼츠·인스타 릴스로

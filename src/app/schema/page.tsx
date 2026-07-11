@@ -89,13 +89,12 @@ export default function ServiceSchemaPage() {
             <p className="eyebrow">// SERVICE</p>
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <span className="pill">{service.serviceType}</span>
-              <span className="pill">대구 · 대한민국</span>
             </div>
             <h1 className="mt-5 max-w-3xl text-3xl font-extrabold leading-[1.15] text-ink sm:text-4xl lg:text-[3rem]">
               {service.name},
               <br />
               사람도 <span className="text-gradient">AI</span>도 읽는 엔티티
-              그래프를 대구에서 설계합니다
+              그래프를 설계합니다
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-soft">
               사람 눈에는 멀쩡한 홈페이지가, AI와 검색에는 정체불명일 수

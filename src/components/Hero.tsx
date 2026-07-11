@@ -164,7 +164,7 @@ export default function Hero() {
           {/* 좌: 카피 + CTA + 사실 배지 */}
           <Reveal>
             <div className="min-w-0">
-              <p className="eyebrow">// 대구 · AI 검색 최적화 (GEO·AIO)</p>
+              <p className="eyebrow">AI 검색 최적화 (GEO·AIO)</p>
 
               <h1 className="mt-6 text-4xl leading-[1.18] sm:text-5xl lg:text-[3.4rem] lg:leading-[1.15]">
                 검색이 끝나고,
