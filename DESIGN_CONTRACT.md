@@ -46,7 +46,7 @@
 4. **Credo**(ProblemSolution 계승) — 컨설팅펌식 포지션 선언 3문장 + before/after 미니 채팅 목업("예시").
 5. **ServicesGrid (GBP 미러)** — 서비스 8종 카드. GBP 서비스명 1:1.
 6. **ProcessSection** — 01 Audit / 02 Strategy / 03 Execution / 04 Tracking.
-7. **ToolsSection** — `.dark-section.grid-bg`. "말이 아니라, 직접 만들어 씁니다" — 도구 4종 파이프라인(신뢰의 핵심 축).
+7. **ToolsSection** — `.dark-section.grid-bg`. "방법론을 소프트웨어로 증명합니다" — 도구 4종 파이프라인(신뢰의 핵심 축).
 8. **ProofSection** — "예시" 라벨 인포그래픽 + before/after.
 9. **IndustriesSection** — 의료·법률·프랜차이즈·이커머스·교육·금융.
 10. **InsightsSection** — posts.ts 최신 글 카드 → /blog.
@@ -66,4 +66,4 @@
 
 ## 7. 카피 톤
 - 신뢰·절제·데이터. 과장 없이 단정적. 첫 문장은 항상 검색자/문제에 말 건다(회사 연혁 X).
-- 하이엔드 컨설팅 어법: 짧은 선언 + 근거. "검색이 끝나고 AI 추천이 시작됐다" / "말이 아니라 직접 만들어 쓴다(도구 4종)" / "측정되지 않으면 개선되지 않는다(AIRank)".
+- 하이엔드 컨설팅 어법: 짧은 선언 + 근거. "검색이 끝나고 AI 추천이 시작됐다" / "방법론을 소프트웨어로 증명한다(도구 4종)" / "측정되지 않으면 개선되지 않는다(AIRank)".

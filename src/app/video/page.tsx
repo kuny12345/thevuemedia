@@ -180,7 +180,7 @@ export default function ServiceVideoPage() {
                 이 서비스를 실행하는 자체 도구
               </h2>
               <p className="mt-3 max-w-2xl text-on-dark-soft">
-                말이 아니라, 직접 만들어 쓰는 도구로 진단하고 실행합니다.
+                직접 개발한 도구로 진단하고, 실행하고, 증명합니다.
               </p>
               <div className="mt-10 grid gap-5 sm:grid-cols-2">
                 {tools.map((p) => (

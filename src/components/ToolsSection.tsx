@@ -14,7 +14,7 @@ export default function ToolsSection() {
         <Reveal className="max-w-2xl">
           <p className="eyebrow">Our Tools</p>
           <h2 className="mt-4 text-3xl leading-snug sm:text-4xl lg:text-5xl">
-            말이 아니라, <span className="text-gold">직접 만들어 씁니다</span>
+            방법론을 <span className="text-gold">소프트웨어로 증명</span>합니다
           </h2>
           <span className="accent-bar mt-5" aria-hidden />
           <p className="mt-5 text-base leading-relaxed text-on-dark-soft sm:text-lg">

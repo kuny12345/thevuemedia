@@ -26,13 +26,15 @@ const STRUCTURAL_GAPS = [
   },
 ];
 
+// 구매자 관점 어미("~됩니다") 7개 — 판매자 관점 명사 나열 금지
 const DELIVERABLES = [
-  "AI가 읽는 시맨틱 문서 구조 (h1–h6·본문 텍스트화)",
-  "업체 정보를 하나로 연결한 JSON-LD 그래프",
-  "llms.txt · robots · sitemap — AI 크롤러 안내 신호",
-  "메타·OG·파비콘 등 인용 표면 정비",
-  "속도·모바일 정비 (Core Web Vitals)",
-  "완료 후 재진단 리포트 — 전후 점수 비교",
+  "AI가 당신의 업종·위치·강점을 정확히 읽을 수 있게 됩니다 (연결된 JSON-LD 그래프)",
+  "이미지 속에 갇혀 있던 내용이 AI가 인용할 수 있는 문서가 됩니다 (시맨틱 구조)",
+  "읽으러 온 AI 크롤러가 무엇을 읽어야 할지 안내받게 됩니다 (llms.txt · robots · sitemap)",
+  "검색 결과·카톡 공유·AI 답변 어디서든 같은 얼굴로 보이게 됩니다 (메타 · OG 정비)",
+  "속도와 모바일 사용성 점수가 개선됩니다 (Core Web Vitals)",
+  "기존 디자인과 주소는 그대로 — 방문자는 아무 변화도 느끼지 못합니다",
+  "완료 후 같은 기준의 재진단 리포트로 전후 점수를 직접 확인하게 됩니다",
 ];
 
 const PROCESS = [
@@ -103,24 +105,31 @@ export default function RebuildPage() {
         </div>
       </header>
 
-      {/* 1. 훅 */}
+      {/* 1. 훅 — 미끄럼틀: 첫 문장의 목적은 둘째 문장을 읽게 하는 것 */}
       <section className="section-pad relative">
         <div className="container-x max-w-3xl">
           <p className="eyebrow mb-6">Structural Rebuilding</p>
           <h1 className="text-4xl leading-[1.22] sm:text-5xl">
-            7일간의 기록을 보셨습니다.
+            잠재 고객이 AI에게 물었을 때,
             <br />
-            AI는 당신의 사이트를{" "}
-            <em className="not-italic text-gold">읽지 못하고</em> 있습니다.
+            당신의 이름은 <em className="not-italic text-gold">몇 번</em>{" "}
+            나왔습니까.
           </h1>
           <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-on-dark-soft">
-            잠재 고객의 질문에 AI가 다른 곳을 추천하는 동안, 당신의 홈페이지는
-            그 답변에 등장할 기회조차 얻지 못했습니다. 원인은 대부분 콘텐츠가
-            아니라 <strong className="font-semibold text-on-dark">구조</strong>입니다.
+            그 숫자를 이미 보셨을 겁니다. 7일간, 잠재 고객의 질문에 AI가 다른
+            곳을 추천하는 동안 당신의 홈페이지는 답변에 등장할 기회조차 얻지
+            못했습니다. 콘텐츠가 부족해서가 아닙니다 — AI가 읽을 수 없는{" "}
+            <strong className="font-semibold text-on-dark">구조</strong> 위에
+            콘텐츠가 올라가 있기 때문입니다.
+          </p>
+          <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-on-dark-soft">
+            지금 매출에는 아무 이상이 없어 보일 수 있습니다. 그래서 더
+            위험합니다. 검색이 AI로 옮겨가는 동안, 보이지 않는 자리는 소리 없이
+            다른 이름으로 채워지고 있습니다.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a href="#consult" className="btn btn-primary">
-              리빌딩 상담 신청
+              내 리포트 기준으로 상담받기
             </a>
             <a href={`tel:${NAP.phoneE164}`} className="btn btn-ghost">
               전화 상담 {NAP.phoneDisplay}
@@ -129,7 +138,7 @@ export default function RebuildPage() {
         </div>
       </section>
 
-      {/* 2. 원인 — 진단 리포트의 언어와 연속 */}
+      {/* 2. 원인 — 적은 경쟁사가 아니라 '낡은 구조' (공동의 적) */}
       <section className="dark-section section-pad">
         <div className="container-x">
           <p className="eyebrow mb-4">Why Invisible</p>
@@ -153,6 +162,13 @@ export default function RebuildPage() {
           </div>
           <p className="mt-8 text-sm text-on-dark-soft">
             받으신 진단 리포트의 감점 항목들이 바로 이 세 가지의 구체적 증상입니다.
+          </p>
+          <p className="mt-6 max-w-2xl border-l-2 border-gold pl-5 text-[16px] leading-relaxed text-on-dark">
+            우리는 검색 순위를 논하려는 것이 아닙니다.{" "}
+            <strong className="font-semibold">
+              AI가 당신을 건너뛰게 만드는 구조를 없애려는 것
+            </strong>
+            입니다.
           </p>
         </div>
       </section>
@@ -185,10 +201,14 @@ export default function RebuildPage() {
                 <p className="mt-1 text-[13px] text-on-dark-soft">규모별 견적 · 상담 후 확정</p>
               </div>
             </div>
+            <p className="mt-6 max-w-md text-[14px] leading-relaxed text-on-dark-soft">
+              한 달 검색광고비 수준의 일회성 투자입니다. 광고는 끄는 순간
+              사라지지만, 구조는 광고가 꺼진 뒤에도 남아서 일합니다.
+            </p>
           </div>
           <div className="card p-8">
             <p className="mono mb-5 text-[13px] tracking-wider text-gold">
-              DELIVERABLES — 2주 후 받는 것
+              2주 후, 이렇게 달라집니다
             </p>
             <ul className="space-y-3.5">
               {DELIVERABLES.map((d) => (
@@ -207,6 +227,10 @@ export default function RebuildPage() {
         <div className="container-x">
           <p className="eyebrow mb-4">Process</p>
           <h2 className="text-3xl sm:text-4xl">리포트에서 재진단까지, 2주</h2>
+          <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-on-dark-soft">
+            완료의 기준은 우리의 감이 아니라 진단 점수입니다. 착수 전과 같은
+            22개 항목을 다시 통과해야 끝난 것으로 봅니다.
+          </p>
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {PROCESS.map((p) => (
               <div key={p.step} className="border-t border-line pt-6">
@@ -255,7 +279,8 @@ export default function RebuildPage() {
               </h3>
               <p className="mt-3 text-[15px] leading-relaxed text-on-dark-soft">
                 리빌딩으로 기반을 만들고, 자체 도구로 매달 언급을 측정하며
-                인용될 콘텐츠 자산을 쌓아가는 연간 프로그램입니다.
+                인용될 콘텐츠 자산을 쌓아가는 연간 프로그램입니다. 읽히는
+                상태에 만족하지 않고, 인용되는 상태까지 함께 갑니다.
               </p>
               <ul className="mt-6 space-y-2.5 text-[14px] text-on-dark-soft">
                 <li className="flex gap-2.5"><GoldCheck />AIRank — 5개 AI 엔진 언급 추적</li>
@@ -275,11 +300,15 @@ export default function RebuildPage() {
         <div className="container-x">
           <p className="eyebrow mb-4">Why Us</p>
           <h2 className="max-w-2xl text-3xl sm:text-4xl">
-            말이 아니라, 직접 만들어 씁니다
+            방법론을 소프트웨어로 증명합니다
           </h2>
           <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-on-dark-soft">
             진단·추적·발행 도구를 자체 개발해 실무에 씁니다. 방금 받아보신 진단
             리포트와 7일 추적이 그 도구의 실물입니다.
+          </p>
+          <p className="mt-6 max-w-xl border-l-2 border-gold pl-5 text-[16px] leading-relaxed text-on-dark">
+            그리고 약속 하나 — 리빌딩이 필요 없는 사이트에는 리빌딩을 권하지
+            않습니다. 구조를 열어본 뒤, 필요 없다면 그렇게 말씀드립니다.
           </p>
           <div className="mt-12 grid gap-px bg-line sm:grid-cols-3">
             {SIGNATURE_FACTS.map((f) => (
@@ -330,8 +359,13 @@ export default function RebuildPage() {
               오시면 됩니다
             </h2>
             <p className="mt-5 text-[15px] leading-relaxed text-on-dark-soft">
-              받으신 진단·추적 결과를 기준으로 리빌딩 가능 여부와 견적을
-              안내드립니다. 불가능한 구조라면 착수 전에 정확히 말씀드립니다.
+              받으신 7일 기록을 함께 다시 보는 것부터 시작합니다. 그 데이터를
+              기준으로 리빌딩 가능 여부와 견적을 안내드리고, 불가능한 구조라면
+              착수 전에 정확히 말씀드립니다.
+            </p>
+            <p className="mt-3 text-[13px] leading-relaxed text-on-dark-soft">
+              품질을 위해 동시 진행 건수를 제한하고 있습니다 — 착수 가능
+              시점은 상담에서 안내드립니다.
             </p>
             <div className="mt-8 space-y-1.5 border-t border-line pt-6 text-[14px] text-on-dark-soft">
               <p className="font-medium text-on-dark">{NAP.name}</p>
