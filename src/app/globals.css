@@ -498,3 +498,14 @@ body::before {
     transform: none;
   }
 }
+
+/* 아이보리 지면 위 primary 버튼 — 골드는 지면과 대비가 약해 잉크 솔리드로 */
+.paper-section .btn-primary {
+  background: #0c1322;
+  color: #f0ecdf;
+  box-shadow: 0 12px 30px -14px rgba(8, 17, 32, 0.45);
+}
+.paper-section .btn-primary:hover {
+  filter: none;
+  background: #16233c;
+}
