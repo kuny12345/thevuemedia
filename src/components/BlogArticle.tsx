@@ -58,60 +58,60 @@ export default function BlogArticle({
       <JsonLd data={breadcrumb} />
       {faq.length > 0 && <JsonLd data={faqPageSchema(faq)} />}
 
-      <article className="bg-white">
+      {/* 아이보리 지면 — 장문 가독성. 본문 38개의 legacy gray-* 는
+          @theme 재매핑으로 웜 뉴트럴이 되어 지면과 자연 통일된다. */}
+      <article className="paper-section">
         {/* Editorial header */}
-        <header className="pt-32 pb-12 lg:pt-40 lg:pb-16 border-b border-gray-100">
-          <div className="max-w-3xl mx-auto px-6 text-center">
-            <span className="inline-block text-xs font-bold tracking-[0.14em] uppercase text-primary mb-4">
-              {tag}
-            </span>
-            <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] lg:leading-[1.15] font-extrabold text-ink mb-6">
+        <header className="border-b border-[rgba(8,17,32,0.1)] pt-32 pb-12 lg:pt-40 lg:pb-16">
+          <div className="mx-auto max-w-3xl px-6 text-center">
+            <span className="eyebrow mb-5 justify-center">{tag}</span>
+            <h1 className="mb-6 text-3xl md:text-4xl lg:text-[2.75rem] lg:leading-[1.2]">
               {title}
             </h1>
-            <div className="flex items-center justify-center gap-3 text-gray-400 text-sm">
+            <div className="flex items-center justify-center gap-3 text-sm text-gray-400">
               <span className="font-medium text-gray-700">더뷰미디어</span>
-              <span className="w-1 h-1 rounded-full bg-gray-300" />
+              <span className="h-1 w-1 rounded-full bg-gray-300" />
               <time dateTime={datePublished}>{date}</time>
-              <span className="w-1 h-1 rounded-full bg-gray-300" />
+              <span className="h-1 w-1 rounded-full bg-gray-300" />
               <span>{readTime}</span>
             </div>
           </div>
         </header>
 
         {/* Body */}
-        <div className="max-w-2xl mx-auto px-6 py-14 lg:py-20 text-[17px] leading-8">
+        <div className="mx-auto max-w-2xl px-6 py-14 text-[17px] leading-8 lg:py-20">
           {children}
           {faq.length > 0 && (
             <section className="mt-14" aria-labelledby="article-faq-heading">
               <h2
                 id="article-faq-heading"
-                className="text-2xl font-extrabold text-ink mb-5"
+                className="mb-5 text-2xl"
               >
                 자주 묻는 질문
               </h2>
               <ul className="flex flex-col gap-3">
                 {faq.map((it) => (
                   <li key={it.q}>
-                    <details className="group rounded-xl border border-gray-200 bg-white open:shadow-sm">
-                      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 min-h-[44px] rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary [&::-webkit-details-marker]:hidden">
-                        <span className="font-bold text-ink leading-snug text-[17px]">
+                    <details className="group border border-[rgba(8,17,32,0.12)] bg-[#fffdf8] open:shadow-sm">
+                      <summary className="flex min-h-[44px] cursor-pointer list-none items-start justify-between gap-4 p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep [&::-webkit-details-marker]:hidden">
+                        <span className="text-[17px] font-bold leading-snug text-ink">
                           {it.q}
                         </span>
                         <svg
                           aria-hidden="true"
                           focusable="false"
-                          className="w-5 h-5 mt-0.5 flex-shrink-0 text-gray-400 transition-transform duration-200 group-open:rotate-180"
+                          className="mt-0.5 h-5 w-5 flex-shrink-0 text-gold-deep transition-transform duration-200 group-open:rotate-180"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth={2}
+                          strokeWidth={1.5}
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
                           <path d="M6 9l6 6 6-6" />
                         </svg>
                       </summary>
-                      <p className="px-5 pb-5 text-gray-600 text-[15px] leading-relaxed">
+                      <p className="px-5 pb-5 text-[15px] leading-relaxed text-gray-600">
                         {it.a}
                       </p>
                     </details>
@@ -122,36 +122,33 @@ export default function BlogArticle({
           )}
         </div>
 
-        {/* CTA */}
-        <div className="bg-gray-50 border-y border-gray-100">
-          <div className="max-w-2xl mx-auto px-6 py-14 text-center">
-            <h3 className="text-2xl font-extrabold text-ink mb-3">
+        {/* CTA — 홈 상담 섹션으로 연결 */}
+        <div className="border-y border-[rgba(8,17,32,0.1)] bg-[#efe9dc]">
+          <div className="mx-auto max-w-2xl px-6 py-14 text-center">
+            <h3 className="mb-3 text-2xl">
               AI는 우리 브랜드를 어떻게 인식하고 있을까?
             </h3>
-            <p className="text-gray-500 mb-6">
-              전문 컨설턴트가 분석한 AI Mention 리포트를 무료로 받아보세요.
+            <p className="mb-6 text-gray-500">
+              현재 상태 기준으로 무엇부터 해야 할지 상담으로 안내드립니다.
             </p>
-            <a
-              href="/#contact"
-              className="inline-block px-6 py-3 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
-            >
-              무료 AI 인식도 진단받기
+            <a href="/#consult" className="btn btn-primary">
+              상담 신청하기
             </a>
           </div>
         </div>
 
         {/* Related */}
-        <div className="max-w-2xl mx-auto px-6 py-14">
-          <h3 className="text-lg font-bold text-ink mb-6">관련 글 더보기</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="mx-auto max-w-2xl px-6 py-14">
+          <h3 className="mb-6 text-lg">관련 글 더보기</h3>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {related.map((r) => (
               <Link
                 key={r.slug}
                 href={postUrl(r.slug)}
-                className="block p-5 rounded-xl border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all"
+                className="block border border-[rgba(8,17,32,0.12)] bg-[#fffdf8] p-5 transition-all hover:border-gold-deep hover:shadow-sm"
               >
-                <span className="text-xs text-primary font-bold">{r.tag}</span>
-                <p className="font-semibold text-ink mt-1 text-sm">{r.title}</p>
+                <span className="mono text-xs font-bold text-gold-deep">{r.tag}</span>
+                <p className="mt-1 text-sm font-semibold text-ink">{r.title}</p>
               </Link>
             ))}
           </div>

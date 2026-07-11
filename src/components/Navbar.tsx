@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { NAP } from "@/lib/nap";
 
+// 다크 베이스 위 헤더 — "Retained Counsel". 세리프 워드마크 + 골드 헤어라인.
 // 데스크톱 메뉴 — 섹션 id와 1:1로 맞춰 앵커가 해석되게 유지.
 const NAV_LINKS = [
   { href: "/#services", label: "서비스" },
@@ -44,22 +45,20 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ${
         scrolled || mobileOpen
-          ? "border-b border-line bg-white/80 shadow-[0_1px_0_0_rgba(10,14,22,0.02)] backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
+          ? "border-b border-line bg-ink/85 backdrop-blur-xl"
+          : "border-b border-line/60 bg-ink/70 backdrop-blur-md"
       }`}
     >
       <div className="container-x flex h-16 items-center justify-between md:h-[72px]">
-        {/* 로고 워드마크 */}
+        {/* 로고 — 세리프 워드마크 */}
         <a
           href="/"
           aria-label={`${NAP.name} 홈`}
-          className="flex items-center gap-[1px] rounded-md text-lg font-extrabold tracking-tight text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+          className="font-serif text-lg font-bold tracking-tight text-[#f5f1e6] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
         >
-          <span>THE</span>
-          <span className="text-brand">VUE</span>
-          <span>MEDIA</span>
+          더뷰미디어
         </a>
 
         {/* 데스크톱 메뉴 */}
@@ -69,7 +68,7 @@ export default function Navbar() {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="rounded-md text-text-soft transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+                  className="text-on-dark-soft transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
                 >
                   {item.label}
                 </a>
@@ -79,16 +78,19 @@ export default function Navbar() {
         </nav>
 
         {/* 우측: 전화 아이콘 + CTA (데스크톱) */}
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2.5 md:flex">
           <a
             href={TEL_HREF}
             aria-label={TEL_LABEL}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-line text-ink transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-[2px] border border-line text-on-dark transition-colors hover:border-line-strong hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
           >
             <PhoneIcon />
           </a>
-          <a href="/#contact" className="btn btn-primary">
-            무료 AI 진단
+          <a
+            href="/#consult"
+            className="btn btn-primary min-h-[44px] px-5 py-2.5 text-sm"
+          >
+            상담 신청
           </a>
         </div>
 
@@ -99,7 +101,7 @@ export default function Navbar() {
           aria-label={mobileOpen ? "메뉴 닫기" : "메뉴 열기"}
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
-          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-xl text-ink md:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="-mr-2 inline-flex h-11 w-11 items-center justify-center rounded-[2px] text-on-dark md:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
         >
           <span className="relative block h-4 w-5" aria-hidden="true">
             <span
@@ -124,7 +126,7 @@ export default function Navbar() {
       {/* 모바일 슬라이드다운 메뉴 */}
       <div
         id="mobile-menu"
-        className={`overflow-hidden border-line bg-white/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out md:hidden ${
+        className={`overflow-hidden border-line bg-ink/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out md:hidden ${
           mobileOpen
             ? "max-h-[26rem] border-t opacity-100"
             : "max-h-0 border-t-0 opacity-0"
@@ -138,7 +140,7 @@ export default function Navbar() {
                 <a
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex min-h-[48px] items-center rounded-xl px-4 text-base font-medium text-text transition-colors hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                  className="flex min-h-[48px] items-center rounded-[2px] px-4 text-base font-medium text-on-dark transition-colors hover:bg-ink-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                 >
                   {item.label}
                 </a>
@@ -157,11 +159,11 @@ export default function Navbar() {
               {NAP.phoneDisplay}
             </a>
             <a
-              href="/#contact"
+              href="/#consult"
               onClick={() => setMobileOpen(false)}
               className="btn btn-primary w-full"
             >
-              무료 AI 진단
+              상담 신청
             </a>
           </div>
         </nav>
@@ -178,7 +180,7 @@ function PhoneIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.75"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"

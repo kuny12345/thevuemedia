@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { services, type ServiceIconKey } from "@/lib/services";
 
-// 라인 아이콘 8종 (stroke 1.75, currentColor) — service.iconKey로 선택.
-// 이모지 금지·한 세트 톤 유지(globals "Measured Authority").
+// 라인 아이콘 8종 (stroke 1.5, currentColor) — service.iconKey로 선택.
+// 이모지 금지 · 단일 골드 톤(icon-chip이 골드로 수렴) — "Retained Counsel".
 function ServiceIcon({
   iconKey,
-  className = "w-6 h-6",
+  className = "h-6 w-6",
 }: {
   iconKey: ServiceIconKey;
   className?: string;
@@ -15,7 +15,7 @@ function ServiceIcon({
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
-    strokeWidth: 1.75,
+    strokeWidth: 1.5,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
     "aria-hidden": true,
@@ -86,68 +86,58 @@ function ServiceIcon({
   }
 }
 
-// 칩 액센트 로테이션 (brand → violet → cyan → indigo → up 반복)
-const CHIP_ACCENTS = ["brand", "violet", "cyan", "indigo", "up"] as const;
-
 export default function ServicesGrid() {
   return (
     <section
       id="services"
       aria-labelledby="services-heading"
-      className="section-pad bg-paper relative overflow-hidden"
+      className="section-pad"
     >
-      <div className="aura aura-soft" aria-hidden="true" />
-      <div className="container-x relative z-10">
-        {/* Header — 첫 문장은 검색자/문제에 말 건다 */}
+      <div className="container-x">
+        {/* Header — 골드 모노 eyebrow + 세리프 헤딩 */}
         <div className="max-w-2xl">
-          <p className="eyebrow">// SERVICES</p>
-          <h2
-            id="services-heading"
-            className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink leading-tight"
-          >
+          <p className="eyebrow mb-4">// Services</p>
+          <h2 id="services-heading" className="text-3xl sm:text-4xl">
             서비스
           </h2>
-          <span className="accent-bar mt-5" aria-hidden />
-          <p className="mt-4 text-base sm:text-lg text-text-soft leading-relaxed">
-            AI와 검색 양쪽에서 브랜드가 먼저 인용되도록, 진단부터 추적까지 필요한
-            작업을 영역별로 나눴습니다. 무엇이 필요한지 골라보세요.
+          <p className="mt-5 text-base leading-relaxed text-on-dark-soft sm:text-lg">
+            AI와 검색 양쪽에서 브랜드가 먼저 인용되도록, 진단부터 추적까지
+            필요한 작업을 영역별로 나눴습니다. 무엇이 필요한지 골라보세요.
           </p>
         </div>
 
-        {/* 8개 서비스 카드 — GBP 서비스명과 1:1 */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {services.map((s, i) => (
+        {/* 8개 서비스 — GBP 서비스명과 1:1 · 골드 헤어라인 gap-px 그리드 */}
+        <div className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((s) => (
             <Link
               key={s.slug}
               href={s.href}
               aria-label={`${s.name} 자세히 보기`}
-              className="card card-hover group relative flex flex-col p-7 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+              className="group relative flex flex-col bg-ink p-7 transition-colors hover:bg-ink-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gold"
             >
               {s.isNew && (
-                <span className="pill-brand absolute right-5 top-5 mono text-[0.65rem] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full">
+                <span className="mono absolute right-5 top-5 border border-line px-2 py-0.5 text-[10px] uppercase tracking-[0.18em] text-on-dark-soft">
                   New
                 </span>
               )}
 
-              <span className={`icon-chip chip-${CHIP_ACCENTS[i % CHIP_ACCENTS.length]}`}>
+              <span className="icon-chip chip-brand">
                 <ServiceIcon iconKey={s.iconKey} />
               </span>
 
-              <h3 className="mt-5 text-lg font-extrabold text-ink leading-snug">
-                {s.name}
-              </h3>
-              <p className="mt-2 text-sm text-text-soft leading-relaxed">
+              <h3 className="mt-5 text-lg leading-snug">{s.name}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-on-dark-soft">
                 {s.short}
               </p>
 
-              <span className="mt-auto pt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand group-hover:gap-2.5 transition-all">
+              <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-sm text-on-dark-soft transition-colors group-hover:text-gold">
                 자세히
                 <svg
-                  className="w-4 h-4"
+                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth={2}
+                  strokeWidth={1.5}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   aria-hidden="true"

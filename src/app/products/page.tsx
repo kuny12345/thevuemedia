@@ -76,6 +76,7 @@ export default function ProductsPage() {
       ))}
       <JsonLd data={faqPageSchema(faq)} />
 
+      <div className="paper-section">
       {/* Hero */}
       <header className="pt-32 pb-16 lg:pt-40 lg:pb-20 border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -196,7 +197,7 @@ export default function ProductsPage() {
             현재 AI가 우리 브랜드를 어떻게 인식하는지 무료로 진단해 드립니다.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="/#contact" className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors">
+            <a href="/#consult" className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors">
               무료 AI 인식도 진단받기
             </a>
             <Link href="/hospital-marketing" className="inline-block px-8 py-4 rounded-full border border-gray-300 text-gray-700 font-semibold hover:border-primary/40 hover:text-primary transition-colors">
@@ -204,6 +205,7 @@ export default function ProductsPage() {
             </Link>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

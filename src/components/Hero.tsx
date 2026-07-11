@@ -1,7 +1,7 @@
 import Reveal from "@/components/Reveal";
-import { NAP } from "@/lib/nap";
+import { SIGNATURE_FACTS } from "@/lib/brand";
 
-// 라이트 히어로 — "Measured Authority". 좌: 카피+CTA, 우: AIRank 대시보드 목업(예시).
+// 다크 히어로 — "Retained Counsel". 좌: 세리프 선언 카피+CTA+사실 배지, 우: AIRank 대시보드 목업(예시).
 // 법무: 1위/최고/100%/보장·검증 안 된 실적 단정 금지. 대시보드 수치는 전부 '예시'.
 
 const ENGINES = ["ChatGPT", "Gemini", "Perplexity", "구글 AIO"] as const;
@@ -14,7 +14,7 @@ function ArrowIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -25,20 +25,21 @@ function ArrowIcon() {
   );
 }
 
-function PhoneIcon() {
+function ExternalIcon() {
   return (
     <svg
-      width="18"
-      height="18"
+      width="16"
+      height="16"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.8"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
     >
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" />
+      <path d="M7 17 17 7" />
+      <path d="M8 7h9v9" />
     </svg>
   );
 }
@@ -51,7 +52,7 @@ function TrendUpIcon() {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2.2"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
@@ -66,31 +67,30 @@ function TrendUpIcon() {
 function DashboardMockup() {
   return (
     <div className="min-w-0">
-      <div className="card shadow-[var(--shadow-lg)] p-5 sm:p-6">
+      <div className="card-dark p-5 shadow-[var(--shadow-lg)] sm:p-6">
         {/* header */}
         <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-up" aria-hidden="true" />
-            <span className="text-sm font-semibold text-ink">AIRank 대시보드</span>
-          </div>
+          <span className="mono text-[13px] font-medium text-on-dark">
+            AIRank 대시보드
+          </span>
           <span className="pill mono text-[11px]">예시 · example</span>
         </div>
 
         {/* headline metric */}
         <div className="mt-5 flex items-end gap-2.5">
-          <span className="stat-num text-gradient text-[2.75rem] leading-none font-extrabold">
+          <span className="stat-num text-[2.75rem] font-bold leading-none text-[#f5f1e6]">
             72.4
           </span>
-          <span className="mb-1 inline-flex items-center gap-1 text-sm font-semibold text-up">
+          <span className="mono mb-1 inline-flex items-center gap-1 text-sm text-on-dark-soft">
             <TrendUpIcon />
             +18.2
           </span>
         </div>
-        <p className="mono mt-1.5 text-xs text-text-soft">
+        <p className="mono mt-1.5 text-xs text-on-dark-soft">
           Mention Score · 최근 30일 (예시)
         </p>
 
-        {/* rising line chart */}
+        {/* rising line chart — 골드 라인 */}
         <svg
           viewBox="0 0 320 96"
           className="mt-4 h-auto w-full"
@@ -98,54 +98,47 @@ function DashboardMockup() {
           aria-label="예시 Mention Score 추세 — 우상향 라인 차트"
         >
           <defs>
-            <linearGradient id="heroChartFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#2563eb" stopOpacity="0.28" />
-              <stop offset="100%" stopColor="#2563eb" stopOpacity="0" />
+            <linearGradient id="heroChartGold" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#c9a96a" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#c9a96a" stopOpacity="0" />
             </linearGradient>
           </defs>
           <polyline
-            fill="url(#heroChartFill)"
+            fill="url(#heroChartGold)"
             stroke="none"
             points="0,80 0,78 32,72 64,74 96,60 128,63 160,48 192,45 224,34 256,30 288,19 320,12 320,96 0,96"
           />
           <polyline
-            fill="none"
-            stroke="#2563eb"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            className="chart-line"
             points="0,78 32,72 64,74 96,60 128,63 160,48 192,45 224,34 256,30 288,19 320,12"
           />
-          <circle cx="320" cy="12" r="4" fill="#06b6d4" />
+          <circle cx="320" cy="12" r="3" fill="#c9a96a" />
         </svg>
 
         {/* mono stat tiles */}
         <div className="mt-5 grid grid-cols-2 gap-3">
-          <div className="rounded-xl border border-line bg-surface px-3.5 py-3">
-            <p className="mono text-[11px] uppercase tracking-wide text-text-soft">
+          <div className="rounded-[2px] border border-line bg-ink-soft px-3.5 py-3">
+            <p className="mono text-[11px] uppercase tracking-wide text-on-dark-soft">
               Share of Voice
             </p>
-            <p className="stat-num mt-1 text-xl font-bold text-ink">38%</p>
+            <p className="stat-num mt-1 text-xl font-bold text-[#f5f1e6]">38%</p>
           </div>
-          <div className="rounded-xl border border-line bg-surface px-3.5 py-3">
-            <p className="mono text-[11px] uppercase tracking-wide text-text-soft">
+          <div className="rounded-[2px] border border-line bg-ink-soft px-3.5 py-3">
+            <p className="mono text-[11px] uppercase tracking-wide text-on-dark-soft">
               AI 인용
             </p>
-            <p className="stat-num mt-1 text-xl font-bold text-ink">24</p>
+            <p className="stat-num mt-1 text-xl font-bold text-[#f5f1e6]">24</p>
           </div>
         </div>
 
         {/* tracked engines */}
         <div className="mt-4">
-          <p className="mono text-[11px] uppercase tracking-wide text-text-soft">
+          <p className="mono text-[11px] uppercase tracking-wide text-on-dark-soft">
             Tracked engines
           </p>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {ENGINES.map((e) => (
-              <span
-                key={e}
-                className="mono rounded-md border border-line bg-paper px-2.5 py-1 text-xs font-medium text-text"
-              >
+              <span key={e} className="pill mono text-xs">
                 {e}
               </span>
             ))}
@@ -153,7 +146,7 @@ function DashboardMockup() {
         </div>
       </div>
 
-      <p className="mt-3 text-xs text-text-soft">
+      <p className="mt-3 text-xs text-on-dark-soft">
         * 대시보드는 예시 화면입니다 · 실제 고객 성과 아님
       </p>
     </div>
@@ -163,45 +156,64 @@ function DashboardMockup() {
 export default function Hero() {
   return (
     <section
-      className="section-pad relative overflow-hidden bg-paper"
-      style={{ paddingTop: "clamp(7rem, 12vw, 11rem)" }}
+      className="section-pad relative overflow-hidden"
+      style={{ paddingTop: "clamp(7.5rem, 12vw, 11rem)" }}
     >
-      {/* 은은한 상단 워시 (라이트) */}
-      <div className="aura" aria-hidden="true" />
-
       <div className="container-x relative z-10">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* 좌: 카피 + CTA */}
+          {/* 좌: 카피 + CTA + 사실 배지 */}
           <Reveal>
-            <div>
+            <div className="min-w-0">
               <p className="eyebrow">// 대구 · AI 검색 최적화 (GEO·AIO)</p>
 
-              <h1 className="mt-5 text-4xl font-extrabold leading-[1.1] tracking-tight text-ink text-balance sm:text-5xl lg:text-[3.5rem] lg:leading-[1.08]">
+              <h1 className="mt-6 text-4xl leading-[1.18] sm:text-5xl lg:text-[3.4rem] lg:leading-[1.15]">
                 검색이 끝나고,
                 <br />
-                지금은 <span className="text-gradient">AI 추천</span>이
+                지금은 <span className="text-gold">AI 추천</span>이
+                <br />
                 시작됐습니다.
               </h1>
 
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-text-soft">
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-on-dark-soft">
                 ChatGPT·Gemini·Perplexity, 그리고 구글 AI 개요가 고객에게 당신의
                 브랜드를 먼저 추천하도록 콘텐츠와 구조를 설계합니다. 컨설팅에
                 그치지 않고, 직접 만든 도구로 진단부터 발행·추적까지 실행합니다.
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <a href="/#contact" className="btn btn-primary">
-                  무료 AI 진단
+                <a href="/#consult" className="btn btn-primary">
+                  상담 신청
                   <ArrowIcon />
                 </a>
                 <a
-                  href={`tel:${NAP.phoneE164}`}
+                  href="https://schemaworks.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-ghost"
-                  aria-label={`전화 상담 ${NAP.phoneDisplay}`}
+                  aria-label="무료 AI 진단 — schemaworks.org (새 창)"
                 >
-                  <PhoneIcon />
-                  전화 상담
+                  무료 AI 진단
+                  <ExternalIcon />
                 </a>
+              </div>
+
+              {/* 사실 배지 — 역량 기반 시그니처(SIGNATURE_FACTS) */}
+              <div className="mt-12 grid grid-cols-3 gap-6 border-t border-line pt-7">
+                {SIGNATURE_FACTS.map((f) => (
+                  <div key={f.label}>
+                    <p className="stat-num text-2xl text-[#f5f1e6] sm:text-3xl">
+                      {f.value}
+                      {f.unit && (
+                        <span className="ml-0.5 text-base text-on-dark-soft">
+                          {f.unit}
+                        </span>
+                      )}
+                    </p>
+                    <p className="mt-1.5 text-[13px] leading-snug text-on-dark-soft">
+                      {f.label}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </Reveal>

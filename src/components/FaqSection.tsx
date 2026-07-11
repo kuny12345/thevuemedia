@@ -41,39 +41,30 @@ const qas: { q: string; a: string }[] = [
 
 export default function FaqSection() {
   return (
-    <section
-      id="faq"
-      aria-labelledby="faq-heading"
-      className="section-pad bg-surface relative overflow-hidden"
-    >
-      <div className="aura aura-soft" aria-hidden="true" />
+    <section id="faq" aria-labelledby="faq-heading" className="section-pad">
       {/* 온페이지 Q&A와 동일한 배열로 FAQPage 구조화 데이터 emit */}
       <JsonLd data={faqPageSchema(qas)} />
 
-      <div className="container-x relative z-10">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
+      <div className="container-x">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-16">
           {/* 좌: 헤더 (데스크톱에서 sticky) — 첫 문장은 검색자에게 말 건다 */}
-          <Reveal as="div" className="lg:sticky lg:top-28 lg:self-start">
-            <p className="eyebrow">// FAQ</p>
-            <h2
-              id="faq-heading"
-              className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink leading-tight text-balance"
-            >
+          <Reveal className="lg:sticky lg:top-28 lg:self-start">
+            <p className="eyebrow mb-4">FAQ</p>
+            <h2 id="faq-heading" className="text-3xl sm:text-4xl">
               자주 묻는 질문
             </h2>
-            <div className="accent-bar mt-4" aria-hidden="true" />
-            <p className="mt-4 text-base sm:text-lg text-text-soft leading-relaxed">
+            <p className="mt-5 text-[15px] leading-relaxed text-on-dark-soft">
               AI 검색 최적화를 처음 검토할 때 가장 많이 받는 질문을 모았습니다.
-              더 궁금한 점은 무료 AI 진단에서 직접 답해 드립니다.
+              더 궁금한 점은 상담에서 직접 답해 드립니다.
             </p>
-            <a href="#contact" className="btn btn-primary mt-6">
-              무료 AI 진단 신청
+            <a href="#consult" className="btn btn-ghost mt-8">
+              상담 신청
               <svg
-                className="w-4 h-4"
+                className="h-4 w-4"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth={2}
+                strokeWidth={1.5}
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
@@ -85,41 +76,28 @@ export default function FaqSection() {
           </Reveal>
 
           {/* 우: 접근성 아코디언 (native details/summary — 서버 컴포넌트 유지) */}
-          <ul className="flex flex-col gap-3">
-            {qas.map((qa, i) => (
-              <Reveal as="li" key={qa.q} delay={i * 50}>
-                <details className="group card overflow-hidden p-0 open:shadow-md open:border-l-[3px] open:border-l-brand">
-                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 sm:px-6 sm:py-5 min-h-[44px] rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden">
-                    <h3 className="text-base sm:text-lg font-bold text-ink leading-snug text-balance">
+          <Reveal>
+            <div className="divide-y divide-[rgba(201,169,106,0.14)] border-y border-line">
+              {qas.map((qa) => (
+                <details key={qa.q} className="group py-5">
+                  <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold [&::-webkit-details-marker]:hidden">
+                    <h3 className="font-sans text-[16px] font-medium leading-normal text-on-dark">
                       {qa.q}
                     </h3>
                     <span
                       aria-hidden="true"
-                      className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand transition-transform duration-200 group-open:rotate-180 group-open:bg-brand group-open:text-white"
+                      className="mono shrink-0 text-gold transition-transform group-open:rotate-45"
                     >
-                      <svg
-                        className="w-4 h-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        focusable="false"
-                      >
-                        <path d="M6 9l6 6 6-6" />
-                      </svg>
+                      +
                     </span>
                   </summary>
-                  <div className="px-5 pb-5 sm:px-6 sm:pb-6">
-                    <p className="border-t border-line pt-4 text-sm sm:text-[0.95rem] text-text-soft leading-relaxed">
-                      {qa.a}
-                    </p>
-                  </div>
+                  <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-on-dark-soft">
+                    {qa.a}
+                  </p>
                 </details>
-              </Reveal>
-            ))}
-          </ul>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

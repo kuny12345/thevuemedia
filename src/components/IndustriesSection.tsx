@@ -1,7 +1,7 @@
 import Reveal from "./Reveal";
 
-// 분야 라인 아이콘 7종 (stroke 1.75, currentColor) — 한 세트 톤 유지(이모지 금지).
-// 업종 라벨은 NAP/서비스/도구가 아닌 표시 카피라 로컬 정의(AiEngineMarquee·ProcessSection과 동일 패턴).
+// 분야 라인 아이콘 7종 (stroke 1.5, currentColor) — 한 세트 톤 유지(이모지 금지).
+// 업종 라벨은 NAP/서비스/도구가 아닌 표시 카피라 로컬 정의.
 type IndustryIconKey =
   | "medical"
   | "legal"
@@ -13,7 +13,7 @@ type IndustryIconKey =
 
 function IndustryIcon({
   iconKey,
-  className = "w-6 h-6",
+  className = "h-6 w-6",
 }: {
   iconKey: IndustryIconKey;
   className?: string;
@@ -23,7 +23,7 @@ function IndustryIcon({
     viewBox: "0 0 24 24",
     fill: "none",
     stroke: "currentColor",
-    strokeWidth: 1.75,
+    strokeWidth: 1.5,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
     "aria-hidden": true,
@@ -137,85 +137,63 @@ const industries: Industry[] = [
   },
 ];
 
-// 칩 액센트 로테이션(brand→violet→cyan→indigo→up) — 색감 변화용 장식
-const chipAccents = [
-  "chip-brand",
-  "chip-violet",
-  "chip-cyan",
-  "chip-indigo",
-  "chip-up",
-];
-
 export default function IndustriesSection() {
   return (
     <section
       id="industries"
       aria-labelledby="industries-heading"
-      className="section-pad bg-surface relative overflow-hidden"
+      className="section-pad"
     >
-      <div className="aura aura-soft" aria-hidden="true" />
-      <div className="container-x relative z-10">
+      <div className="container-x">
         {/* Header — 첫 문장은 검색자/문제에 말 건다(연혁 X) */}
         <Reveal className="max-w-2xl">
-          <p className="eyebrow">{"// INDUSTRIES"}</p>
-          <h2
-            id="industries-heading"
-            className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-ink leading-tight text-balance"
-          >
-            이미 이 분야들이 준비하고 있습니다.
+          <p className="eyebrow mb-4">Industries</p>
+          <h2 id="industries-heading" className="text-3xl leading-snug sm:text-4xl">
+            이미 이 분야들이
+            <br />
+            준비하고 있습니다
           </h2>
-          <span className="accent-bar mt-5" aria-hidden />
-          <p className="mt-4 text-base sm:text-lg text-text-soft leading-relaxed">
+          <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-on-dark-soft">
             고객은 이미 업종을 가리지 않고 AI에게 먼저 묻습니다. 분야마다 AI가
             인용하는 방식이 다르기 때문에, 업종 특성에 맞춰 인용 자산을
             설계합니다.
           </p>
         </Reveal>
 
-        {/* 7개 분야 칩/카드 — 의료가 주력(2열 폭) */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+        {/* 7개 분야 카드 — 의료가 주력(2열 폭, 골드 헤어라인 카드) */}
+        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {industries.map((it, i) =>
             it.featured ? (
-              // 주력 분야 — 와이드 카드(아이콘 + 텍스트), 브랜드 액센트
               <Reveal
                 key={it.key}
                 delay={i * 60}
                 className="sm:col-span-2 lg:col-span-2"
               >
-                <article className="card card-hover group relative flex h-full flex-col gap-5 p-7 ring-1 ring-brand/15 sm:flex-row sm:items-start sm:gap-6">
-                  <span className="pill absolute right-5 top-5 bg-brand/10 text-brand">
-                    <span className="mono text-[0.7rem] font-semibold tracking-wider uppercase">
-                      주력 분야
-                    </span>
+                <article className="card-dark card-hover relative flex h-full flex-col gap-5 p-7 sm:flex-row sm:items-start sm:gap-6">
+                  <span className="pill mono absolute right-5 top-5 text-[0.68rem] font-medium uppercase tracking-[0.14em]">
+                    주력 분야
                   </span>
 
                   <span className="icon-chip chip-brand shrink-0">
-                    <IndustryIcon iconKey={it.key} className="h-7 w-7" />
+                    <IndustryIcon iconKey={it.key} className="h-6 w-6" />
                   </span>
 
                   <div className="min-w-0">
-                    <h3 className="text-xl font-extrabold text-ink leading-snug">
-                      {it.label}
-                    </h3>
-                    <p className="mt-2 max-w-md text-sm sm:text-base text-text-soft leading-relaxed">
+                    <h3 className="text-xl leading-snug">{it.label}</h3>
+                    <p className="mt-2.5 max-w-md text-[15px] leading-relaxed text-on-dark-soft">
                       {it.note}
                     </p>
                   </div>
                 </article>
               </Reveal>
             ) : (
-              // 일반 분야 카드
-              <Reveal key={it.key} delay={i * 60}>
-                <article className="card card-hover group flex h-full flex-col p-6">
-                  <span
-                    className={`icon-chip ${chipAccents[i % chipAccents.length]}`}
-                  >
+              <Reveal key={it.key} delay={i * 60} className="h-full">
+                <article className="card card-hover flex h-full flex-col p-6">
+                  <span className="icon-chip chip-brand">
                     <IndustryIcon iconKey={it.key} />
                   </span>
-                  <h3 className="mt-5 text-lg font-extrabold text-ink leading-snug">
-                    {it.label}
-                  </h3>
-                  <p className="mt-2 text-sm text-text-soft leading-relaxed">
+                  <h3 className="mt-5 text-lg leading-snug">{it.label}</h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-on-dark-soft">
                     {it.note}
                   </p>
                 </article>

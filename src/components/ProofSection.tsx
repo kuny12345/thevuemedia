@@ -107,10 +107,10 @@ export default function ProofSection() {
       <div className="container-x">
         {/* heading */}
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow">// HOW IT LOOKS (예시)</p>
+          <p className="eyebrow">How It Looks (예시)</p>
           <h2 className="mt-4 text-3xl leading-tight md:text-4xl lg:text-[2.75rem]">
             AI 검색을 브랜드의{" "}
-            <span className="text-gradient">추천 엔진</span>으로 바꿉니다
+            <span className="text-gold">추천 엔진</span>으로 바꿉니다
           </h2>
           <p className="mt-5 text-base leading-relaxed text-on-dark-soft md:text-lg">
             사용자가 AI에게 “어디가 좋아?”라고 물을 때, 우리 브랜드가 근거와

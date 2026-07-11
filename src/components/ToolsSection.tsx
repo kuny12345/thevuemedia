@@ -12,9 +12,9 @@ export default function ToolsSection() {
       <div className="container-x">
         {/* 헤더 */}
         <Reveal className="max-w-2xl">
-          <p className="eyebrow">// OUR TOOLS</p>
-          <h2 className="mt-4 text-3xl font-extrabold leading-[1.15] tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            말이 아니라, <span className="text-gradient">직접 만들어 씁니다</span>
+          <p className="eyebrow">Our Tools</p>
+          <h2 className="mt-4 text-3xl leading-snug sm:text-4xl lg:text-5xl">
+            말이 아니라, <span className="text-gold">직접 만들어 씁니다</span>
           </h2>
           <span className="accent-bar mt-5" aria-hidden />
           <p className="mt-5 text-base leading-relaxed text-on-dark-soft sm:text-lg">
@@ -28,8 +28,8 @@ export default function ToolsSection() {
           <ol className="mono mt-8 flex flex-wrap items-center gap-x-2 gap-y-3 text-xs sm:text-sm">
             {PIPELINE.map((step, i) => (
               <li key={step} className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5">
-                  <span className="text-[#7fb0ff]">0{i + 1}</span>
+                <span className="inline-flex items-center gap-2 border border-line bg-[rgba(201,169,106,0.04)] px-3 py-1.5">
+                  <span className="text-gold">0{i + 1}</span>
                   <span className="text-white">{step}</span>
                 </span>
                 {i < PIPELINE.length - 1 && (
@@ -56,18 +56,18 @@ export default function ToolsSection() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
           {products.map((p, i) => (
             <Reveal key={p.slug} delay={i * 90} className="h-full">
-              <article className="card-dark flex h-full flex-col p-6 transition-colors duration-200 hover:border-white/20 sm:p-8">
+              <article className="card-dark flex h-full flex-col p-6 transition-colors duration-200 hover:border-line-strong sm:p-8">
                 {/* 아이콘 + 역할 배지 */}
                 <div className="flex items-center justify-between gap-3">
                   <span className="icon-chip chip-dark">
                     <ProductIcon iconKey={p.iconKey} className="h-6 w-6" />
                   </span>
-                  <span className="mono inline-flex items-center rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-xs font-semibold text-brand-bright">
+                  <span className="mono inline-flex items-center border border-line-strong bg-[rgba(201,169,106,0.08)] px-3 py-1 text-xs font-medium text-gold-bright">
                     {p.role}
                   </span>
                 </div>
 
-                <h3 className="mt-5 text-xl font-bold text-white">{p.name}</h3>
+                <h3 className="mt-5 text-xl">{p.name}</h3>
                 <p className="mt-1.5 text-sm text-on-dark-soft">{p.tagline}</p>
 
                 {/* 기능 (최대 4개) */}
@@ -83,7 +83,7 @@ export default function ToolsSection() {
                         strokeWidth={2}
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="mt-0.5 h-4 w-4 shrink-0 text-cyan"
+                        className="mt-0.5 h-4 w-4 shrink-0 text-gold"
                       >
                         <path d="m5 12 4.5 4.5L19 7" />
                       </svg>
@@ -100,7 +100,7 @@ export default function ToolsSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${p.urlLabel} (새 탭에서 열림)`}
-                      className="inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-brand-bright transition-all hover:gap-2.5"
+                      className="inline-flex min-h-[44px] items-center gap-1.5 mono text-sm text-gold transition-all hover:gap-2.5 hover:text-gold-bright"
                     >
                       {p.urlLabel}
                       <svg
@@ -120,7 +120,7 @@ export default function ToolsSection() {
                   ) : (
                     <Link
                       href={p.url}
-                      className="inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-brand-bright transition-all hover:gap-2.5"
+                      className="inline-flex min-h-[44px] items-center gap-1.5 mono text-sm text-gold transition-all hover:gap-2.5 hover:text-gold-bright"
                     >
                       {p.urlLabel}
                       <svg

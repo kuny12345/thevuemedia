@@ -114,31 +114,35 @@ body::before {
     radial-gradient(60rem 60rem at 50% 120%, rgba(8, 12, 22, 0.9), transparent 70%);
 }
 
-/* ---- 세리프 헤딩 — 시스템의 심장 ---- */
-h1,
-h2,
-h3 {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  color: #f5f1e6;
-  letter-spacing: -0.015em; /* 세리프는 완만한 트래킹 */
-  text-wrap: balance;
-  word-break: keep-all;
-  line-height: 1.25;
-}
-h4 {
-  color: #f0ecdf;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-  word-break: keep-all;
-}
-/* 아이보리 지면 위에서는 잉크 헤딩 */
-.paper-section h1,
-.paper-section h2,
-.paper-section h3,
-.paper-section h4 {
-  color: #10131a;
+/* ---- 세리프 헤딩 — 시스템의 심장 ----
+   @layer base: Tailwind 유틸리티(text-*)가 이 기본값을 이길 수 있어야 한다.
+   (unlayered 전역 규칙은 layered 유틸을 눌러버림 — v4 캐스케이드 주의) */
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    color: #f5f1e6;
+    letter-spacing: -0.015em; /* 세리프는 완만한 트래킹 */
+    text-wrap: balance;
+    word-break: keep-all;
+    line-height: 1.25;
+  }
+  h4 {
+    color: #f0ecdf;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    word-break: keep-all;
+  }
+  /* 아이보리 지면 위에서는 잉크 헤딩 */
+  .paper-section h1,
+  .paper-section h2,
+  .paper-section h3,
+  .paper-section h4 {
+    color: #10131a;
+  }
 }
 
 ::selection {

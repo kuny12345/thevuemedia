@@ -112,6 +112,7 @@ export default function AioServicePage() {
       <JsonLd data={howto} />
       <JsonLd data={faqPageSchema(faq)} />
 
+      <div className="paper-section">
       {/* Hero */}
       <header className="pt-32 pb-16 lg:pt-40 lg:pb-20 border-b border-gray-100">
         <div className="max-w-4xl mx-auto px-6 text-center">
@@ -128,7 +129,7 @@ export default function AioServicePage() {
             최적화입니다. 진단부터 실시간 추적까지 4단계로 설계합니다.
           </p>
           <a
-            href="/#contact"
+            href="/#consult"
             className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
           >
             무료 AI 인식도 진단받기
@@ -271,12 +272,13 @@ export default function AioServicePage() {
             전문 컨설턴트가 분석한 AI Mention 리포트를 무료로 받아보세요.
           </p>
           <a
-            href="/#contact"
+            href="/#consult"
             className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
           >
             무료 AI 인식도 진단받기
           </a>
         </div>
+      </div>
       </div>
     </>
   );

@@ -82,7 +82,7 @@ export default function ServiceContentPage() {
 
       <Navbar />
 
-      <main id="main">
+      <main id="main" className="paper-section">
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-line bg-paper pt-28 pb-16 sm:pt-32 lg:pt-40 lg:pb-24">
           <div className="container-x">

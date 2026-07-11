@@ -12,7 +12,7 @@ const YEAR = new Date().getFullYear();
 const COMPANY_LINKS = [
   { href: "/blog", label: "블로그", external: false },
   { href: "/#insights", label: "인사이트", external: false },
-  { href: "/#contact", label: "문의", external: false },
+  { href: "/#consult", label: "문의", external: false },
 ] as const;
 
 // 실재 채널만(YouTube·Instagram). 가짜 sameAs 금지 — NAP.socials 단일 출처.
@@ -36,11 +36,11 @@ function SocialIcon({ name }: { name: string }) {
 
 export default function Footer() {
   return (
-    <footer className="dark-section border-t border-white/10">
+    <footer className="dark-section border-t border-line">
       {/* 상단 그라데이션 액센트 라인 (장식) */}
       <div
         aria-hidden
-        className="h-0.5 w-full bg-gradient-to-r from-[#2563eb] to-[#06b6d4]"
+        className="h-px w-full bg-gradient-to-r from-transparent via-[#c9a96a] to-transparent"
       />
       <div className="container-x py-16 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
@@ -97,7 +97,7 @@ export default function Footer() {
                       rel="me noopener noreferrer"
                       aria-label={`더뷰미디어 ${s.name} 채널 (새 탭에서 열림)`}
                       title={`더뷰미디어 ${s.name}`}
-                      className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-on-dark-soft transition-colors hover:border-white/25 hover:bg-white/10 hover:text-brand"
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-[rgba(236,231,219,0.05)] text-on-dark-soft transition-colors hover:border-white/25 hover:bg-[rgba(236,231,219,0.1)] hover:text-brand"
                     >
                       <SocialIcon name={s.name} />
                     </a>
