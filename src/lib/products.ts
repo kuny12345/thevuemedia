@@ -56,7 +56,7 @@ export const products: Product[] = [
     description:
       "5개 AI 엔진의 답변에서 우리 브랜드가 어떻게 언급·인용되는지 매일 자동으로 추적하고, 점유율과 감성까지 정량화합니다. ‘AIO가 실제로 효과가 있는가’를 데이터로 증명하는 측정 레이어입니다.",
     features: [
-      "5개 엔진 동시 추적 — Google AIO·ChatGPT·Perplexity·Gemini·Grok",
+      "5개 엔진 동시 추적 — Google AIO·ChatGPT·Perplexity·Gemini·Naver AI",
       "노출·인용 순위·감성·점유율(Share of Voice) 일일 측정",
       "경쟁사 대비 가시성·감성 사분면 분석",
       "AI 답변 원문 아카이브로 근거 보관",

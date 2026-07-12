@@ -20,7 +20,7 @@ export const SIGNATURE_FACTS = [
     value: "5",
     unit: "개",
     label: "AI 엔진 동시 추적",
-    note: "Google AIO · ChatGPT · Perplexity · Gemini · Grok",
+    note: "Google AIO · ChatGPT · Perplexity · Gemini · Naver AI",
   },
   {
     value: "2023",

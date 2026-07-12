@@ -121,7 +121,7 @@ export const services: ServiceItem[] = [
     name: "AI 노출 추적·진단 리포트",
     short: "5개 AI 엔진의 브랜드 노출·점유율을 매일 측정",
     description:
-      "AIRank로 Google AIO·ChatGPT·Perplexity·Gemini·Grok의 답변에서 브랜드 노출·인용·점유율(SOV)을 추적하고, SchemaWorks로 홈페이지 GEO 상태를 진단합니다.",
+      "AIRank로 Google AIO·ChatGPT·Perplexity·Gemini·Naver AI의 답변에서 브랜드 노출·인용·점유율(SOV)을 추적하고, SchemaWorks로 홈페이지 GEO 상태를 진단합니다.",
     serviceType: "AI 가시성 추적·진단",
     href: "/products",
     gbpCategory: "인터넷마케팅 서비스",
