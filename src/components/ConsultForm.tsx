@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import posthog from "posthog-js";
 
 /**
  * 상담 신청 폼 — /api/consult 로 제출.
@@ -62,6 +63,11 @@ export default function ConsultForm({
         setState("error");
       } else {
         setState("done");
+        try {
+          posthog.capture("consult_submitted", { source: meta.source });
+        } catch {
+          /* noop */
+        }
       }
     } catch {
       setError("네트워크 오류가 발생했습니다.");
