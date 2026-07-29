@@ -50,12 +50,16 @@ export function organizationSchema(): Json {
     // --- NAP (GBP 동일) ---
     telephone: NAP.phoneE164,
     address: postalAddress(),
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: NAP.geo.lat,
-      longitude: NAP.geo.lng,
-    },
-    hasMap: `https://www.google.com/maps/place/${encodeURIComponent(NAP.name)}/@${NAP.geo.lat},${NAP.geo.lng},17z`,
+    ...(NAP.geo
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: NAP.geo.lat,
+            longitude: NAP.geo.lng,
+          },
+          hasMap: `https://www.google.com/maps/place/${encodeURIComponent(NAP.name)}/@${NAP.geo.lat},${NAP.geo.lng},17z`,
+        }
+      : {}),
     openingHoursSpecification: openingHoursSpec(),
     foundingDate: NAP.foundingDate,
     priceRange: NAP.priceRange,

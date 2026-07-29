@@ -11,21 +11,23 @@ export const NAP = {
   tagline: "AI가 당신의 브랜드를 추천하게 만듭니다",
 
   // 연락처 (GBP와 동일)
-  phoneDisplay: "010-6663-5352",
-  phoneE164: "+82-10-6663-5352",
+  phoneDisplay: "070-4215-3007",
+  phoneE164: "+82-70-4215-3007",
   email: "", // 공개 이메일 확정 시 입력 — 미확정이면 비움(허위 금지)
 
   // 주소 (GBP 표기와 동일)
   address: {
-    full: "대구광역시 수성구 청수로20길 13 프롬앤드 206",
-    streetAddress: "청수로20길 13 프롬앤드 206",
-    addressLocality: "수성구",
+    full: "대구광역시 동구 동대구로 457 대구상공회의소 7층",
+    streetAddress: "동대구로 457 대구상공회의소 7층",
+    addressLocality: "동구",
     addressRegion: "대구광역시",
-    postalCode: "", // 확인 후 입력 — 미확인이면 비움(허위 금지)
+    postalCode: "41260",
     addressCountry: "KR",
   },
-  geo: { lat: 35.8396052, lng: 128.6193069 },
-  plusCode: "RJQ9+RP 대구광역시",
+  // 2026-07 사무실 이전. 이전 좌표·Plus Code는 옛 주소값이라 폐기 —
+  // GBP에서 새 좌표 확인 후 입력(허위 금지). null이면 스키마에서 geo/hasMap을 생략한다.
+  geo: null as { lat: number; lng: number } | null,
+  plusCode: "",
 
   // 영업시간 — 평일 09:00–18:00, 토·일 휴무 (GBP와 동일)
   hours: [
