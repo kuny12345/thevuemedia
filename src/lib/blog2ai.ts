@@ -39,8 +39,10 @@ class Blog2AiError extends Error {
 }
 
 function settings() {
-  const apiUrl = process.env.BLOG2AI_API_URL;
-  const apiKey = process.env.BLOG2AI_API_KEY;
+  // 배포 환경변수 입력 과정에서 끝 공백이나 줄바꿈이 포함돼도 서버 전용 값만
+  // 정규화한다. 키는 클라이언트 번들에 절대 포함하지 않는다.
+  const apiUrl = process.env.BLOG2AI_API_URL?.trim();
+  const apiKey = process.env.BLOG2AI_API_KEY?.trim();
   if (!apiUrl || !apiKey) return null;
 
   const base = new URL(apiUrl);
