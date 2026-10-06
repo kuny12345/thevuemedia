@@ -73,6 +73,12 @@ async function request<T>(path: string): Promise<T> {
   return response.json() as Promise<T>;
 }
 
+function mediaUrl(value: string | null) {
+  if (!value?.startsWith("/")) return value;
+  const config = settings();
+  return config ? new URL(value, config.apiUrl).href : value;
+}
+
 export function hasBlog2AiConnection() {
   return Boolean(settings());
 }
@@ -81,13 +87,17 @@ export async function getColumns(page = 1, query = "") {
   if (!Number.isSafeInteger(page) || page < 1 || query.length > 100) {
     throw new Blog2AiError(400);
   }
-  return request<ColumnList>(`?${new URLSearchParams({ page: String(page), q: query })}`);
+  const result = await request<ColumnList>(`?${new URLSearchParams({ page: String(page), q: query })}`);
+  return {
+    ...result,
+    articles: result.articles.map((article) => ({ ...article, imageUrl: mediaUrl(article.imageUrl) })),
+  };
 }
 
 export async function getColumn(slug: string) {
   if (!/^[\p{L}\p{N}_-]{1,180}$/u.test(slug)) throw new Blog2AiError(404);
   const response = await request<{ publication: ColumnArticle }>(`/${encodeURIComponent(slug)}`);
-  return response.publication;
+  return { ...response.publication, imageUrl: mediaUrl(response.publication.imageUrl) };
 }
 
 export { Blog2AiError };
