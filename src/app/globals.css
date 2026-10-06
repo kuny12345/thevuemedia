@@ -509,3 +509,38 @@ body::before {
   filter: none;
   background: #16233c;
 }
+
+/* Blog2AI가 정리한 공개 HTML. 의미 구조(h2~h4, p, figure, table)를 유지해
+   발행 원문의 읽는 흐름과 검색용 시맨틱을 함께 보존한다. */
+.column-article > :first-child { margin-top: 0; }
+.column-article > :last-child { margin-bottom: 0; }
+.column-article p { margin: 0 0 1.7rem; color: #3e4854; }
+.column-article h2,
+.column-article h3,
+.column-article h4 { margin: 3.5rem 0 1.2rem; color: #081120; line-height: 1.35; }
+.column-article h2 { font-size: 1.6rem; }
+.column-article h3 { font-size: 1.3rem; }
+.column-article h4 { font-size: 1.1rem; }
+.column-article a { color: #8a6a34; font-weight: 600; text-decoration: underline; text-decoration-color: rgba(138, 106, 52, .35); text-underline-offset: .18em; }
+.column-article a:hover { color: #5d451e; }
+.column-article mark { border-radius: .15em; background: #f3e4a5; padding: .04em .12em; color: inherit; }
+.column-article strong { color: #182332; font-weight: 700; }
+.column-article em { font-style: italic; }
+.column-article figure { margin: 2.5rem 0; }
+.column-article figure img,
+.column-article > img { display: block; width: 100%; height: auto; border: 1px solid rgba(8, 17, 32, .1); }
+.column-article figcaption { margin-top: .65rem; color: #6f7780; font-size: .82rem; line-height: 1.5; text-align: center; }
+.column-article blockquote { margin: 2.25rem 0; border-left: 3px solid #c9a96a; padding: .25rem 0 .25rem 1.25rem; color: #505b67; font-family: var(--font-serif); font-size: 1.13rem; line-height: 1.8; }
+.column-article ul,
+.column-article ol { margin: 0 0 1.7rem 1.25rem; color: #3e4854; }
+.column-article ul { list-style: disc; }
+.column-article ol { list-style: decimal; }
+.column-article li { margin: .5rem 0; padding-left: .2rem; }
+.column-article hr { margin: 3rem 0; border: 0; border-top: 1px solid rgba(8, 17, 32, .14); }
+.column-article .article-table-wrap { margin: 2rem 0; overflow-x: auto; }
+.column-article table { width: 100%; min-width: 34rem; border-collapse: collapse; color: #3e4854; font-size: .93rem; line-height: 1.6; }
+.column-article th,
+.column-article td { border: 1px solid rgba(8, 17, 32, .14); padding: .75rem .85rem; text-align: left; vertical-align: top; }
+.column-article th { background: #efe9dc; color: #182332; font-weight: 700; }
+.column-article [style*="text-align: center"] { text-align: center; }
+.column-article [style*="text-align: right"] { text-align: right; }

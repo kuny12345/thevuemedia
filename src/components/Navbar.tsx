@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: "/#tools", label: "자체 도구" },
   { href: "/#process", label: "프로세스" },
   { href: "/blog", label: "인사이트" },
+  { href: "/column", label: "칼럼" },
 ] as const;
 
 const TEL_HREF = `tel:${NAP.phoneE164}`;
