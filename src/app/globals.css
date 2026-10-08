@@ -544,3 +544,11 @@ body::before {
 .column-article th { background: #efe9dc; color: #182332; font-weight: 700; }
 .column-article [style*="text-align: center"] { text-align: center; }
 .column-article [style*="text-align: right"] { text-align: right; }
+
+@media (max-width: 639px) {
+  .column-page-title,
+  .column-article {
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+}

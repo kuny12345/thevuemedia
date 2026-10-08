@@ -49,6 +49,9 @@ export default async function ColumnArticlePage({ params }: { params: Promise<{ 
   if (suppliedSlug !== article.slug) permanentRedirect(`/column/${encodeURIComponent(article.slug)}`);
   const url = articleUrl(article.slug);
   const [list] = await Promise.all([getColumns(1)]);
+  const moreArticles = list.articles
+    .filter((item) => item.slug !== article.slug)
+    .slice(0, 5);
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -73,11 +76,32 @@ export default async function ColumnArticlePage({ params }: { params: Promise<{ 
     <header className="border-b border-[rgba(8,17,32,0.1)] pt-32 pb-12 lg:pt-40 lg:pb-16">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <Link href="/column" className="eyebrow mb-5 justify-center hover:text-gold">{article.categoryName ?? "Column"}</Link>
-        <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] lg:leading-[1.2]">{article.title}</h1>
-        <div className="mt-6 flex items-center justify-center gap-3 text-sm text-gray-400"><span className="font-medium text-gray-700">{list.site.name}</span><span className="h-1 w-1 rounded-full bg-gray-300" /><time dateTime={article.publishedDate ?? article.publishedAt}>{dateLabel(article.publishedDate, article.publishedAt)}</time></div>
+        <h1 className="column-page-title text-3xl md:text-4xl lg:text-[2.75rem] lg:leading-[1.2]">{article.title}</h1>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-sm text-gray-400"><span className="font-medium text-gray-700">{list.site.name}</span><span className="h-1 w-1 rounded-full bg-gray-300" /><time dateTime={article.publishedDate ?? article.publishedAt}>{dateLabel(article.publishedDate, article.publishedAt)}</time></div>
       </div>
     </header>
-    <div className="column-article mx-auto max-w-2xl px-6 py-14 text-[17px] leading-8 lg:py-20" dangerouslySetInnerHTML={{ __html: article.html }} />
+    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-14 px-6 py-14 lg:grid-cols-[minmax(0,720px)_minmax(260px,320px)] lg:items-start lg:justify-between lg:gap-16 lg:py-20">
+      <div className="column-article min-w-0 text-[17px] leading-8" dangerouslySetInnerHTML={{ __html: article.html }} />
+
+      {moreArticles.length > 0 && <aside aria-labelledby="more-articles-title" className="border-t-2 border-ink pt-6 lg:sticky lg:top-28">
+        <div className="mb-2 flex items-end justify-between gap-4">
+          <h2 id="more-articles-title" className="text-xl font-bold tracking-[-0.02em]">More Articles</h2>
+          <span className="mono pb-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-gold-deep">Latest</span>
+        </div>
+        <div>
+          {moreArticles.map((item) => <Link key={item.id} href={`/column/${encodeURIComponent(item.slug)}`} className="group grid grid-cols-[88px_minmax(0,1fr)] gap-4 border-b border-[rgba(8,17,32,0.13)] py-5 first:pt-4">
+            {item.imageUrl
+              ? <span className="aspect-square overflow-hidden bg-[#efe9dc]"><img src={item.imageUrl} alt="" loading="lazy" className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /></span>
+              : <span className="mono grid aspect-square place-items-center bg-[#efe9dc] text-[10px] font-semibold uppercase tracking-[0.12em] text-gold-deep">Column</span>}
+            <span className="min-w-0 self-center">
+              <time className="mono block text-[10px] tracking-[0.08em] text-gray-400" dateTime={item.publishedDate ?? item.publishedAt}>{dateLabel(item.publishedDate, item.publishedAt)}</time>
+              <strong className="mt-1.5 line-clamp-3 block text-[14px] leading-[1.55] text-ink [overflow-wrap:anywhere] transition-colors group-hover:text-gold-deep">{item.title}</strong>
+            </span>
+          </Link>)}
+        </div>
+        <Link href="/column" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-gold-deep transition-all hover:gap-3 hover:text-ink">전체 칼럼 보기 <span aria-hidden="true">→</span></Link>
+      </aside>}
+    </div>
     <footer className="border-y border-[rgba(8,17,32,0.1)] bg-[#efe9dc]"><div className="mx-auto max-w-2xl px-6 py-12 text-center"><p className="text-lg font-semibold">더 많은 인사이트가 필요하신가요?</p><Link href="/column" className="btn btn-primary mt-5">칼럼 목록 보기</Link></div></footer>
   </article>;
 }
