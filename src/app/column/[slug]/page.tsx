@@ -3,6 +3,7 @@ import { cache } from "react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
+import ColumnContents, { type ColumnContentsItem } from "@/components/ColumnContents";
 import { Blog2AiError, getColumn, getColumns } from "@/lib/blog2ai";
 import { abs, breadcrumbSchema } from "@/lib/schema";
 
@@ -31,8 +32,6 @@ function dateLabel(value: string | null, fallback: string) {
   return Number.isNaN(date.valueOf()) ? source.slice(0, 10) : new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(date);
 }
 
-type TocItem = { id: string; title: string; level: number };
-
 function plainHeading(value: string) {
   return value
     .replace(/<[^>]+>/g, " ")
@@ -46,8 +45,8 @@ function plainHeading(value: string) {
     .trim();
 }
 
-function articleWithContents(html: string): { html: string; items: TocItem[] } {
-  const items: TocItem[] = [];
+function articleWithContents(html: string): { html: string; items: ColumnContentsItem[] } {
+  const items: ColumnContentsItem[] = [];
   const used = new Set<string>();
   const anchoredHtml = html.replace(/<h([2-4])([^>]*)>([\s\S]*?)<\/h\1>/gi, (full, rawLevel: string, rawAttributes: string, inner: string) => {
     const title = plainHeading(inner);
@@ -80,6 +79,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: article.metaTitle,
     description: article.metaDescription,
     alternates: { canonical: url },
+    category: article.categoryName ?? undefined,
+    robots: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+      googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+    },
     openGraph: { type: "article", url, title: article.metaTitle, description: article.metaDescription, publishedTime: article.publishedDate ? `${article.publishedDate}T00:00:00+09:00` : article.publishedAt, modifiedTime: article.updatedAt, images: article.imageUrl ? [{ url: article.imageUrl }] : undefined },
     twitter: { card: article.imageUrl ? "summary_large_image" : "summary", title: article.metaTitle, description: article.metaDescription, images: article.imageUrl ? [article.imageUrl] : undefined },
   };
@@ -95,22 +103,55 @@ export default async function ColumnArticlePage({ params }: { params: Promise<{ 
     .filter((item) => item.slug !== article.slug)
     .slice(0, 5);
   const contents = articleWithContents(article.html);
+  const sourceName = list.site.name.replace(/\s*\(테스트용\)\s*$/u, "");
+  const publishedAt = article.publishedDate ? `${article.publishedDate}T00:00:00+09:00` : article.publishedAt;
+  const wordCount = plainHeading(article.html).split(/\s+/).filter(Boolean).length;
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": `${url}#article`,
-    headline: article.title,
-    description: article.metaDescription,
-    mainEntityOfPage: url,
-    url,
-    inLanguage: "ko-KR",
-    datePublished: article.publishedDate ? `${article.publishedDate}T00:00:00+09:00` : article.publishedAt,
-    dateModified: article.updatedAt,
-    ...(article.categoryName ? { articleSection: article.categoryName } : {}),
-    ...(article.imageUrl ? { image: [article.imageUrl] } : {}),
-    author: { "@type": "Organization", name: list.site.name },
-    publisher: { "@id": "https://thevuemedia.com/#organization" },
-    isPartOf: { "@id": "https://thevuemedia.com/#website" },
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: article.title,
+        description: article.metaDescription,
+        inLanguage: "ko-KR",
+        datePublished: publishedAt,
+        dateModified: article.updatedAt,
+        isPartOf: { "@id": "https://thevuemedia.com/#website" },
+        mainEntity: { "@id": `${url}#article` },
+        ...(article.imageUrl ? { primaryImageOfPage: { "@type": "ImageObject", url: article.imageUrl } } : {}),
+      },
+      {
+        "@type": "BlogPosting",
+        "@id": `${url}#article`,
+        headline: article.title,
+        description: article.metaDescription,
+        url,
+        inLanguage: "ko-KR",
+        mainEntityOfPage: { "@id": `${url}#webpage` },
+        isPartOf: { "@id": "https://thevuemedia.com/column#blog" },
+        datePublished: publishedAt,
+        dateModified: article.updatedAt,
+        wordCount,
+        isAccessibleForFree: true,
+        isBasedOn: article.sourceUrl,
+        ...(article.categoryName ? { articleSection: article.categoryName } : {}),
+        ...(contents.items.length ? { keywords: contents.items.slice(0, 10).map((item) => item.title) } : {}),
+        ...(article.imageUrl ? { image: [article.imageUrl], thumbnailUrl: article.imageUrl } : {}),
+        author: { "@type": "Organization", name: sourceName, ...(list.site.websiteUrl ? { url: list.site.websiteUrl } : {}) },
+        publisher: { "@id": "https://thevuemedia.com/#organization" },
+      },
+      {
+        "@type": "Blog",
+        "@id": "https://thevuemedia.com/column#blog",
+        url: "https://thevuemedia.com/column",
+        name: "더뷰미디어 최신 칼럼",
+        inLanguage: "ko-KR",
+        publisher: { "@id": "https://thevuemedia.com/#organization" },
+        blogPost: { "@id": `${url}#article` },
+      },
+    ],
   };
 
   return <article className="paper-section min-h-screen">
@@ -120,28 +161,14 @@ export default async function ColumnArticlePage({ params }: { params: Promise<{ 
       <div className="mx-auto max-w-3xl px-6 text-center">
         <Link href="/column" className="eyebrow mb-5 justify-center hover:text-gold">{article.categoryName ?? "Column"}</Link>
         <h1 className="column-page-title text-3xl md:text-4xl lg:text-[2.75rem] lg:leading-[1.2]">{article.title}</h1>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-sm text-gray-400"><span className="font-medium text-gray-700">{list.site.name}</span><span className="h-1 w-1 rounded-full bg-gray-300" /><time dateTime={article.publishedDate ?? article.publishedAt}>{dateLabel(article.publishedDate, article.publishedAt)}</time></div>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-sm text-gray-400"><span className="font-medium text-gray-700">{sourceName}</span><span className="h-1 w-1 rounded-full bg-gray-300" /><time dateTime={publishedAt}>{dateLabel(article.publishedDate, article.publishedAt)}</time></div>
       </div>
     </header>
     <div className={`mx-auto grid grid-cols-1 gap-14 px-6 py-14 lg:items-start lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-12 lg:py-20 ${contents.items.length ? "max-w-[86rem] xl:grid-cols-[190px_minmax(0,1fr)_280px] xl:gap-10" : "max-w-6xl"}`}>
-      {contents.items.length > 0 && <nav aria-labelledby="contents-title" className="hidden border-t-2 border-ink pt-6 xl:sticky xl:top-28 xl:block">
-        <h2 id="contents-title" className="mb-4 text-lg font-bold tracking-[-0.02em]">Contents</h2>
-        <ol className="space-y-3">
-          {contents.items.map((item) => <li key={item.id} className={item.level === 3 ? "pl-3" : item.level === 4 ? "pl-6" : ""}>
-            <a href={`#${item.id}`} className="block text-[13px] leading-[1.55] text-gray-500 [overflow-wrap:anywhere] transition-colors hover:text-gold-deep">{item.title}</a>
-          </li>)}
-        </ol>
-      </nav>}
+      {contents.items.length > 0 && <ColumnContents items={contents.items} />}
 
       <main className="min-w-0">
-        {contents.items.length > 0 && <details className="mb-10 border-y border-[rgba(8,17,32,0.16)] py-4 xl:hidden">
-          <summary className="flex cursor-pointer list-none items-center justify-between text-lg font-bold [&::-webkit-details-marker]:hidden">Contents <span aria-hidden="true" className="text-sm font-normal text-gold-deep">목차 보기</span></summary>
-          <ol className="mt-5 space-y-3 border-t border-[rgba(8,17,32,0.1)] pt-5">
-            {contents.items.map((item) => <li key={item.id} className={item.level === 3 ? "pl-3" : item.level === 4 ? "pl-6" : ""}>
-              <a href={`#${item.id}`} className="block text-sm leading-relaxed text-gray-500 [overflow-wrap:anywhere] hover:text-gold-deep">{item.title}</a>
-            </li>)}
-          </ol>
-        </details>}
+        {contents.items.length > 0 && <ColumnContents items={contents.items} mobile />}
         <div className="column-article min-w-0 text-[17px] leading-8" dangerouslySetInnerHTML={{ __html: contents.html }} />
       </main>
 
