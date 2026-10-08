@@ -518,6 +518,9 @@ body::before {
 .column-article h2,
 .column-article h3,
 .column-article h4 { margin: 3.5rem 0 1.2rem; color: #081120; line-height: 1.35; }
+.column-article h2[id],
+.column-article h3[id],
+.column-article h4[id] { scroll-margin-top: 7rem; }
 .column-article h2 { font-size: 1.6rem; }
 .column-article h3 { font-size: 1.3rem; }
 .column-article h4 { font-size: 1.1rem; }

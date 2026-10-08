@@ -31,6 +31,48 @@ function dateLabel(value: string | null, fallback: string) {
   return Number.isNaN(date.valueOf()) ? source.slice(0, 10) : new Intl.DateTimeFormat("ko-KR", { year: "numeric", month: "long", day: "numeric" }).format(date);
 }
 
+type TocItem = { id: string; title: string; level: number };
+
+function plainHeading(value: string) {
+  return value
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, "\"")
+    .replace(/&#39;/gi, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function articleWithContents(html: string): { html: string; items: TocItem[] } {
+  const items: TocItem[] = [];
+  const used = new Set<string>();
+  const anchoredHtml = html.replace(/<h([2-4])([^>]*)>([\s\S]*?)<\/h\1>/gi, (full, rawLevel: string, rawAttributes: string, inner: string) => {
+    const title = plainHeading(inner);
+    if (!title) return full;
+
+    const existingId = rawAttributes.match(/\sid=(?:"([^"]+)"|'([^']+)')/i)?.slice(1).find(Boolean);
+    const base = (existingId ?? title.normalize("NFKC").toLocaleLowerCase("ko-KR")
+      .replace(/[^\p{L}\p{N}]+/gu, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 100)) || `section-${items.length + 1}`;
+    let id = base;
+    let suffix = 2;
+    while (used.has(id)) id = `${base}-${suffix++}`;
+    used.add(id);
+    items.push({ id, title, level: Number(rawLevel) });
+
+    const attributes = existingId
+      ? rawAttributes.replace(/\sid=(?:"[^"]+"|'[^']+')/i, ` id="${id}"`)
+      : `${rawAttributes} id="${id}"`;
+    return `<h${rawLevel}${attributes}>${inner}</h${rawLevel}>`;
+  });
+
+  return { html: anchoredHtml, items };
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const article = await getArticle(routeKey((await params).slug));
   const url = articleUrl(article.slug);
@@ -52,6 +94,7 @@ export default async function ColumnArticlePage({ params }: { params: Promise<{ 
   const moreArticles = list.articles
     .filter((item) => item.slug !== article.slug)
     .slice(0, 5);
+  const contents = articleWithContents(article.html);
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -80,8 +123,27 @@ export default async function ColumnArticlePage({ params }: { params: Promise<{ 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-sm text-gray-400"><span className="font-medium text-gray-700">{list.site.name}</span><span className="h-1 w-1 rounded-full bg-gray-300" /><time dateTime={article.publishedDate ?? article.publishedAt}>{dateLabel(article.publishedDate, article.publishedAt)}</time></div>
       </div>
     </header>
-    <div className="mx-auto grid max-w-6xl grid-cols-1 gap-14 px-6 py-14 lg:grid-cols-[minmax(0,720px)_minmax(260px,320px)] lg:items-start lg:justify-between lg:gap-16 lg:py-20">
-      <div className="column-article min-w-0 text-[17px] leading-8" dangerouslySetInnerHTML={{ __html: article.html }} />
+    <div className={`mx-auto grid grid-cols-1 gap-14 px-6 py-14 lg:items-start lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-12 lg:py-20 ${contents.items.length ? "max-w-[86rem] xl:grid-cols-[190px_minmax(0,1fr)_280px] xl:gap-10" : "max-w-6xl"}`}>
+      {contents.items.length > 0 && <nav aria-labelledby="contents-title" className="hidden border-t-2 border-ink pt-6 xl:sticky xl:top-28 xl:block">
+        <h2 id="contents-title" className="mb-4 text-lg font-bold tracking-[-0.02em]">Contents</h2>
+        <ol className="space-y-3">
+          {contents.items.map((item) => <li key={item.id} className={item.level === 3 ? "pl-3" : item.level === 4 ? "pl-6" : ""}>
+            <a href={`#${item.id}`} className="block text-[13px] leading-[1.55] text-gray-500 [overflow-wrap:anywhere] transition-colors hover:text-gold-deep">{item.title}</a>
+          </li>)}
+        </ol>
+      </nav>}
+
+      <main className="min-w-0">
+        {contents.items.length > 0 && <details className="mb-10 border-y border-[rgba(8,17,32,0.16)] py-4 xl:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between text-lg font-bold [&::-webkit-details-marker]:hidden">Contents <span aria-hidden="true" className="text-sm font-normal text-gold-deep">목차 보기</span></summary>
+          <ol className="mt-5 space-y-3 border-t border-[rgba(8,17,32,0.1)] pt-5">
+            {contents.items.map((item) => <li key={item.id} className={item.level === 3 ? "pl-3" : item.level === 4 ? "pl-6" : ""}>
+              <a href={`#${item.id}`} className="block text-sm leading-relaxed text-gray-500 [overflow-wrap:anywhere] hover:text-gold-deep">{item.title}</a>
+            </li>)}
+          </ol>
+        </details>}
+        <div className="column-article min-w-0 text-[17px] leading-8" dangerouslySetInnerHTML={{ __html: contents.html }} />
+      </main>
 
       {moreArticles.length > 0 && <aside aria-labelledby="more-articles-title" className="border-t-2 border-ink pt-6 lg:sticky lg:top-28">
         <div className="mb-2 flex items-end justify-between gap-4">
