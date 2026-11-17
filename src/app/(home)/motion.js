@@ -113,7 +113,21 @@ export function initHome(){
   gsap.ticker.add(function(){ var cap = innerHeight * 0.6; if (lenis.targetScroll - lenis.animatedScroll > cap) lenis.targetScroll = lenis.animatedScroll + cap; });
   ScrollTrigger.addEventListener('refresh', function(){ lenis.resize(); });
   window.__lenis = lenis;
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(e){ var t = document.querySelector(a.getAttribute('href')); if (t) { e.preventDefault(); lenis.scrollTo(t, { duration: 1.2 }); } }); });
+  /* 메뉴·버튼으로 이동: 고정 장면이면 등장 애니메이션이 끝난 지점으로 (시작 지점은 내용이 아직 안 보임) */
+  function anchorY(t){
+    var st = ScrollTrigger.getAll().find(function(s){ return s.pin && (s.trigger === t || t.contains(s.trigger)); });
+    if (!st || !st.animation) return t;
+    var tl = st.animation, end = 0;
+    tl.getChildren(false, true, true).forEach(function(c){
+      var tg = c.targets ? c.targets() : null;
+      if (tg && tg.length && tg[0] && typeof tg[0] === 'object' && !tg[0].nodeType && !Array.isArray(tg[0])) return; /* 빈 '머무름' 구간 */
+      end = Math.max(end, c.endTime());
+    });
+    var p = Math.min(1, end / tl.duration() + 0.01);
+    return Math.round(st.start + (st.end - st.start) * p);
+  }
+  window.__anchorY = anchorY;
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(e){ var t = document.querySelector(a.getAttribute('href')); if (t) { e.preventDefault(); lenis.scrollTo(anchorY(t), { duration: 1.2 }); } }); });
 
   /* 숫자 0에서 올라가기 */
   function countUp(els, dur){ var t = gsap.timeline(); [].forEach.call(els, function(el){ var to = parseFloat(el.dataset.to), dec = +(el.dataset.dec || 0), from = parseFloat(el.dataset.from || 0), o = { v: from }; el.textContent = from.toFixed(dec); t.to(o, { v: to, duration: dur, ease: 'power2.out', onUpdate: function(){ el.textContent = o.v.toFixed(dec); } }, 0); }); return t; }
@@ -340,6 +354,6 @@ export function initHome(){
 
   /* 다른 페이지에서 /#consult 같은 주소로 들어오면, 고정 장면이 만들어진 뒤 그 위치로 이동 */
   if (location.hash.length > 1) { var hashEl = null; try { hashEl = document.querySelector(location.hash); } catch (e) { /* 잘못된 주소 */ }
-    if (hashEl) { var goHash = function(){ lenis.scrollTo(hashEl, { immediate: true, force: true }); }; setTimeout(goHash, 80); if (document.fonts) document.fonts.ready.then(function(){ setTimeout(goHash, 160); }); } }
+    if (hashEl) { var goHash = function(){ lenis.scrollTo(anchorY(hashEl), { immediate: true, force: true }); }; setTimeout(goHash, 80); if (document.fonts) document.fonts.ready.then(function(){ setTimeout(goHash, 160); }); } }
 
 }
