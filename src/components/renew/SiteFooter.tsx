@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { NAP } from "@/lib/nap";
 import { services } from "@/lib/services";
 import { products } from "@/lib/products";
@@ -12,10 +13,10 @@ export default function SiteFooter() {
     <footer className="sf">
       <div className="sf-in">
         <div className="sf-brand">
-          <a className="brand" href="/" aria-label={`${NAP.name} 홈`}>
+          <Link className="brand" href="/" aria-label={`${NAP.name} 홈`}>
             <i />
             {NAP.name}
-          </a>
+          </Link>
           <p className="sf-tag">{NAP.tagline}</p>
           <ul className="sf-nap">
             <li>{NAP.address.full}</li>
@@ -81,13 +82,13 @@ export default function SiteFooter() {
           <p className="sf-h">회사</p>
           <ul>
             <li>
-              <a href="/blog">인사이트</a>
+              <Link href="/blog">인사이트</Link>
             </li>
             <li>
-              <a href="/column">칼럼</a>
+              <Link href="/column">칼럼</Link>
             </li>
             <li>
-              <a href="/#consult">상담 신청</a>
+              <Link href="/#consult">상담 신청</Link>
             </li>
             {guides.map((g) => (
               <li key={g.slug}>

@@ -131,9 +131,9 @@ export default function BlogArticle({
             <p className="mb-6 text-gray-500">
               현재 상태 기준으로 무엇부터 해야 할지 상담으로 안내드립니다.
             </p>
-            <a href="/#consult" className="btn blue">
+            <Link href="/#consult" className="btn blue">
               상담 신청하기
-            </a>
+            </Link>
           </div>
         </div>
 
