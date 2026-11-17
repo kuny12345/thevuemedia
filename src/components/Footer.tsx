@@ -13,7 +13,7 @@ const YEAR = new Date().getFullYear();
 // 회사 링크
 const COMPANY_LINKS = [
   { href: "/blog", label: "블로그", external: false },
-  { href: "/#insights", label: "인사이트", external: false },
+  { href: "/blog", label: "인사이트", external: false },
   { href: "/#consult", label: "문의", external: false },
 ] as const;
 

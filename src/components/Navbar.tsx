@@ -8,7 +8,7 @@ import Logo from "@/components/Logo";
 // 데스크톱 메뉴 — 섹션 id와 1:1로 맞춰 앵커가 해석되게 유지.
 const NAV_LINKS = [
   { href: "/#services", label: "서비스" },
-  { href: "/#tools", label: "자체 도구" },
+  { href: "/#s1", label: "SaaS 솔루션" },
   { href: "/#process", label: "프로세스" },
   { href: "/blog", label: "인사이트" },
   { href: "/column", label: "칼럼" },

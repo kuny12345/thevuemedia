@@ -87,7 +87,7 @@ export function GET() {
 
   lines.push("## 문의");
   lines.push(
-    `- 무료 AI 인식도 진단: ${abs("/#contact")} — 현재 AI가 브랜드를 어떻게 인식하는지 진단 리포트 제공.`
+    `- 무료 AI 인식도 진단: ${abs("/#consult")} — 현재 AI가 브랜드를 어떻게 인식하는지 진단 리포트 제공.`
   );
   lines.push(`- 전화: ${NAP.phoneDisplay} (${NAP.hoursDisplay}, ${NAP.hoursClosed})`);
   lines.push("");
