@@ -110,7 +110,8 @@ export function initHome(){
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
   gsap.ticker.lagSmoothing(0);
-  gsap.ticker.add(function(){ var cap = innerHeight * 0.6; if (lenis.targetScroll - lenis.animatedScroll > cap) lenis.targetScroll = lenis.animatedScroll + cap; });
+  var navJumping = false;
+  gsap.ticker.add(function(){ if (navJumping) return; var cap = innerHeight * 0.6; if (lenis.targetScroll - lenis.animatedScroll > cap) lenis.targetScroll = lenis.animatedScroll + cap; });
   ScrollTrigger.addEventListener('refresh', function(){ lenis.resize(); });
   window.__lenis = lenis;
   /* 메뉴·버튼으로 이동: 고정 장면이면 등장 애니메이션이 끝난 지점으로 (시작 지점은 내용이 아직 안 보임) */
@@ -127,7 +128,21 @@ export function initHome(){
     return Math.round(st.start + (st.end - st.start) * p);
   }
   window.__anchorY = anchorY;
-  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(e){ var t = document.querySelector(a.getAttribute('href')); if (t) { e.preventDefault(); lenis.scrollTo(anchorY(t), { duration: 1.2 }); } }); });
+  /* 멀리 이동할 때는 중간 장면을 훑고 지나가지 않게: 화면을 잠깐 덮고 → 바로 이동 → 도착 장면을 완성 상태로 → 덮개 걷기 */
+  var veil = document.createElement('div'); veil.className = 'nav-veil'; veil.setAttribute('aria-hidden', 'true'); document.body.appendChild(veil);
+  function jumpTo(t){
+    var y = anchorY(t);
+    if (Math.abs(y - lenis.animatedScroll) < innerHeight * 1.5) { navJumping = true; lenis.scrollTo(y, { duration: 0.9, onComplete: function(){ navJumping = false; } }); return; }
+    navJumping = true; veil.classList.add('on');
+    setTimeout(function(){
+      lenis.scrollTo(y, { immediate: true, force: true });
+      ScrollTrigger.update();
+      ScrollTrigger.getAll().forEach(function(s){ var tw = s.getTween && s.getTween(); if (tw) tw.progress(1); });
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ veil.classList.remove('on'); navJumping = false; }); });
+    }, 200);
+  }
+  window.__jumpTo = jumpTo;
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){ a.addEventListener('click', function(e){ var t = document.querySelector(a.getAttribute('href')); if (t) { e.preventDefault(); jumpTo(t); } }); });
 
   /* 숫자 0에서 올라가기 */
   function countUp(els, dur){ var t = gsap.timeline(); [].forEach.call(els, function(el){ var to = parseFloat(el.dataset.to), dec = +(el.dataset.dec || 0), from = parseFloat(el.dataset.from || 0), o = { v: from }; el.textContent = from.toFixed(dec); t.to(o, { v: to, duration: dur, ease: 'power2.out', onUpdate: function(){ el.textContent = o.v.toFixed(dec); } }, 0); }); return t; }
