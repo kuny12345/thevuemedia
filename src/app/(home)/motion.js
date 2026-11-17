@@ -55,6 +55,16 @@ export function initHome(){
         .catch(function(){ fail('네트워크 오류가 발생했습니다.'); });
     });
   })();
+  /* 폰·태블릿 메뉴 버튼 */
+  (function(){
+    var hd = document.getElementById('hd'), btn = document.getElementById('mBtn'); if (!hd || !btn) return;
+    var panel = document.getElementById('m-panel'), dim = hd.querySelector('.m-dim'), links = [].slice.call(panel.querySelectorAll('a'));
+    function set(o){ hd.classList.toggle('menu-open', o); btn.setAttribute('aria-expanded', o); btn.setAttribute('aria-label', o ? '메뉴 닫기' : '메뉴 열기'); panel.setAttribute('aria-hidden', !o); links.forEach(function(a){ a.tabIndex = o ? 0 : -1; }); }
+    btn.addEventListener('click', function(){ set(!hd.classList.contains('menu-open')); });
+    dim.addEventListener('click', function(){ set(false); });
+    links.forEach(function(a){ a.addEventListener('click', function(){ set(false); }); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && hd.classList.contains('menu-open')) set(false); });
+  })();
   var prm = window.matchMedia('(prefers-reduced-motion: reduce)').matches, reduce = prm || window.innerWidth <= 1100;
   if (reduce) {
     document.documentElement.classList.add('reduced');

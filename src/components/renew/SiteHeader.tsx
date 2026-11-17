@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NAP } from "@/lib/nap";
+import MobileMenu from "./MobileMenu";
 
 // 리뉴얼 디자인 하위 페이지(인사이트·칼럼) 공용 헤더 — 홈 헤더와 같은 모양·메뉴.
 const NAV = [
@@ -36,6 +37,12 @@ export default function SiteHeader({ active }: { active?: "인사이트" | "칼�
         <Link className="btn sm" href="/#consult">
           상담 신청
         </Link>
+        <MobileMenu
+          items={NAV}
+          active={active}
+          tel={`tel:${NAP.phoneE164}`}
+          telLabel={`전화 ${NAP.phoneDisplay}`}
+        />
       </div>
     </header>
   );

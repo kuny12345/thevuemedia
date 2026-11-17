@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./home.css";
 import "@/styles/site-footer.css";
+import "@/styles/site-menu.css";
 import { siteMetadata, SiteHeadCommon } from "@/lib/site-meta";
 
 // 리뉴얼 홈 전용 레이아웃 — 기존 페이지(globals.css)와 스타일이 섞이지 않게 분리.
