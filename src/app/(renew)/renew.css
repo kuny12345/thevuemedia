@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   리뉴얼 디자인 — 하위 페이지(인사이트·칼럼) 공용.
+   홈(home.css)과 같은 디자인 토큰. 글 본문(블로그 38개)의 Tailwind 색 이름
+   (gray-*, primary)을 이 토큰에 다시 연결해 본문 수정 없이 새 톤이 된다.
+   ============================================================================ */
+@theme {
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --color-primary: #0064e0;
+  --color-gray-50: #f1f4f7;
+  --color-gray-100: #e9edf2;
+  --color-gray-200: #dee3e9;
+  --color-gray-300: #ced0d4;
+  --color-gray-400: #8595a4;
+  --color-gray-500: #5d6c7b;
+  --color-gray-600: #444950;
+  --color-gray-700: #3a4350;
+  --color-gray-800: #2b333d;
+  --color-gray-900: #2a3747;
+}
+
+:root {
+  --primary: #0064e0; --primary-deep: #0457cb; --primary-soft: #0091ff;
+  --ink-deep: #2a3747; --ink-button: #34445a; --ink: #2b333d; --charcoal: #444950; --steel: #5d6c7b; --stone: #8595a4;
+  --hairline: #ced0d4; --hairline-soft: #dee3e9; --canvas: #ffffff; --surface-soft: #f1f4f7;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+html { background: var(--canvas); }
+body { color: var(--ink-deep); background: var(--canvas); -webkit-font-smoothing: antialiased; word-break: keep-all; overflow-wrap: break-word; }
+.nw { white-space: nowrap; }
+.text-gradient { color: var(--primary); }
+
+/* ---------- 헤더 (홈과 같은 모양) ---------- */
+.hd { position: fixed; top: 0; left: 0; right: 0; z-index: 80; height: 72px; padding: 0 64px; display: flex; align-items: center; justify-content: space-between; }
+.hd.solid { background: rgba(255,255,255,.94); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); box-shadow: 0 1px 0 var(--hairline-soft); }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--ink-deep); }
+.brand i { width: 20px; height: 20px; border-radius: 6px; background: var(--primary); display: block; }
+.nav { display: flex; gap: 36px; font-size: 14px; font-weight: 700; color: var(--charcoal); }
+.nav a { transition: color .25s; }
+.nav a:hover, .nav a.on { color: var(--primary); }
+.hd-r { display: flex; align-items: center; gap: 20px; font-size: 14px; color: var(--steel); }
+.hd-r .tel:hover { color: var(--ink-deep); }
+.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 100px; font-weight: 700; font-size: 14px; padding: 14px 30px; border: 0; background: var(--ink-button); color: #fff; transition: background .2s; }
+.btn:hover { background: var(--ink-deep); }
+.btn.sm { padding: 10px 22px; }
+.btn.blue { background: var(--primary); }
+.btn.blue:hover { background: var(--primary-deep); }
+.btn.line { background: transparent; color: var(--ink-deep); box-shadow: inset 0 0 0 1.5px var(--ink-deep); padding: 12px 28px; }
+
+/* ---------- 이전 버전 레이아웃에서 쓰던 보조 클래스 — 홈 토큰으로 다시 정의 ---------- */
+@layer base {
+  h1, h2, h3 { font-weight: 700; color: var(--ink-deep); letter-spacing: -.02em; line-height: 1.25; text-wrap: balance; word-break: keep-all; }
+  h4 { font-weight: 700; color: var(--ink-deep); letter-spacing: -.02em; text-wrap: balance; word-break: keep-all; }
+}
+::selection { background: rgba(0,100,224,.18); }
+.paper-section { background: var(--canvas); color: var(--charcoal); }
+.mono { font-family: var(--mono); font-feature-settings: "tnum" 1; }
+/* eyebrow: 자리·정렬은 그대로, 모양은 홈의 섹션 라벨(.lb)과 같게 */
+.eyebrow { display: inline-flex; align-items: center; gap: .6rem; font-size: 14px; font-weight: 700; color: var(--primary); }
+p.eyebrow, span.eyebrow { display: flex; }
+
+/* ---------- 반응형 ---------- */
+@media (max-width: 1100px) {
+  .hd { padding: 0 24px; }
+  .nav { display: none; }
+}
+@media (max-width: 640px) {
+  .hd-r > .tel { display: none; }
+  .brand { font-size: 16px; }
+}

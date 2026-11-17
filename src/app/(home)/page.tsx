@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import { services } from "@/lib/services";
 import { itemListSchema, faqPageSchema } from "@/lib/schema";
 import HomeMotion from "./HomeMotion";
+import SiteFooter from "@/components/renew/SiteFooter";
 
 // 홈 화면 HTML(리뉴얼 시안에서 이식) — 빌드 때 읽어 서버에서 그대로 그린다.
 // 문구가 HTML에 들어 있어 검색엔진·AI 크롤러가 스크립트 없이 읽을 수 있다.
@@ -40,6 +41,7 @@ export default function Home() {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: html }}
       />
+      <SiteFooter />
       <HomeMotion />
     </>
   );

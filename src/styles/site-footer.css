@@ -1,0 +1,26 @@
+/* 리뉴얼 공용 푸터 — 홈(home.css)·인사이트(renew.css) 모두에서 불러온다. 홈 디자인 토큰(:root) 사용 */
+.sf{background:var(--surface-soft);color:var(--charcoal);border-top:1px solid var(--hairline-soft)}
+.sf-in{max-width:1200px;margin:0 auto;padding:64px 24px 48px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px}
+.sf .brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--ink-deep);text-decoration:none}
+.sf .brand i{width:20px;height:20px;border-radius:6px;background:var(--primary);display:block}
+.sf-tag{margin-top:14px;font-size:14px;line-height:1.6;color:var(--steel)}
+.sf-nap{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:6px;font-size:13.5px;line-height:1.6;color:var(--steel)}
+.sf-nap a{color:inherit;text-decoration:none}
+.sf-nap a:hover{color:var(--primary)}
+.sf-social{list-style:none;margin:18px 0 0;padding:0;display:flex;gap:8px}
+.sf-social a{display:inline-flex;padding:6px 14px;border-radius:100px;background:#fff;font-size:12.5px;font-weight:700;color:var(--ink-deep);text-decoration:none;transition:color .2s}
+.sf-social a:hover{color:var(--primary)}
+.sf-h{font-size:13px;font-weight:700;color:var(--ink-deep);margin:0 0 14px}
+.sf-col ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.sf-col a{font-size:13.5px;line-height:1.5;color:var(--steel);text-decoration:none;word-break:keep-all;transition:color .2s}
+.sf-col a:hover{color:var(--primary)}
+.sf-bar{max-width:1200px;margin:0 auto;padding:20px 24px 28px;border-top:1px solid var(--hairline-soft);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--stone)}
+@media (max-width:1100px){
+  .sf-in{grid-template-columns:1fr 1fr;gap:36px;padding:52px 6vw 40px}
+  .sf-bar{padding:18px 6vw 26px}
+}
+@media (max-width:640px){
+  .sf-in{grid-template-columns:1fr 1fr;gap:30px 20px}
+  .sf-brand{grid-column:1/-1}
+  .sf-bar{flex-direction:column;gap:4px}
+}

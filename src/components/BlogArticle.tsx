@@ -58,11 +58,11 @@ export default function BlogArticle({
       <JsonLd data={breadcrumb} />
       {faq.length > 0 && <JsonLd data={faqPageSchema(faq)} />}
 
-      {/* 아이보리 지면 — 장문 가독성. 본문 38개의 legacy gray-* 는
-          @theme 재매핑으로 웜 뉴트럴이 되어 지면과 자연 통일된다. */}
+      {/* 리뉴얼 디자인 토큰 — 배치·글자 크기는 이전 버전 그대로, 색·서체·모서리만 홈과 같게.
+          본문의 gray-*·primary 는 renew.css @theme 에서 홈 토큰으로 연결된다. */}
       <article className="paper-section">
         {/* Editorial header */}
-        <header className="border-b border-[rgba(8,17,32,0.1)] pt-32 pb-12 lg:pt-40 lg:pb-16">
+        <header className="border-b border-gray-200 pt-32 pb-12 lg:pt-40 lg:pb-16">
           <div className="mx-auto max-w-3xl px-6 text-center">
             <span className="eyebrow mb-5 justify-center">{tag}</span>
             <h1 className="mb-6 text-3xl md:text-4xl lg:text-[2.75rem] lg:leading-[1.2]">
@@ -92,15 +92,15 @@ export default function BlogArticle({
               <ul className="flex flex-col gap-3">
                 {faq.map((it) => (
                   <li key={it.q}>
-                    <details className="group border border-[rgba(8,17,32,0.12)] bg-[#fffdf8] open:shadow-sm">
-                      <summary className="flex min-h-[44px] cursor-pointer list-none items-start justify-between gap-4 p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-deep [&::-webkit-details-marker]:hidden">
-                        <span className="text-[17px] font-bold leading-snug text-ink">
+                    <details className="group overflow-hidden rounded-[14px] border border-gray-200 bg-white open:shadow-sm">
+                      <summary className="flex min-h-[44px] cursor-pointer list-none items-start justify-between gap-4 p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary [&::-webkit-details-marker]:hidden">
+                        <span className="text-[17px] font-bold leading-snug text-gray-900">
                           {it.q}
                         </span>
                         <svg
                           aria-hidden="true"
                           focusable="false"
-                          className="mt-0.5 h-5 w-5 flex-shrink-0 text-gold-deep transition-transform duration-200 group-open:rotate-180"
+                          className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
@@ -123,7 +123,7 @@ export default function BlogArticle({
         </div>
 
         {/* CTA — 홈 상담 섹션으로 연결 */}
-        <div className="border-y border-[rgba(8,17,32,0.1)] bg-[#efe9dc]">
+        <div className="border-y border-gray-200 bg-gray-50">
           <div className="mx-auto max-w-2xl px-6 py-14 text-center">
             <h3 className="mb-3 text-2xl">
               AI는 우리 브랜드를 어떻게 인식하고 있을까?
@@ -131,7 +131,7 @@ export default function BlogArticle({
             <p className="mb-6 text-gray-500">
               현재 상태 기준으로 무엇부터 해야 할지 상담으로 안내드립니다.
             </p>
-            <a href="/#consult" className="btn btn-primary">
+            <a href="/#consult" className="btn blue">
               상담 신청하기
             </a>
           </div>
@@ -145,10 +145,10 @@ export default function BlogArticle({
               <Link
                 key={r.slug}
                 href={postUrl(r.slug)}
-                className="block border border-[rgba(8,17,32,0.12)] bg-[#fffdf8] p-5 transition-all hover:border-gold-deep hover:shadow-sm"
+                className="block rounded-[18px] border border-gray-200 bg-white p-5 transition-all hover:border-primary hover:shadow-sm"
               >
-                <span className="mono text-xs font-bold text-gold-deep">{r.tag}</span>
-                <p className="mt-1 text-sm font-semibold text-ink">{r.title}</p>
+                <span className="mono text-xs font-bold text-primary">{r.tag}</span>
+                <p className="mt-1 text-sm font-semibold text-gray-900">{r.title}</p>
               </Link>
             ))}
           </div>

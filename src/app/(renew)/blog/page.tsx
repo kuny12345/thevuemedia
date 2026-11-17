@@ -64,7 +64,7 @@ export default function BlogIndexPage() {
       <JsonLd data={collection} />
 
       <div className="paper-section">
-        <header className="border-b border-[rgba(8,17,32,0.1)] pt-32 pb-14 lg:pt-40 lg:pb-16">
+        <header className="border-b border-gray-200 pt-32 pb-14 lg:pt-40 lg:pb-16">
           <div className="mx-auto max-w-5xl px-6 text-center">
             <p className="eyebrow mb-5 justify-center">Insights</p>
             <h1 className="mb-5 text-3xl md:text-4xl lg:text-5xl">
@@ -83,7 +83,7 @@ export default function BlogIndexPage() {
             if (!items.length) return null;
             return (
               <section key={cat.key} className="mb-16">
-                <div className="mb-6 border-t border-[rgba(8,17,32,0.12)] pt-6">
+                <div className="mb-6 border-t border-gray-200 pt-6">
                   <h2 className="text-2xl">{cat.label}</h2>
                   <p className="mt-1 text-gray-500">{cat.desc}</p>
                 </div>
@@ -92,12 +92,12 @@ export default function BlogIndexPage() {
                     <Link
                       key={p.slug}
                       href={postUrl(p.slug)}
-                      className="group flex h-full flex-col border border-[rgba(8,17,32,0.12)] bg-[#fffdf8] p-6 transition-all duration-300 hover:border-gold-deep hover:shadow-md"
+                      className="group flex h-full flex-col rounded-[18px] border border-gray-200 bg-white p-6 transition-all duration-300 hover:border-primary hover:shadow-md"
                     >
-                      <span className="mono mb-4 self-start text-xs font-bold tracking-wider text-gold-deep">
+                      <span className="mono mb-4 self-start text-xs font-bold tracking-wider text-primary">
                         {p.tag}
                       </span>
-                      <h3 className="mb-2 text-lg leading-snug transition-colors group-hover:text-gold-deep">
+                      <h3 className="mb-2 text-lg leading-snug transition-colors group-hover:text-primary">
                         {p.title}
                       </h3>
                       <p className="mb-4 flex-1 text-sm leading-relaxed text-gray-500">
@@ -105,8 +105,8 @@ export default function BlogIndexPage() {
                       </p>
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-gray-400">{p.date}</span>
-                        <span className="font-semibold text-gold-deep transition-transform group-hover:translate-x-1">
-                          읽어보기 &rarr;
+                        <span className="font-semibold text-primary transition-transform group-hover:translate-x-1">
+                          읽어보기
                         </span>
                       </div>
                     </Link>
