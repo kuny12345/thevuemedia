@@ -1,6 +1,7 @@
 import { posts, postUrl, type Category } from "@/lib/posts";
 import { services } from "@/lib/services";
 import { products } from "@/lib/products";
+import { guides } from "@/lib/guides";
 import { NAP } from "@/lib/nap";
 import { SITE } from "@/lib/schema";
 
@@ -60,6 +61,13 @@ export function GET() {
   for (const p of products) {
     const purl = p.external ? p.url : abs(p.url);
     lines.push(`- [${p.name}](${purl}) — ${p.role} · ${p.tagline}: ${p.description}`);
+  }
+  lines.push("");
+
+  // 운영 중인 정보 가이드 사이트
+  lines.push("## 운영 중인 가이드 사이트");
+  for (const g of guides) {
+    lines.push(`- [${g.name}](${g.url}) (${g.language}): ${g.description}`);
   }
   lines.push("");
 

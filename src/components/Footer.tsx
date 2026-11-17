@@ -3,6 +3,7 @@ import Logo from "@/components/Logo";
 import { NAP } from "@/lib/nap";
 import { services } from "@/lib/services";
 import { products } from "@/lib/products";
+import { guides } from "@/lib/guides";
 
 const TEL_HREF = `tel:${NAP.phoneE164}`;
 const HOURS = `${NAP.hoursDisplay} · ${NAP.hoursClosed}`;
@@ -160,7 +161,7 @@ export default function Footer() {
               )}
             </FooterCol>
 
-            {/* 회사 */}
+            {/* 회사 + 운영 가이드 — guides 단일 출처 */}
             <FooterCol title="회사">
               {COMPANY_LINKS.map((l) => (
                 <li key={l.label}>
@@ -170,6 +171,20 @@ export default function Footer() {
                   >
                     {l.label}
                   </Link>
+                </li>
+              ))}
+              {guides.map((g) => (
+                <li key={g.slug}>
+                  <a
+                    href={g.url}
+                    hrefLang={g.language}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`${g.name} — 운영 중인 영문 병원 가이드 (새 탭에서 열림)`}
+                    className="inline-flex min-h-[36px] items-center gap-1.5 text-sm leading-snug text-on-dark-soft transition-colors hover:text-white"
+                  >
+                    {g.label}
+                  </a>
                 </li>
               ))}
             </FooterCol>
