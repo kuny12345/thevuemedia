@@ -8,10 +8,9 @@ const NAV = [
   { href: "/#s1", label: "SaaS 솔루션" },
   { href: "/#process", label: "프로세스" },
   { href: "/blog", label: "인사이트" },
-  { href: "/column", label: "칼럼" },
 ] as const;
 
-export default function SiteHeader({ active }: { active?: "인사이트" | "칼럼" }) {
+export default function SiteHeader({ active }: { active?: "인사이트" | "서비스" }) {
   return (
     <header className="hd solid">
       <Link className="brand" href="/" aria-label={`${NAP.name} 홈`}>

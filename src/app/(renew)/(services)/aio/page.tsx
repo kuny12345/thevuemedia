@@ -130,7 +130,7 @@ export default function AioServicePage() {
           </p>
           <a
             href="/#consult"
-            className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
+            className="inline-block px-6 py-3.5 rounded-full bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
           >
             무료 AI 인식도 진단받기
           </a>
@@ -273,7 +273,7 @@ export default function AioServicePage() {
           </p>
           <a
             href="/#consult"
-            className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
+            className="inline-block px-6 py-3.5 rounded-full bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
           >
             무료 AI 인식도 진단받기
           </a>

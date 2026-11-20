@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CtaSection from "@/components/CtaSection";
 import JsonLd from "@/components/JsonLd";
 import { getService } from "@/lib/services";
@@ -9,39 +7,39 @@ import { NAP } from "@/lib/nap";
 import { serviceSchema, breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 
 // 데이터는 lib에서만 import (NAP/services 하드코딩 금지).
-const service = getService("content")!;
+const service = getService("video")!;
 const TEL_HREF = `tel:${NAP.phoneE164}`;
 
 const whatWeDo = [
-  "키워드 분석을 바탕으로 고객 맞춤 프롬프트로 AI 본문 생성",
-  "워드프레스·티스토리·네이버에 멀티채널 자동 발행",
-  "네이버 Search Advisor 색인 요청과 순위 추적",
-  "의료광고법 금지어 자동 치환·발행 전 검증으로 안전 운영",
-  "발행 일정과 채널별 운영을 스케줄로 관리",
-  "발행 콘텐츠를 AI가 인용하기 좋은 구조로 정리",
+  "유튜브 쇼츠·인스타그램 릴스 등 숏폼 기획·제작·운영",
+  "검색·AI 질의 의도에 맞춘 주제와 자막·설명 구조 설계",
+  "멀티채널 업로드와 발행 일정 운영",
+  "영상 메타데이터(제목·설명·태그)를 검색·AI 친화적으로 정리",
+  "자체 채널(YouTube·Instagram)과 연계한 일관된 메시지 운영",
+  "도달·반응 데이터를 기준으로 주제를 반복 개선",
 ];
 
 const problem =
-  "AI 추천에는 꾸준한 양질의 콘텐츠가 필요하지만, 채널마다 형식이 달라 수작업으로는 지속하기 어렵습니다. 특히 의료처럼 규제가 있는 분야는 단어 하나가 위험이 됩니다.";
+  "텍스트만으로는 닿지 않는 사용자가 많고, Gemini처럼 영상을 학습하는 AI 엔진이 늘고 있습니다. 영상이 비어 있으면 그만큼 추천 신호도 비어 있습니다.";
 const solution =
-  "생성·발행·추적을 자동화해 운영 부담을 줄이고, 의료광고법 단어 치환을 내장해 안전하게 발행합니다. 꾸준함이 AI 인용의 토대를 만듭니다.";
+  "숏폼으로 사람에게는 도달을, AI에게는 학습·추천 신호를 동시에 만듭니다. 멀티채널 운영으로 한 번의 제작을 여러 접점으로 확장합니다.";
 
 const faq = [
   {
-    q: "AI가 쓴 글을 그대로 발행해도 괜찮나요?",
-    a: "고객별 맞춤 프롬프트로 생성하고, 발행 전 검증 단계를 둡니다. 특히 의료 분야는 금지어 자동 치환과 점검을 거쳐 규제 위반 위험을 줄입니다.",
+    q: "숏폼이 AI 검색과 무슨 상관인가요?",
+    a: "Gemini 등 일부 AI 엔진은 영상도 학습·참조합니다. 숏폼은 사람에게 도달하는 동시에, 영상으로 학습되는 AI 엔진에 브랜드 신호를 더하는 채널이 됩니다.",
   },
   {
-    q: "어떤 채널에 발행되나요?",
-    a: "워드프레스·티스토리·네이버를 기본으로 멀티채널 자동 발행합니다. 채널별 형식 차이를 자동으로 맞춰 운영 부담을 줄입니다.",
+    q: "어떤 채널에 올리나요?",
+    a: "유튜브 쇼츠·인스타그램 릴스를 중심으로 운영합니다. 채널별 형식에 맞춰 한 번 만든 영상을 여러 접점으로 확장합니다.",
   },
   {
-    q: "의료광고법은 어떻게 대응하나요?",
-    a: "발행 파이프라인에 금지어 자동 치환과 발행 전 검증을 내장했습니다. 치료 효과 단정·환자 유인 같은 표현을 배제하도록 설계합니다.",
+    q: "출연자나 촬영 장비가 꼭 필요한가요?",
+    a: "주제와 포맷에 따라 다릅니다. 기존 자료·이미지·자막 중심 포맷도 가능하며, 지속 운영할 수 있는 형태로 함께 설계합니다.",
   },
   {
-    q: "발행 후 성과는 추적되나요?",
-    a: "네이버 색인 요청과 순위 변화를 추적하고, 필요하면 AI 노출까지 연계해 모니터링합니다. 측정 근거를 함께 공유합니다.",
+    q: "성과는 어떻게 보나요?",
+    a: "채널별 도달·반응 데이터를 기준선과 비교해 추적하고, 반응이 좋은 주제를 반복·확장합니다. 측정 근거를 함께 공유합니다.",
   },
 ];
 
@@ -57,7 +55,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServiceContentPage() {
+export default function ServiceVideoPage() {
   const tools = (service.poweredBy ?? [])
     .map((s) => getProduct(s))
     .filter((p): p is Product => Boolean(p));
@@ -80,8 +78,6 @@ export default function ServiceContentPage() {
       />
       <JsonLd data={faqPageSchema(faq)} />
 
-      <Navbar />
-
       <main id="main" className="paper-section">
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-line bg-paper pt-28 pb-16 sm:pt-32 lg:pt-40 lg:pb-24">
@@ -93,12 +89,13 @@ export default function ServiceContentPage() {
             <h1 className="mt-5 max-w-3xl text-3xl font-extrabold leading-[1.15] text-ink sm:text-4xl lg:text-[3rem]">
               {service.name},
               <br />
-              <span className="text-gradient">AI가 인용할</span> 콘텐츠를
-              꾸준히 발행합니다
+              영상으로 사람과 <span className="text-gradient">AI 추천
+              신호</span>를 함께 키웁니다
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-soft">
-              좋은 콘텐츠를 여러 채널에 꾸준히 올리는 일은 현실적으로 버겁습니다.
-              AI 생성부터 멀티채널 발행, 색인·추적까지 한 흐름으로 자동화합니다.
+              고객은 글보다 짧은 영상을 먼저 봅니다. 유튜브 쇼츠·인스타 릴스로
+              도달을 넓히고, 영상으로 학습되는 AI 엔진의 추천 신호까지 함께
+              강화합니다.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a href="#contact" className="btn btn-primary">
@@ -127,8 +124,8 @@ export default function ServiceContentPage() {
               무엇을 하는가
             </h2>
             <p className="mt-3 max-w-2xl text-text-soft">
-              콘텐츠를 안전하고 꾸준하게 운영하기 위해, 다음을 한 흐름으로
-              자동화합니다.
+              숏폼으로 도달과 추천 신호를 함께 키우기 위해, 다음을 한 흐름으로
+              운영합니다.
             </p>
             <ul className="mt-10 grid gap-4 sm:grid-cols-2">
               {whatWeDo.map((item) => (
@@ -218,8 +215,6 @@ export default function ServiceContentPage() {
 
         <CtaSection />
       </main>
-
-      <Footer />
     </>
   );
 }

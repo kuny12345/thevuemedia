@@ -108,7 +108,7 @@ export default function HospitalMarketingPage() {
           </p>
           <a
             href="/#consult"
-            className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
+            className="inline-block px-6 py-3.5 rounded-full bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors"
           >
             무료 병원 AI 노출 진단받기
           </a>
@@ -250,7 +250,7 @@ export default function HospitalMarketingPage() {
         <div className="max-w-3xl mx-auto px-6 py-16 text-center">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-3">우리 병원은 AI에게 추천받고 있을까?</h2>
           <p className="text-gray-500 mb-6">진료과·지역 기준 AI 노출 진단 리포트를 무료로 받아보세요.</p>
-          <a href="/#consult" className="inline-block px-6 py-3.5 rounded-lg bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors">
+          <a href="/#consult" className="inline-block px-6 py-3.5 rounded-full bg-gray-900 text-white font-semibold hover:bg-gray-800 transition-colors">
             무료 병원 AI 노출 진단받기
           </a>
         </div>

@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CtaSection from "@/components/CtaSection";
 import JsonLd from "@/components/JsonLd";
 import { getService } from "@/lib/services";
@@ -9,39 +7,39 @@ import { NAP } from "@/lib/nap";
 import { serviceSchema, breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 
 // 데이터는 lib에서만 import (NAP/services 하드코딩 금지).
-const service = getService("video")!;
+const service = getService("schema")!;
 const TEL_HREF = `tel:${NAP.phoneE164}`;
 
 const whatWeDo = [
-  "유튜브 쇼츠·인스타그램 릴스 등 숏폼 기획·제작·운영",
-  "검색·AI 질의 의도에 맞춘 주제와 자막·설명 구조 설계",
-  "멀티채널 업로드와 발행 일정 운영",
-  "영상 메타데이터(제목·설명·태그)를 검색·AI 친화적으로 정리",
-  "자체 채널(YouTube·Instagram)과 연계한 일관된 메시지 운영",
-  "도달·반응 데이터를 기준으로 주제를 반복 개선",
+  "Organization·LocalBusiness 노드로 상호·주소·전화·영업시간(NAP)을 기계가 읽게 구조화",
+  "FAQPage·Service·Article 등 페이지 유형별 schema.org 마크업 설계",
+  "@id로 노드를 연결해 흩어진 정보를 하나의 엔티티 그래프로 묶기",
+  "JSON-LD를 서버 렌더링(SSR)으로 출력해 자바스크립트 없이도 크롤러가 읽도록 처리",
+  "구조화 데이터 유효성 검증과 리치 결과·AI 인용 적합성 점검",
+  "기존 마크업의 누락·오류·중복(@id 충돌) 진단과 정리",
 ];
 
 const problem =
-  "텍스트만으로는 닿지 않는 사용자가 많고, Gemini처럼 영상을 학습하는 AI 엔진이 늘고 있습니다. 영상이 비어 있으면 그만큼 추천 신호도 비어 있습니다.";
+  "검색과 AI는 페이지의 글자만이 아니라 구조를 읽습니다. 구조화 데이터가 없으면 같은 업체 정보가 페이지마다 따로 인식돼, 신뢰가 쌓이지 않고 추천 근거로도 약합니다.";
 const solution =
-  "숏폼으로 사람에게는 도달을, AI에게는 학습·추천 신호를 동시에 만듭니다. 멀티채널 운영으로 한 번의 제작을 여러 접점으로 확장합니다.";
+  "schema.org 그래프를 @id로 연결해 상호·서비스·위치를 한 개체로 묶습니다. AI가 추천 근거로 삼을 만한, 기계가 신뢰하는 구조를 만듭니다.";
 
 const faq = [
   {
-    q: "숏폼이 AI 검색과 무슨 상관인가요?",
-    a: "Gemini 등 일부 AI 엔진은 영상도 학습·참조합니다. 숏폼은 사람에게 도달하는 동시에, 영상으로 학습되는 AI 엔진에 브랜드 신호를 더하는 채널이 됩니다.",
+    q: "구조화 데이터(스키마)가 정확히 무엇인가요?",
+    a: "페이지의 의미를 검색·AI가 이해하도록, 기계가 읽는 형식(주로 schema.org JSON-LD)으로 표기한 데이터입니다. 이 텍스트는 상호, 이건 주소, 이건 FAQ처럼 정보의 정체를 명시합니다.",
   },
   {
-    q: "어떤 채널에 올리나요?",
-    a: "유튜브 쇼츠·인스타그램 릴스를 중심으로 운영합니다. 채널별 형식에 맞춰 한 번 만든 영상을 여러 접점으로 확장합니다.",
+    q: "스키마를 넣으면 순위가 바로 오르나요?",
+    a: "구조화 데이터 자체가 순위를 곧바로 올려 주지는 않습니다. 다만 검색·AI가 페이지를 정확히 이해하고 리치 결과·AI 인용 대상으로 삼을 가능성을 높이는 토대입니다.",
   },
   {
-    q: "출연자나 촬영 장비가 꼭 필요한가요?",
-    a: "주제와 포맷에 따라 다릅니다. 기존 자료·이미지·자막 중심 포맷도 가능하며, 지속 운영할 수 있는 형태로 함께 설계합니다.",
+    q: "어떤 유형의 스키마가 필요한가요?",
+    a: "업종과 페이지에 따라 다릅니다. 보통 Organization·LocalBusiness를 기본으로, 서비스 페이지엔 Service, 안내 페이지엔 FAQPage, 글에는 Article을 적용하고 @id로 연결합니다.",
   },
   {
-    q: "성과는 어떻게 보나요?",
-    a: "채널별 도달·반응 데이터를 기준선과 비교해 추적하고, 반응이 좋은 주제를 반복·확장합니다. 측정 근거를 함께 공유합니다.",
+    q: "우리 사이트에 이미 스키마가 있는데도 필요한가요?",
+    a: "네. 중복·충돌(@id 미연결), 잘못된 유형, 누락이 흔합니다. SchemaWorks로 현재 상태를 진단한 뒤 빠지거나 어긋난 부분을 정리합니다.",
   },
 ];
 
@@ -57,7 +55,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServiceVideoPage() {
+export default function ServiceSchemaPage() {
   const tools = (service.poweredBy ?? [])
     .map((s) => getProduct(s))
     .filter((p): p is Product => Boolean(p));
@@ -80,8 +78,6 @@ export default function ServiceVideoPage() {
       />
       <JsonLd data={faqPageSchema(faq)} />
 
-      <Navbar />
-
       <main id="main" className="paper-section">
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-line bg-paper pt-28 pb-16 sm:pt-32 lg:pt-40 lg:pb-24">
@@ -93,13 +89,13 @@ export default function ServiceVideoPage() {
             <h1 className="mt-5 max-w-3xl text-3xl font-extrabold leading-[1.15] text-ink sm:text-4xl lg:text-[3rem]">
               {service.name},
               <br />
-              영상으로 사람과 <span className="text-gradient">AI 추천
-              신호</span>를 함께 키웁니다
+              사람도 <span className="text-gradient">AI</span>도 읽는 엔티티
+              그래프를 설계합니다
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-soft">
-              고객은 글보다 짧은 영상을 먼저 봅니다. 유튜브 쇼츠·인스타 릴스로
-              도달을 넓히고, 영상으로 학습되는 AI 엔진의 추천 신호까지 함께
-              강화합니다.
+              사람 눈에는 멀쩡한 홈페이지가, AI와 검색에는 정체불명일 수
+              있습니다. schema.org 구조화 데이터로 ‘이 업체 = 이 서비스 = 이
+              위치’를 기계가 하나의 개체로 이해하게 만듭니다.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a href="#contact" className="btn btn-primary">
@@ -128,8 +124,8 @@ export default function ServiceVideoPage() {
               무엇을 하는가
             </h2>
             <p className="mt-3 max-w-2xl text-text-soft">
-              숏폼으로 도달과 추천 신호를 함께 키우기 위해, 다음을 한 흐름으로
-              운영합니다.
+              검색·AI가 신뢰하는 엔티티 그래프를 만들기 위해, 다음을 한 흐름으로
+              설계합니다.
             </p>
             <ul className="mt-10 grid gap-4 sm:grid-cols-2">
               {whatWeDo.map((item) => (
@@ -219,8 +215,6 @@ export default function ServiceVideoPage() {
 
         <CtaSection />
       </main>
-
-      <Footer />
     </>
   );
 }

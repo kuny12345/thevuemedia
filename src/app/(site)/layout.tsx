@@ -36,7 +36,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {/* 분석 스크립트(PostHog)가 body 바로 아래 첫 script 앞에 끼어들어 hydration 경고가 나지 않도록, 페이지 내용을 한 겹 감싼다 */}
+        <div style={{ display: "contents" }}>{children}</div>
+      </body>
     </html>
   );
 }

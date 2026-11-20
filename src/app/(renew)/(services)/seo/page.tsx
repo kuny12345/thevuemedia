@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CtaSection from "@/components/CtaSection";
 import JsonLd from "@/components/JsonLd";
 import { getService } from "@/lib/services";
@@ -79,8 +77,6 @@ export default function ServiceSeoPage() {
         ])}
       />
       <JsonLd data={faqPageSchema(faq)} />
-
-      <Navbar />
 
       <main id="main" className="paper-section">
         {/* Hero */}
@@ -222,8 +218,6 @@ export default function ServiceSeoPage() {
 
         <CtaSection />
       </main>
-
-      <Footer />
     </>
   );
 }

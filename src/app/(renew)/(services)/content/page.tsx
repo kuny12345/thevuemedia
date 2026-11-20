@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import CtaSection from "@/components/CtaSection";
 import JsonLd from "@/components/JsonLd";
 import { getService } from "@/lib/services";
@@ -9,39 +7,39 @@ import { NAP } from "@/lib/nap";
 import { serviceSchema, breadcrumbSchema, faqPageSchema } from "@/lib/schema";
 
 // 데이터는 lib에서만 import (NAP/services 하드코딩 금지).
-const service = getService("schema")!;
+const service = getService("content")!;
 const TEL_HREF = `tel:${NAP.phoneE164}`;
 
 const whatWeDo = [
-  "Organization·LocalBusiness 노드로 상호·주소·전화·영업시간(NAP)을 기계가 읽게 구조화",
-  "FAQPage·Service·Article 등 페이지 유형별 schema.org 마크업 설계",
-  "@id로 노드를 연결해 흩어진 정보를 하나의 엔티티 그래프로 묶기",
-  "JSON-LD를 서버 렌더링(SSR)으로 출력해 자바스크립트 없이도 크롤러가 읽도록 처리",
-  "구조화 데이터 유효성 검증과 리치 결과·AI 인용 적합성 점검",
-  "기존 마크업의 누락·오류·중복(@id 충돌) 진단과 정리",
+  "키워드 분석을 바탕으로 고객 맞춤 프롬프트로 AI 본문 생성",
+  "워드프레스·티스토리·네이버에 멀티채널 자동 발행",
+  "네이버 Search Advisor 색인 요청과 순위 추적",
+  "의료광고법 금지어 자동 치환·발행 전 검증으로 안전 운영",
+  "발행 일정과 채널별 운영을 스케줄로 관리",
+  "발행 콘텐츠를 AI가 인용하기 좋은 구조로 정리",
 ];
 
 const problem =
-  "검색과 AI는 페이지의 글자만이 아니라 구조를 읽습니다. 구조화 데이터가 없으면 같은 업체 정보가 페이지마다 따로 인식돼, 신뢰가 쌓이지 않고 추천 근거로도 약합니다.";
+  "AI 추천에는 꾸준한 양질의 콘텐츠가 필요하지만, 채널마다 형식이 달라 수작업으로는 지속하기 어렵습니다. 특히 의료처럼 규제가 있는 분야는 단어 하나가 위험이 됩니다.";
 const solution =
-  "schema.org 그래프를 @id로 연결해 상호·서비스·위치를 한 개체로 묶습니다. AI가 추천 근거로 삼을 만한, 기계가 신뢰하는 구조를 만듭니다.";
+  "생성·발행·추적을 자동화해 운영 부담을 줄이고, 의료광고법 단어 치환을 내장해 안전하게 발행합니다. 꾸준함이 AI 인용의 토대를 만듭니다.";
 
 const faq = [
   {
-    q: "구조화 데이터(스키마)가 정확히 무엇인가요?",
-    a: "페이지의 의미를 검색·AI가 이해하도록, 기계가 읽는 형식(주로 schema.org JSON-LD)으로 표기한 데이터입니다. 이 텍스트는 상호, 이건 주소, 이건 FAQ처럼 정보의 정체를 명시합니다.",
+    q: "AI가 쓴 글을 그대로 발행해도 괜찮나요?",
+    a: "고객별 맞춤 프롬프트로 생성하고, 발행 전 검증 단계를 둡니다. 특히 의료 분야는 금지어 자동 치환과 점검을 거쳐 규제 위반 위험을 줄입니다.",
   },
   {
-    q: "스키마를 넣으면 순위가 바로 오르나요?",
-    a: "구조화 데이터 자체가 순위를 곧바로 올려 주지는 않습니다. 다만 검색·AI가 페이지를 정확히 이해하고 리치 결과·AI 인용 대상으로 삼을 가능성을 높이는 토대입니다.",
+    q: "어떤 채널에 발행되나요?",
+    a: "워드프레스·티스토리·네이버를 기본으로 멀티채널 자동 발행합니다. 채널별 형식 차이를 자동으로 맞춰 운영 부담을 줄입니다.",
   },
   {
-    q: "어떤 유형의 스키마가 필요한가요?",
-    a: "업종과 페이지에 따라 다릅니다. 보통 Organization·LocalBusiness를 기본으로, 서비스 페이지엔 Service, 안내 페이지엔 FAQPage, 글에는 Article을 적용하고 @id로 연결합니다.",
+    q: "의료광고법은 어떻게 대응하나요?",
+    a: "발행 파이프라인에 금지어 자동 치환과 발행 전 검증을 내장했습니다. 치료 효과 단정·환자 유인 같은 표현을 배제하도록 설계합니다.",
   },
   {
-    q: "우리 사이트에 이미 스키마가 있는데도 필요한가요?",
-    a: "네. 중복·충돌(@id 미연결), 잘못된 유형, 누락이 흔합니다. SchemaWorks로 현재 상태를 진단한 뒤 빠지거나 어긋난 부분을 정리합니다.",
+    q: "발행 후 성과는 추적되나요?",
+    a: "네이버 색인 요청과 순위 변화를 추적하고, 필요하면 AI 노출까지 연계해 모니터링합니다. 측정 근거를 함께 공유합니다.",
   },
 ];
 
@@ -57,7 +55,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ServiceSchemaPage() {
+export default function ServiceContentPage() {
   const tools = (service.poweredBy ?? [])
     .map((s) => getProduct(s))
     .filter((p): p is Product => Boolean(p));
@@ -80,8 +78,6 @@ export default function ServiceSchemaPage() {
       />
       <JsonLd data={faqPageSchema(faq)} />
 
-      <Navbar />
-
       <main id="main" className="paper-section">
         {/* Hero */}
         <section className="relative overflow-hidden border-b border-line bg-paper pt-28 pb-16 sm:pt-32 lg:pt-40 lg:pb-24">
@@ -93,13 +89,12 @@ export default function ServiceSchemaPage() {
             <h1 className="mt-5 max-w-3xl text-3xl font-extrabold leading-[1.15] text-ink sm:text-4xl lg:text-[3rem]">
               {service.name},
               <br />
-              사람도 <span className="text-gradient">AI</span>도 읽는 엔티티
-              그래프를 설계합니다
+              <span className="text-gradient">AI가 인용할</span> 콘텐츠를
+              꾸준히 발행합니다
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-soft">
-              사람 눈에는 멀쩡한 홈페이지가, AI와 검색에는 정체불명일 수
-              있습니다. schema.org 구조화 데이터로 ‘이 업체 = 이 서비스 = 이
-              위치’를 기계가 하나의 개체로 이해하게 만듭니다.
+              좋은 콘텐츠를 여러 채널에 꾸준히 올리는 일은 현실적으로 버겁습니다.
+              AI 생성부터 멀티채널 발행, 색인·추적까지 한 흐름으로 자동화합니다.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a href="#contact" className="btn btn-primary">
@@ -128,8 +123,8 @@ export default function ServiceSchemaPage() {
               무엇을 하는가
             </h2>
             <p className="mt-3 max-w-2xl text-text-soft">
-              검색·AI가 신뢰하는 엔티티 그래프를 만들기 위해, 다음을 한 흐름으로
-              설계합니다.
+              콘텐츠를 안전하고 꾸준하게 운영하기 위해, 다음을 한 흐름으로
+              자동화합니다.
             </p>
             <ul className="mt-10 grid gap-4 sm:grid-cols-2">
               {whatWeDo.map((item) => (
@@ -219,8 +214,6 @@ export default function ServiceSchemaPage() {
 
         <CtaSection />
       </main>
-
-      <Footer />
     </>
   );
 }
