@@ -22,8 +22,13 @@ export function initHome(){
   /* 서비스 상세 창 (열기: 카드 / 닫기: ×, Esc, 바깥 영역) */
   (function(){
     var root = document.documentElement, ps = [].slice.call(document.querySelectorAll('#drBody .sv-p')), dr = document.getElementById('drawer'), last = null;
-    function open(i){ ps.forEach(function(p, k){ p.classList.toggle('cur', k === i); }); dr.scrollTop = 0; root.classList.add('dr-open'); dr.setAttribute('aria-hidden', 'false'); if (window.__lenis) window.__lenis.stop(); setTimeout(function(){ document.getElementById('drX').focus({ preventScroll: true }); }, 50); }
-    function close(){ root.classList.remove('dr-open'); dr.setAttribute('aria-hidden', 'true'); if (window.__lenis) window.__lenis.start(); if (last) last.focus({ preventScroll: true }); }
+    /* 폰·태블릿은 Lenis를 쓰지 않아 lenis.stop()이 아무것도 막지 못함 → 창이 열린 동안 뒤 페이지를 제자리에 고정
+       (body를 fixed로 잡아야 iOS에서 주소창이 접히며 화면이 밀리거나 뒤 페이지가 스크롤되지 않는다) */
+    var lockY = 0, locked = false, bs = document.body.style;
+    function lockPage(){ if (locked) return; locked = true; lockY = window.scrollY; bs.position = 'fixed'; bs.top = -lockY + 'px'; bs.left = '0'; bs.right = '0'; bs.width = '100%'; }
+    function unlockPage(){ if (!locked) return; locked = false; bs.position = bs.top = bs.left = bs.right = bs.width = ''; window.scrollTo({ top: lockY, behavior: 'instant' }); }
+    function open(i){ ps.forEach(function(p, k){ p.classList.toggle('cur', k === i); }); dr.scrollTop = 0; root.classList.add('dr-open'); dr.setAttribute('aria-hidden', 'false'); if (window.__lenis) window.__lenis.stop(); else lockPage(); setTimeout(function(){ document.getElementById('drX').focus({ preventScroll: true }); }, 50); }
+    function close(){ root.classList.remove('dr-open'); dr.setAttribute('aria-hidden', 'true'); if (window.__lenis) window.__lenis.start(); else unlockPage(); if (last) last.focus({ preventScroll: true }); }
     document.querySelectorAll('.sc').forEach(function(c){ c.addEventListener('click', function(){ last = c; open(+c.dataset.i); }); });
     document.getElementById('drX').addEventListener('click', close);
     document.getElementById('drDim').addEventListener('click', close);
