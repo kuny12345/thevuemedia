@@ -3,6 +3,7 @@ import "./home.css";
 import "@/styles/site-footer.css";
 import "@/styles/site-menu.css";
 import { siteMetadata, SiteHeadCommon } from "@/lib/site-meta";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 // 리뉴얼 홈 전용 레이아웃 — 기존 페이지(globals.css)와 스타일이 섞이지 않게 분리.
 // 인사이트(/blog)·칼럼(/column) 등은 (site) 레이아웃을 그대로 쓴다(추후 새 톤으로 정리 예정).
@@ -36,6 +37,7 @@ export default function HomeLayout({
       <body>
         {/* 분석 스크립트(PostHog)가 body 바로 아래 첫 script 앞에 끼어들어 hydration 경고가 나지 않도록, 페이지 내용을 한 겹 감싼다 */}
         <div style={{ display: "contents" }}>{children}</div>
+        <GoogleAnalytics />
       </body>
     </html>
   );

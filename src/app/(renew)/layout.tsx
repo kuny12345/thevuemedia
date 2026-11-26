@@ -3,6 +3,7 @@ import "./renew.css";
 import "@/styles/site-footer.css";
 import "@/styles/site-menu.css";
 import { siteMetadata, SiteHeadCommon } from "@/lib/site-meta";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 // 리뉴얼 디자인 하위 페이지(인사이트, 추후 칼럼) 전용 레이아웃 — 홈과 같은 디자인 토큰.
 export const viewport = {
@@ -35,6 +36,7 @@ export default function RenewLayout({
       <body>
         {/* 분석 스크립트(PostHog)가 body 바로 아래 첫 script 앞에 끼어들어 hydration 경고가 나지 않도록, 페이지 내용을 한 겹 감싼다 */}
         <div style={{ display: "contents" }}>{children}</div>
+        <GoogleAnalytics />
       </body>
     </html>
   );
