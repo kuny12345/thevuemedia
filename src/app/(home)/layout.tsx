@@ -6,7 +6,7 @@ import { siteMetadata, SiteHeadCommon } from "@/lib/site-meta";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 // 리뉴얼 홈 전용 레이아웃 — 기존 페이지(globals.css)와 스타일이 섞이지 않게 분리.
-// 인사이트(/blog)·칼럼(/column) 등은 (site) 레이아웃을 그대로 쓴다(추후 새 톤으로 정리 예정).
+// 인사이트(/blog) 등은 (site) 레이아웃을 그대로 쓴다(추후 새 톤으로 정리 예정).
 export const viewport = {
   themeColor: "#ffffff",
 };

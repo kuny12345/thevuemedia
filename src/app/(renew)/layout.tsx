@@ -5,7 +5,7 @@ import "@/styles/site-menu.css";
 import { siteMetadata, SiteHeadCommon } from "@/lib/site-meta";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
-// 리뉴얼 디자인 하위 페이지(인사이트, 추후 칼럼) 전용 레이아웃 — 홈과 같은 디자인 토큰.
+// 리뉴얼 디자인 하위 페이지(인사이트) 전용 레이아웃 — 홈과 같은 디자인 토큰.
 export const viewport = {
   themeColor: "#ffffff",
 };

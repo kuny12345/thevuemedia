@@ -2,7 +2,7 @@ import Link from "next/link";
 import { NAP } from "@/lib/nap";
 import MobileMenu from "./MobileMenu";
 
-// 리뉴얼 디자인 하위 페이지(인사이트·칼럼) 공용 헤더 — 홈 헤더와 같은 모양·메뉴.
+// 리뉴얼 디자인 하위 페이지(인사이트) 공용 헤더 — 홈 헤더와 같은 모양·메뉴.
 const NAV = [
   { href: "/#services", label: "서비스" },
   { href: "/#s1", label: "SaaS 솔루션" },

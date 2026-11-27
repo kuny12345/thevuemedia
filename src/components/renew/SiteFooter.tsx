@@ -4,7 +4,7 @@ import { services } from "@/lib/services";
 import { products } from "@/lib/products";
 import { guides } from "@/lib/guides";
 
-// 리뉴얼 디자인 공용 푸터 — 홈·인사이트(·칼럼)에서 같이 쓴다.
+// 리뉴얼 디자인 공용 푸터 — 홈·인사이트에서 같이 쓴다.
 // 서비스·SaaS 솔루션·운영 가이드·소셜 링크는 기존 푸터와 같은 단일 출처(lib)를 읽는다.
 const TEL_HREF = `tel:${NAP.phoneE164}`;
 
@@ -83,9 +83,6 @@ export default function SiteFooter() {
           <ul>
             <li>
               <Link href="/blog">인사이트</Link>
-            </li>
-            <li>
-              <Link href="/column">칼럼</Link>
             </li>
             <li>
               <Link href="/#consult">상담 신청</Link>

@@ -3,7 +3,7 @@ import "./globals.css";
 import { siteMetadata, SiteHeadCommon } from "@/lib/site-meta";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
-// 기존 디자인 페이지(서비스 상세·블로그·칼럼·/rebuild) 전용 레이아웃.
+// 기존 디자인 페이지(서비스 상세·블로그·/rebuild) 전용 레이아웃.
 // 홈은 리뉴얼 디자인이라 (home) 그룹의 별도 레이아웃을 쓴다.
 export const viewport = {
   themeColor: "#081120",
