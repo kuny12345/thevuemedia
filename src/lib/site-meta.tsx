@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 
 // 사이트 공통 메타데이터 · head 태그 — 홈(리뉴얼)과 기존 페이지가 같은 값을 쓴다.
-export const siteUrl = "https://thevuemedia.com";
+// 실제 접속 주소(www) — thevuemedia.com은 www로 넘어가므로 canonical·sitemap 등은 모두 www로 쓴다.
+export const siteUrl = "https://www.thevuemedia.com";
 
 export const siteMetadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -40,9 +41,6 @@ export const siteMetadata: Metadata = {
     title: "AI 검색 최적화 GEO·AIO 전문 | 더뷰미디어",
     description:
       "ChatGPT·Gemini·Perplexity가 브랜드를 먼저 추천하도록 설계하는 AIO 전문 에이전시.",
-  },
-  alternates: {
-    canonical: siteUrl,
   },
   robots: {
     index: true,

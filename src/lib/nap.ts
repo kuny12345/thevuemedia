@@ -43,7 +43,7 @@ export const NAP = {
   priceRange: "₩₩",
 
   areaServed: ["대구광역시", "경상북도", "대한민국"],
-  url: "https://thevuemedia.com",
+  url: "https://www.thevuemedia.com",
 
   // 실재하는 채널만 (허위 sameAs 금지) — GBP 소셜 프로필과 동일
   socials: [

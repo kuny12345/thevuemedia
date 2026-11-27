@@ -48,12 +48,12 @@ export default function BlogIndexPage() {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: "더뷰미디어 AIO·GEO 인사이트",
-    url: "https://thevuemedia.com/blog",
+    url: "https://www.thevuemedia.com/blog",
     inLanguage: "ko-KR",
     blogPost: postsByDate().map((p) => ({
       "@type": "BlogPosting",
       headline: p.title,
-      url: `https://thevuemedia.com${postUrl(p.slug)}`,
+      url: `https://www.thevuemedia.com${postUrl(p.slug)}`,
       datePublished: p.iso,
     })),
   };

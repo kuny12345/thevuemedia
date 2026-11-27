@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { posts, postUrl } from "@/lib/posts";
 import { services } from "@/lib/services";
 
-const siteUrl = "https://thevuemedia.com";
+const siteUrl = "https://www.thevuemedia.com";
 
 // Static (non-blog) routes. Keep in sync with app/ landing pages.
 const staticRoutes: { path: string; lastModified: string; priority: number }[] = [

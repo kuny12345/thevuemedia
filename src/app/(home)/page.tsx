@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import fs from "node:fs";
 import path from "node:path";
 import JsonLd from "@/components/JsonLd";
@@ -5,6 +6,9 @@ import { services } from "@/lib/services";
 import { itemListSchema, faqPageSchema } from "@/lib/schema";
 import HomeMotion from "./HomeMotion";
 import SiteFooter from "@/components/renew/SiteFooter";
+
+// canonical은 페이지마다 따로 둔다(공통 레이아웃에 두면 canonical 없는 페이지가 홈을 가리키게 됨).
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 // 홈 화면 HTML(리뉴얼 시안에서 이식) — 빌드 때 읽어 서버에서 그대로 그린다.
 // 문구가 HTML에 들어 있어 검색엔진·AI 크롤러가 스크립트 없이 읽을 수 있다.

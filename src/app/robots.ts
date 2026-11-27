@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = "https://thevuemedia.com";
+const siteUrl = "https://www.thevuemedia.com";
 
 // GEO note: we explicitly welcome AI answer-engine crawlers (ai-input / RAG / grounding)
 // and major search + Korean (Naver/Daum) crawlers, while keeping app internals private.
@@ -35,6 +35,6 @@ export default function robots(): MetadataRoute.Robots {
       ...aiAndSearchBots.map((ua) => ({ userAgent: ua, allow: "/", disallow })),
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
-    host: "thevuemedia.com",
+    host: "www.thevuemedia.com",
   };
 }
