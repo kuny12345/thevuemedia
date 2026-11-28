@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { posts, postsByDate, postUrl, type Category } from "@/lib/posts";
 import { citationsFor, citationStats, enginesOf, formatDate, loadCitations } from "@/lib/citations";
 import PostCard, { thumbUrl } from "@/components/blog/PostCard";
-import { CitationLedger, CitationSeal, EngineChip } from "@/components/blog/CitationLog";
+import { CitationLedger, EngineBadge } from "@/components/blog/CitationLog";
 import { breadcrumbSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
@@ -71,70 +71,22 @@ export default async function BlogIndexPage() {
       <JsonLd data={collection} />
 
       <div className="paper-section">
-        <header className="pt-32 pb-12 lg:pt-40 lg:pb-14">
-          <div className="mx-auto max-w-5xl px-6 text-center">
+        <header className="pt-28 pb-10 sm:pt-32 lg:pt-40 lg:pb-14">
+          <div className="mx-auto max-w-5xl px-5 text-center sm:px-6">
             <p className="eyebrow mb-5 justify-center">Insights</p>
             <h1 className="mb-5 text-3xl md:text-4xl lg:text-5xl">
               AIO·GEO 인사이트
             </h1>
-            <p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-500">
+            <p className="mx-auto max-w-2xl text-base leading-relaxed text-gray-500 sm:text-lg">
               AI가 브랜드를 추천하게 만드는 모든 전략을 한곳에 모았습니다.
               개념부터 엔진별·업종별 실전까지.
             </p>
           </div>
         </header>
 
-        {/* AI 답변 인용 기록 — 글 목록과 구분되는 별도 영역 */}
-        {stats.total > 0 && (
-          <section id="citations" aria-labelledby="citations-heading" className="scroll-mt-20 bg-[#1d2835] text-white">
-            <div className="mx-auto max-w-6xl px-6 py-16 lg:py-20">
-              <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-                <div className="flex items-start gap-5">
-                  <span className="hidden shrink-0 sm:inline-flex">
-                    <CitationSeal count={stats.total} size={92} id="ledger" />
-                  </span>
-                  <div>
-                    <p className="mb-3 text-[14px] font-bold text-[#8cc4ff]">AI Citation Log</p>
-                    <h2 id="citations-heading" className="text-2xl !text-white md:text-3xl">
-                      AI 답변 인용 기록
-                    </h2>
-                    <p className="mt-3 max-w-2xl leading-relaxed text-[#b8c3cf]">
-                      AIRank가 매일 같은 질문을 AI 엔진에 던지고 답변을 저장합니다. 답변의 출처 링크로
-                      더뷰미디어 글이 잡힌 기록만 날짜·질문별로 모았습니다. 매일 자동으로 갱신되며,
-                      &lsquo;답변 원본 보기&rsquo;로 그날 저장된 실제 답변 화면을 열어볼 수 있습니다.
-                    </p>
-                  </div>
-                </div>
-                <dl className="grid shrink-0 grid-cols-3 gap-6 text-center lg:text-right">
-                  <div>
-                    <dt className="text-[12px] text-[#b8c3cf]">인용</dt>
-                    <dd className="mono mt-1 text-2xl font-bold">{stats.total}<span className="ml-0.5 text-sm font-medium text-[#b8c3cf]">건</span></dd>
-                  </div>
-                  <div>
-                    <dt className="text-[12px] text-[#b8c3cf]">인용된 글</dt>
-                    <dd className="mono mt-1 text-2xl font-bold">{stats.posts}<span className="ml-0.5 text-sm font-medium text-[#b8c3cf]">편</span></dd>
-                  </div>
-                  <div>
-                    <dt className="text-[12px] text-[#b8c3cf]">최근 측정</dt>
-                    <dd className="mono mt-1 text-2xl font-bold">{formatDate(stats.lastDate!).slice(5)}</dd>
-                  </div>
-                </dl>
-              </div>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {enginesOf(citations).map((e) => (
-                  <EngineChip key={e} engine={e} size="md" />
-                ))}
-              </div>
-              <div className="mt-10">
-                <CitationLedger items={citations} />
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* 카테고리 바로가기 */}
+        {/* 카테고리 바로가기 (+ 맨 끝에 하단 인용 기록으로 가는 작은 링크) */}
         <nav aria-label="카테고리" className="border-y border-gray-200">
-          <div className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-6 py-4 [scrollbar-width:none]">
+          <div className="mx-auto flex max-w-6xl items-center gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none] sm:px-6 sm:py-4 [&::-webkit-scrollbar]:hidden">
             {categories.map((c) => (
               <a
                 key={c.key}
@@ -144,22 +96,31 @@ export default async function BlogIndexPage() {
                 {c.label}
               </a>
             ))}
+            {stats.total > 0 && (
+              <a
+                href="#citations"
+                className="ml-1 inline-flex min-h-[40px] shrink-0 items-center gap-1.5 rounded-full px-3 text-[13px] font-semibold text-gray-500 transition-colors hover:text-primary"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+                AI 인용 기록 {stats.total}
+              </a>
+            )}
           </div>
         </nav>
 
-        <main className="mx-auto max-w-6xl px-6 py-16 lg:py-20">
+        <main className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:py-20">
           {categories.map((cat) => {
             const items = postsByDate().filter((p) => p.category === cat.key);
             return (
-              <section key={cat.key} id={`cat-${cat.key}`} className="mb-20 scroll-mt-24">
-                <div className="mb-8 flex flex-col gap-1 border-t border-gray-200 pt-6 md:flex-row md:items-end md:justify-between">
+              <section key={cat.key} id={`cat-${cat.key}`} className="mb-16 scroll-mt-24 lg:mb-20">
+                <div className="mb-6 flex items-end justify-between gap-4 border-t border-gray-200 pt-6 lg:mb-8">
                   <div>
-                    <h2 className="text-2xl">{cat.label}</h2>
-                    <p className="mt-1 text-gray-500">{cat.desc}</p>
+                    <h2 className="text-xl sm:text-2xl">{cat.label}</h2>
+                    <p className="mt-1 text-[14px] text-gray-500 sm:text-base">{cat.desc}</p>
                   </div>
-                  <span className="mono text-[13px] text-gray-400">{items.length} posts</span>
+                  <span className="mono hidden shrink-0 text-[13px] text-gray-400 sm:block">{items.length} posts</span>
                 </div>
-                <div className="grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-12">
                   {items.map((p) => (
                     <PostCard key={p.slug} post={p} citations={citationsFor(citations, p.slug)} />
                   ))}
@@ -168,6 +129,37 @@ export default async function BlogIndexPage() {
             );
           })}
         </main>
+
+        {/* AI 답변 인용 기록 — 글 목록이 끝난 뒤, 조용한 별도 영역 */}
+        {stats.total > 0 && (
+          <section id="citations" aria-labelledby="citations-heading" className="scroll-mt-20 border-t border-gray-200 bg-white">
+            <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:py-16">
+              <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <p className="mb-2 text-[13px] font-bold text-primary">AI Citation Log</p>
+                  <h2 id="citations-heading" className="text-xl sm:text-2xl">
+                    AI 답변 인용 기록
+                  </h2>
+                  <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-gray-500">
+                    AIRank가 매일 같은 질문으로 AI 답변을 수집하고, 출처 링크로 이 블로그 글이 잡힌 건만 남깁니다.
+                    &lsquo;답변 원본&rsquo;은 그날 저장된 실제 답변 화면입니다.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3 md:items-end">
+                  <p className="mono text-[13px] text-gray-500">
+                    인용 {stats.total} · 글 {stats.posts}편 · 최근 {formatDate(stats.lastDate!)}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 md:justify-end">
+                    {enginesOf(citations).map((e) => (
+                      <EngineBadge key={e} engine={e} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <CitationLedger items={citations} />
+            </div>
+          </section>
+        )}
       </div>
     </>
   );

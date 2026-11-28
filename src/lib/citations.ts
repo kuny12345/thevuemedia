@@ -25,15 +25,26 @@ export const ENGINE_LABEL: Record<string, string> = {
   copilot: "Copilot",
 };
 
-/** 엔진 칩 색 (각 서비스 대표색 계열, 흰 글자 대비 4.5:1 이상) */
-export const ENGINE_COLOR: Record<string, string> = {
-  chatgpt: "#0b7a5e",
-  gemini: "#5b4bdb",
-  google_aio: "#1a5fd0",
-  perplexity: "#16707a",
-  naver_ai: "#03873e",
-  grok: "#111111",
-  copilot: "#0b5cad",
+/** 뱃지용 짧은 이름 */
+export const ENGINE_SHORT: Record<string, string> = {
+  chatgpt: "ChatGPT",
+  gemini: "Gemini",
+  google_aio: "Google AI",
+  perplexity: "Perplexity",
+  naver_ai: "네이버 AI",
+  grok: "Grok",
+  copilot: "Copilot",
+};
+
+/** 엔진 뱃지 배경 — 각 서비스 대표색 계열(흰 글자 대비 확보 위해 한 톤 깊게) */
+export const ENGINE_STYLE: Record<string, { background: string }> = {
+  chatgpt: { background: "#0d7d62" },
+  gemini: { background: "linear-gradient(110deg, #3f6ae8 0%, #7a5ce0 55%, #b05bc9 100%)" },
+  google_aio: { background: "#1a66d6" },
+  perplexity: { background: "#1c6d76" },
+  naver_ai: { background: "#03893f" },
+  grok: { background: "#16181c" },
+  copilot: { background: "linear-gradient(110deg, #0a62c9 0%, #5a4fd6 100%)" },
 };
 
 /** 같은 엔진은 한 번만, 정해진 순서로 */
