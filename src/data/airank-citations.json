@@ -1,0 +1,50 @@
+{
+  "generatedAt": "2026-11-28T05:37:19Z",
+  "siteId": "6b0a437d1206163a643caef9",
+  "citations": [
+    {
+      "slug": "aio-agency-selection-criteria",
+      "postTitle": "AIO·GEO 대행사 선택기준 7가지 + 계약 전 체크리스트 (2026)",
+      "queryId": "6b0a437d1206163a643caf06",
+      "query": "AIO 대행사 어디가 잘해?",
+      "engine": "naver_ai",
+      "date": "2026-11-28",
+      "screenshotUrl": "https://airank.lol/api/report-image/ri_d1f23b0c998dee1bd51d0e6110a2c391",
+      "evidence": "thevuemedia.com 2026.06.01 AIO·GEO 대행사 선택기준 7가지 + 계약 전 체크리스트 (2026) | 더뷰미디어"
+    }
+  ],
+  "domainOnly": [
+    {
+      "queryId": "6b0a437d1206163a643caf08",
+      "query": "의료광고법 잘 아는 병원 마케팅 회사 알려줘",
+      "engine": "perplexity",
+      "date": "2026-11-28"
+    },
+    {
+      "queryId": "6b0a437d1206163a643caf07",
+      "query": "AI 검색 최적화 대행사 추천해줘",
+      "engine": "gemini",
+      "date": "2026-11-28"
+    },
+    {
+      "queryId": "6b0a437d1206163a643caf04",
+      "query": "AI 검색에 잘 나오는 병원 홈페이지 제작 업체 추천해줘",
+      "engine": "gemini",
+      "date": "2026-11-28"
+    }
+  ],
+  "brandMention": [
+    {
+      "queryId": "6b0a437d1206163a643caeff",
+      "query": "ChatGPT에 우리 병원이 추천되게 해주는 업체 있어?",
+      "engine": "chatgpt",
+      "date": "2026-11-28"
+    },
+    {
+      "queryId": "6b0a437d1206163a643caeff",
+      "query": "ChatGPT에 우리 병원이 추천되게 해주는 업체 있어?",
+      "engine": "naver_ai",
+      "date": "2026-11-28"
+    }
+  ]
+}

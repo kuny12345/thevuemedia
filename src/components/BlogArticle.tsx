@@ -6,6 +6,9 @@ import {
 } from "@/lib/schema";
 import { postUrl, relatedPosts } from "@/lib/posts";
 import JsonLd from "@/components/JsonLd";
+import { citationsFor } from "@/lib/citations";
+import { CitationLogFull } from "@/components/blog/CitationLog";
+import PostCard from "@/components/blog/PostCard";
 
 // 글 단위 FAQ 항목(스키마는 본문 하단에서 직접 emit). 홈 FaqSection은
 // 무인자 섹션이므로, 블로그 본문은 자체 FAQ 블록으로 렌더한다.
@@ -51,6 +54,7 @@ export default function BlogArticle({
     { name: title, path },
   ]);
   const related = relatedPosts(slug, 3);
+  const citations = citationsFor(slug);
 
   return (
     <>
@@ -120,6 +124,7 @@ export default function BlogArticle({
               </ul>
             </section>
           )}
+          <CitationLogFull items={citations} />
         </div>
 
         {/* CTA — 홈 상담 섹션으로 연결 */}
@@ -138,18 +143,11 @@ export default function BlogArticle({
         </div>
 
         {/* Related */}
-        <div className="mx-auto max-w-2xl px-6 py-14">
-          <h3 className="mb-6 text-lg">관련 글 더보기</h3>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="mx-auto max-w-5xl px-6 py-14 lg:py-16">
+          <h3 className="mb-8 text-xl">관련 글 더보기</h3>
+          <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-3">
             {related.map((r) => (
-              <Link
-                key={r.slug}
-                href={postUrl(r.slug)}
-                className="block rounded-[18px] border border-gray-200 bg-white p-5 transition-all hover:border-primary hover:shadow-sm"
-              >
-                <span className="mono text-xs font-bold text-primary">{r.tag}</span>
-                <p className="mt-1 text-sm font-semibold text-gray-900">{r.title}</p>
-              </Link>
+              <PostCard key={r.slug} post={r} showCitations={false} />
             ))}
           </div>
         </div>
