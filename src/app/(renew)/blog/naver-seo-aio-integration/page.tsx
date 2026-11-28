@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "네이버 SEO + AIO 통합 전략 | 더뷰미디어",
+  title: "네이버 SEO + AIO 통합 전략",
   description:
     "국내 AI는 네이버 생태계 데이터를 폭넓게 참조합니다. 네이버 SEO와 AIO를 함께 설계해 한국형 AI 노출을 극대화하는 법을 정리했습니다.",
   keywords: ["네이버 SEO", "네이버 AIO", "한국 AI 검색", "Yeti 최적화", "네이버 검색 최적화", "더뷰미디어"],

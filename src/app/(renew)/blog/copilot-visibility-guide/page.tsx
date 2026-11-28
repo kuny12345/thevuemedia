@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "Microsoft Copilot 노출 최적화 전략 | 더뷰미디어",
+  title: "Microsoft Copilot 노출 최적화 전략",
   description:
     "Bing·Copilot 생태계에서 브랜드 노출을 높이는 법. Bing 인덱싱과 Copilot 답변 인용의 연결고리를 짚고 실전 전략을 정리했습니다.",
   keywords: [

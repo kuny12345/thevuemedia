@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "피부과 마케팅 완벽 가이드 — 시술별 키워드·AI 노출 전략 (2026) | 더뷰미디어",
+  title: "피부과 마케팅 완벽 가이드 — 시술별 키워드·AI 노출 전략 (2026)",
   description:
     "보톡스·필러·리프팅 등 시술별로 환자 검색·AI 질의가 다릅니다. 피부과가 의료광고법을 지키며 검색과 AI 답변 양쪽에서 노출되는 시술별 전략과 콘텐츠 설계를 정리했습니다.",
   keywords: [

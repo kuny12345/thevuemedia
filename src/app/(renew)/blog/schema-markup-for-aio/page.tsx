@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "스키마 마크업과 AIO — 구조화 데이터 실전 | 더뷰미디어",
+  title: "스키마 마크업과 AIO — 구조화 데이터 실전",
   description:
     "FAQPage·ItemList·Organization 등 schema.org 구조화 데이터가 AI 인용에 어떻게 기여하는지, 실전 적용법과 함께 정리했습니다.",
   keywords: ["스키마 마크업", "구조화 데이터", "schema.org", "FAQPage", "ItemList", "더뷰미디어"],

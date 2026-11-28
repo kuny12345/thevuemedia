@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "성형외과 마케팅 가이드 — AI·검색 통합 전략 (2026) | 더뷰미디어",
+  title: "성형외과 마케팅 가이드 — AI·검색 통합 전략 (2026)",
   description:
     "경쟁이 치열한 성형외과 마케팅, 의료광고 심의를 지키며 AI 추천과 검색 상위를 동시에 노리는 통합 전략과 콘텐츠 설계, 신뢰 시그널 확보법을 정리했습니다.",
   keywords: [

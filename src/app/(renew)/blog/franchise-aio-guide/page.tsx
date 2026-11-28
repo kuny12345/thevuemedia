@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "프랜차이즈 AIO 가이드 — 가맹 문의를 부르는 AI 노출 | 더뷰미디어",
+  title: "프랜차이즈 AIO 가이드 — 가맹 문의를 부르는 AI 노출",
   description:
     "예비 창업자가 AI에게 브랜드를 물을 때 추천되도록, 프랜차이즈 본사가 갖춰야 할 AIO 콘텐츠와 신뢰 시그널을 안내합니다.",
   keywords: ["프랜차이즈 마케팅", "가맹 모집", "프랜차이즈 AIO", "창업 AI 추천", "가맹점 모집", "더뷰미디어"],

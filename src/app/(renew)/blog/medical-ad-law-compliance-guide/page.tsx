@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "의료광고법 완벽 가이드 — 심의·금지표현·체크리스트 (2026) | 더뷰미디어",
+  title: "의료광고법 완벽 가이드 — 심의·금지표현·체크리스트 (2026)",
   description:
     "의료광고는 사전심의 대상이며 금지표현이 많습니다. 병원 마케팅·AIO 콘텐츠를 만들 때 반드시 알아야 할 의료광고법의 핵심(금지유형·사전심의·자율심의기구)과 실무 체크리스트를 정리했습니다.",
   keywords: [

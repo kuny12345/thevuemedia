@@ -4,7 +4,7 @@ import BlogArticle from "@/components/BlogArticle";
 import { SIGNATURE, SIGNATURE_FACTS } from "@/lib/brand";
 
 export const metadata: Metadata = {
-  title: "병원 마케팅 대행사 추천 — AI 시대 선택 가이드 (2026) | 더뷰미디어",
+  title: "병원 마케팅 대행사 추천 — AI 시대 선택 가이드 (2026)",
   description:
     "“병원 마케팅 어디에 맡길까?” AI 추천 시대에 병원·의원 마케팅 대행사를 고르는 객관적 기준 8가지와, 의료광고법까지 함께 보는 계약 전 체크리스트를 정리했습니다.",
   keywords: [

@@ -3,7 +3,7 @@ import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
   title:
-    "2026년 Google SGE 대응 전략: 검색의 패러다임이 바뀐다 | 더뷰미디어",
+    "2026년 Google SGE 대응 전략: 검색의 패러다임이 바뀐다",
   description:
     "Google Search Generative Experience(SGE)가 본격 확대되면서 기존 SEO만으로는 브랜드 노출이 어렵습니다. AI 생성 답변에 브랜드가 포함되기 위한 AIO 전략과 실전 대응법을 단계별로 안내합니다.",
   keywords: [

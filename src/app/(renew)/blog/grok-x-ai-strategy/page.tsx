@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "Grok·X(트위터) AI 노출 전략 | 더뷰미디어",
+  title: "Grok·X(트위터) AI 노출 전략",
   description:
     "실시간 데이터를 학습하는 Grok과 X 생태계에서 브랜드 시그널을 만드는 콘텐츠·발행 전략을 정리했습니다.",
   keywords: ["Grok 최적화", "X 마케팅", "실시간 AI", "AIO", "그록", "더뷰미디어"],

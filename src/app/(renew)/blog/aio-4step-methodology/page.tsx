@@ -5,7 +5,7 @@ import { howToSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "더뷰미디어 4단계 AIO 방법론 — 진단·전략·실행·추적 | 더뷰미디어",
+  title: "더뷰미디어 4단계 AIO 방법론 — 진단·전략·실행·추적",
   description:
     "AIO를 추측이 아니라 절차로. 진단(Audit) → 전략(Strategy) → 실행(Execution) → 추적(Tracking) 4단계 방법론을 공개합니다.",
   keywords: ["AIO 방법론", "AIO 프로세스", "AI 최적화 단계", "더뷰미디어 방법론", "AIO 도입", "더뷰미디어"],

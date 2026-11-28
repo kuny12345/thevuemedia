@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "Google Gemini·AI 오버뷰 노출 최적화 가이드 | 더뷰미디어",
+  title: "Google Gemini·AI 오버뷰 노출 최적화 가이드",
   description:
     "Google AI Overview(SGE)와 Gemini 답변에 브랜드가 포함되려면 무엇이 필요한지, 구조화 데이터와 콘텐츠 관점에서 정리했습니다.",
   keywords: [

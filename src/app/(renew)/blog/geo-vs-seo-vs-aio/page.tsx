@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "GEO vs SEO vs AIO 차이 완벽 정리 | 더뷰미디어",
+  title: "GEO vs SEO vs AIO 차이 완벽 정리",
   description:
     "GEO, SEO, AIO는 무엇이 다르고 어떻게 함께 작동할까요? 목적·대상·측정 지표를 표로 비교 정리했습니다.",
   keywords: ["GEO vs SEO", "AIO 차이", "생성형 엔진 최적화", "검색 최적화", "AEO", "더뷰미디어"],

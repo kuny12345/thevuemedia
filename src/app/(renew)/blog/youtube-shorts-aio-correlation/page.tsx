@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "유튜브 쇼츠 알고리즘과 AIO의 상관관계 | 더뷰미디어",
+  title: "유튜브 쇼츠 알고리즘과 AIO의 상관관계",
   description:
     "유튜브 쇼츠의 추천 알고리즘이 AI 학습 데이터에 미치는 영향을 분석하고, 쇼츠를 활용한 AIO 전략으로 AI 언급량과 브랜드 인지도를 동시에 높이는 방법을 제시합니다.",
   keywords: [

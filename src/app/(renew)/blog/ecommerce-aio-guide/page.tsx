@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "이커머스·쇼핑몰 AIO 가이드 | 더뷰미디어",
+  title: "이커머스·쇼핑몰 AIO 가이드",
   description:
     "AI가 제품·브랜드를 추천하는 쇼핑 질의에서 노출되는 법. 제품 스키마, 리뷰 시그널, 비교 콘텐츠 전략을 다룹니다.",
   keywords: ["이커머스 마케팅", "쇼핑몰 AIO", "제품 AI 추천", "커머스 GEO", "온라인 쇼핑몰 마케팅", "더뷰미디어"],

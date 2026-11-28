@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "로펌·법률 AIO 가이드 — 변호사 AI 마케팅 | 더뷰미디어",
+  title: "로펌·법률 AIO 가이드 — 변호사 AI 마케팅",
   description:
     "변호사·법무법인이 AI 답변에서 추천되도록 만드는 법. 변호사법 광고규정을 고려한 전문성·권위 콘텐츠 전략을 정리했습니다.",
   keywords: ["로펌 마케팅", "변호사 AI 마케팅", "법률 AIO", "법무법인 마케팅", "변호사 광고", "더뷰미디어"],

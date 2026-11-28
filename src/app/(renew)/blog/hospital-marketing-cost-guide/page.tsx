@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "병원 마케팅 비용 가이드 — 진료과·채널별 예산 잡는 법 (2026) | 더뷰미디어",
+  title: "병원 마케팅 비용 가이드 — 진료과·채널별 예산 잡는 법 (2026)",
   description:
     "병원 마케팅 비용은 진료과·경쟁강도·채널 구성에 따라 크게 달라집니다. 검색·플레이스·콘텐츠·AIO 단계별 비용 구조와 합리적 예산 설계법, 과금 방식을 정리했습니다.",
   keywords: [

@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "AIO·AI 마케팅 비용 가이드 — 견적·단가·예산 잡는 법 | 더뷰미디어",
+  title: "AIO·AI 마케팅 비용 가이드 — 견적·단가·예산 잡는 법",
   description:
     "AIO 프로젝트 비용은 무엇으로 결정될까요? 진단·콘텐츠·멀티채널 운영·측정 단계별 비용 구조와 과금 방식, 예산 설계 방법을 정리했습니다.",
   keywords: [

@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "병원 네이버 플레이스·지도 마케팅 가이드 | 더뷰미디어",
+  title: "병원 네이버 플레이스·지도 마케팅 가이드",
   description:
     "“○○동 피부과” 같은 지역 질의에서 노출되려면 네이버 플레이스·지도 최적화가 핵심입니다. 병원의 로컬 신호를 AI·검색이 신뢰하게 만드는 실전 방법을 정리했습니다.",
   keywords: [

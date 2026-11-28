@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "AI Mention Score란? 측정법과 개선 전략 | 더뷰미디어",
+  title: "AI Mention Score란? 측정법과 개선 전략",
   description:
     "AI가 우리 브랜드를 얼마나, 어떤 맥락으로 언급하는지 정량화하는 AI Mention Score의 개념과 측정·개선 방법을 설명합니다.",
   keywords: ["AI Mention Score", "AI 인지도 측정", "브랜드 언급", "AIO 측정", "AI 추천 측정", "더뷰미디어"],

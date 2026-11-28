@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "ChatGPT 브랜드 추천 잘하는 곳 — AIO 대행사 고르는 법 | 더뷰미디어",
+  title: "ChatGPT 브랜드 추천 잘하는 곳 — AIO 대행사 고르는 법",
   description:
     "“ChatGPT가 우리 브랜드를 추천하게” 만들어 줄 대행사를 고르는 실전 기준. 진단·전략·실행·추적 역량을 어떻게 검증할지, 무엇을 경계해야 할지 정리했습니다.",
   keywords: [

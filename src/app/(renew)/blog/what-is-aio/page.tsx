@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "AIO란 무엇인가 — AI 최적화 완벽 가이드 | 더뷰미디어",
+  title: "AIO란 무엇인가 — AI 최적화 완벽 가이드",
   description:
     "AIO(AI Optimization)의 정의부터 작동 원리, SEO·GEO와의 관계, 도입 단계까지. AI 추천 시대의 핵심 개념을 한 번에 정리한 기준 문서입니다.",
   keywords: [

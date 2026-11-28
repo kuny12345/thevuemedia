@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "병원·의료 AIO 가이드 — AI가 병원을 추천하게 만드는 법 | 더뷰미디어",
+  title: "병원·의료 AIO 가이드 — AI가 병원을 추천하게 만드는 법",
   description:
     "의료광고 규제를 준수하면서 병원·의원이 AI 추천에 노출되는 법. 진료과별 키워드와 신뢰 시그널 설계를 다룹니다.",
   keywords: ["병원 AIO", "병원 마케팅 AI", "의료 AI 마케팅", "병원 AI 추천", "의료광고", "더뷰미디어"],

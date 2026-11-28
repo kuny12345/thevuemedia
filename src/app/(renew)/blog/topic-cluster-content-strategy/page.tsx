@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "AI 검색 시대 토픽 클러스터 콘텐츠 전략 | 더뷰미디어",
+  title: "AI 검색 시대 토픽 클러스터 콘텐츠 전략",
   description:
     "단발성 글이 아니라 주제 군집(토픽 클러스터)으로 권위를 쌓는 법. 허브-스포크 구조와 내부링크 설계를 안내합니다.",
   keywords: ["토픽 클러스터", "콘텐츠 전략", "내부링크", "AIO 콘텐츠", "허브 스포크", "더뷰미디어"],

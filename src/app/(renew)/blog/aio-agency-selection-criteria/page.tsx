@@ -3,7 +3,7 @@ import BlogArticle from "@/components/BlogArticle";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "AIO·GEO 대행사 선택기준 7가지 + 계약 전 체크리스트 (2026) | 더뷰미디어",
+  title: "AIO·GEO 대행사 선택기준 7가지 + 계약 전 체크리스트 (2026)",
   description:
     "AI 최적화(AIO·GEO) 대행사를 잘못 고르면 시간과 비용을 낭비합니다. 계약 전 반드시 확인할 7가지 기준과 실무 질문 리스트, 피해야 할 제안서 신호를 정리했습니다.",
   keywords: [

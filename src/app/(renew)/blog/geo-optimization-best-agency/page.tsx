@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "GEO(생성형 엔진 최적화) 잘하는 곳 비교 가이드 (2026) | 더뷰미디어",
+  title: "GEO(생성형 엔진 최적화) 잘하는 곳 비교 가이드 (2026)",
   description:
     "GEO와 SEO의 차이부터, 생성형 엔진 최적화를 제대로 하는 대행사를 가려내는 평가 기준까지. AI 검색 시대 GEO 파트너를 고르는 법을 정리했습니다.",
   keywords: [

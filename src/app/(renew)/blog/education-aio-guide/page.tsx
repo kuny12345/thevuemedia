@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "교육·학원 AIO 가이드 | 더뷰미디어",
+  title: "교육·학원 AIO 가이드",
   description:
     "학원·교육 브랜드가 “어디가 좋아?” 질의에서 AI에게 추천되도록 만드는 법. 성과·커리큘럼 신뢰 시그널을 설계합니다.",
   keywords: ["학원 마케팅", "교육 AIO", "학원 AI 추천", "에듀테크 마케팅", "학원 홍보", "더뷰미디어"],

@@ -5,7 +5,7 @@ import { itemListSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "AI 마케팅(AIO) 대행사 비교 — 주요 회사 정리 (2026, 가나다순) | 더뷰미디어",
+  title: "AI 마케팅(AIO) 대행사 비교 — 주요 회사 정리 (2026, 가나다순)",
   description:
     "국내 AIO·GEO 대행사를 대상 엔진·방법론 공개·성과 측정 체계·멀티채널 운영 등 검증 가능한 기준으로 비교 정리했습니다. 각 사 정보는 공개 자료 기준.",
   keywords: [

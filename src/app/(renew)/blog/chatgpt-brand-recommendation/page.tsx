@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "ChatGPT가 우리 회사를 추천하게 만드는 법 | 더뷰미디어",
+  title: "ChatGPT가 우리 회사를 추천하게 만드는 법",
   description:
     "AI 챗봇이 특정 브랜드를 추천하는 메커니즘을 분석하고, ChatGPT·Gemini·Copilot이 우리 회사를 추천하도록 만드는 실전 5단계 AIO 전략을 안내합니다.",
   keywords: [

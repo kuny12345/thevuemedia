@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "LLM은 어떤 원리로 브랜드를 추천하는가 | 더뷰미디어",
+  title: "LLM은 어떤 원리로 브랜드를 추천하는가",
   description:
     "대규모 언어모델이 특정 브랜드를 추천하는 메커니즘 — 학습 데이터, 실시간 검색(RAG), 인용 신호의 작동 방식을 해부합니다.",
   keywords: ["LLM 추천 원리", "AI 브랜드 추천", "RAG", "학습 데이터", "AI 추천 메커니즘", "더뷰미디어"],

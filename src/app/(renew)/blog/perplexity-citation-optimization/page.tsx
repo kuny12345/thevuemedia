@@ -3,7 +3,7 @@ import Link from "next/link";
 import BlogArticle from "@/components/BlogArticle";
 
 export const metadata: Metadata = {
-  title: "Perplexity 인용 최적화 가이드 — 출처로 선택되는 콘텐츠 | 더뷰미디어",
+  title: "Perplexity 인용 최적화 가이드 — 출처로 선택되는 콘텐츠",
   description:
     "Perplexity는 답변에 출처를 명시합니다. 인용 출처로 선택되기 위한 콘텐츠 구조·근거 표기·구조화 데이터 전략을 정리했습니다.",
   keywords: [
