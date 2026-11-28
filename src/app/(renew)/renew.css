@@ -120,3 +120,33 @@ p.eyebrow, span.eyebrow { display: flex; }
   .hd-r > .tel { display: none; }
   .brand { font-size: 16px; }
 }
+
+/* ---------- AI 인용 엔진 뱃지 — 썸네일 위 반짝임(빛 줄기 + 별) ---------- */
+@keyframes badge-sweep {
+  0%, 62% { transform: translateX(-160%) skewX(-22deg); }
+  100% { transform: translateX(320%) skewX(-22deg); }
+}
+@keyframes badge-twinkle {
+  0%, 55%, 100% { opacity: 0; transform: scale(.3) rotate(0deg); }
+  70% { opacity: 1; transform: scale(1) rotate(45deg); }
+  85% { opacity: .9; transform: scale(.7) rotate(90deg); }
+}
+.badge-shine { position: relative; overflow: hidden; isolation: isolate; }
+.badge-shine::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.6), transparent);
+  transform: translateX(-160%) skewX(-22deg);
+  animation: badge-sweep 3.4s cubic-bezier(.4,0,.2,1) infinite;
+  animation-delay: var(--shine-delay, 0s);
+  pointer-events: none;
+}
+.badge-star {
+  position: absolute; top: -5px; right: -3px; width: 11px; height: 11px; opacity: 0;
+  filter: drop-shadow(0 0 3px rgba(255,255,255,.9));
+  animation: badge-twinkle 3.4s ease-in-out infinite;
+  animation-delay: var(--shine-delay, 0s);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .badge-shine::after, .badge-star { animation: none; opacity: 0; }
+}

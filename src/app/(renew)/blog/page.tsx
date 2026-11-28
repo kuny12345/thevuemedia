@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { posts, postsByDate, postUrl, type Category } from "@/lib/posts";
-import { citationsFor, citationStats, enginesOf, formatDate, loadCitations } from "@/lib/citations";
+import { citationsFor, loadCitations } from "@/lib/citations";
 import PostCard, { thumbUrl } from "@/components/blog/PostCard";
-import { CitationLedger, EngineBadge } from "@/components/blog/CitationLog";
 import { breadcrumbSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
@@ -62,7 +61,6 @@ export default async function BlogIndexPage() {
   };
 
   const citations = await loadCitations();
-  const stats = citationStats(citations);
   const categories = CATEGORY_ORDER.filter((c) => posts.some((p) => p.category === c.key));
 
   return (
@@ -84,7 +82,7 @@ export default async function BlogIndexPage() {
           </div>
         </header>
 
-        {/* 카테고리 바로가기 (+ 맨 끝에 하단 인용 기록으로 가는 작은 링크) */}
+        {/* 카테고리 바로가기 */}
         <nav aria-label="카테고리" className="border-y border-gray-200">
           <div className="mx-auto flex max-w-6xl items-center gap-2 overflow-x-auto px-4 py-3 [scrollbar-width:none] sm:px-6 sm:py-4 [&::-webkit-scrollbar]:hidden">
             {categories.map((c) => (
@@ -96,15 +94,6 @@ export default async function BlogIndexPage() {
                 {c.label}
               </a>
             ))}
-            {stats.total > 0 && (
-              <a
-                href="#citations"
-                className="ml-1 inline-flex min-h-[40px] shrink-0 items-center gap-1.5 rounded-full px-3 text-[13px] font-semibold text-gray-500 transition-colors hover:text-primary"
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
-                AI 인용 기록 {stats.total}
-              </a>
-            )}
           </div>
         </nav>
 
@@ -130,36 +119,6 @@ export default async function BlogIndexPage() {
           })}
         </main>
 
-        {/* AI 답변 인용 기록 — 글 목록이 끝난 뒤, 조용한 별도 영역 */}
-        {stats.total > 0 && (
-          <section id="citations" aria-labelledby="citations-heading" className="scroll-mt-20 border-t border-gray-200 bg-white">
-            <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:py-16">
-              <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <p className="mb-2 text-[13px] font-bold text-primary">AI Citation Log</p>
-                  <h2 id="citations-heading" className="text-xl sm:text-2xl">
-                    AI 답변 인용 기록
-                  </h2>
-                  <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-gray-500">
-                    AIRank가 매일 같은 질문으로 AI 답변을 수집하고, 출처 링크로 이 블로그 글이 잡힌 건만 남깁니다.
-                    &lsquo;답변 원본&rsquo;은 그날 저장된 실제 답변 화면입니다.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3 md:items-end">
-                  <p className="mono text-[13px] text-gray-500">
-                    인용 {stats.total} · 글 {stats.posts}편 · 최근 {formatDate(stats.lastDate!)}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5 md:justify-end">
-                    {enginesOf(citations).map((e) => (
-                      <EngineBadge key={e} engine={e} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <CitationLedger items={citations} />
-            </div>
-          </section>
-        )}
       </div>
     </>
   );

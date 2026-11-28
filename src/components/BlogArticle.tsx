@@ -8,6 +8,7 @@ import { postUrl, relatedPosts } from "@/lib/posts";
 import JsonLd from "@/components/JsonLd";
 import { citationsFor, loadCitations } from "@/lib/citations";
 import PostCard from "@/components/blog/PostCard";
+import { PostCitations, PostCitationSummary } from "@/components/blog/CitationLog";
 
 // 글 단위 FAQ 항목(스키마는 본문 하단에서 직접 emit). 홈 FaqSection은
 // 무인자 섹션이므로, 블로그 본문은 자체 FAQ 블록으로 렌더한다.
@@ -54,6 +55,7 @@ export default async function BlogArticle({
   ]);
   const related = relatedPosts(slug, 3);
   const citations = await loadCitations();
+  const mine = citationsFor(citations, slug);
 
   return (
     <>
@@ -78,6 +80,7 @@ export default async function BlogArticle({
               <span className="h-1 w-1 rounded-full bg-gray-300" />
               <span>{readTime}</span>
             </div>
+            <PostCitationSummary items={mine} />
           </div>
         </header>
 
@@ -123,6 +126,7 @@ export default async function BlogArticle({
               </ul>
             </section>
           )}
+          <PostCitations items={mine} />
         </div>
 
         {/* CTA — 홈 상담 섹션으로 연결 */}
