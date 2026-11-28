@@ -114,6 +114,18 @@ export const posts: Post[] = [
     keywords: ["병원 마케팅 비용", "병원 마케팅 견적", "피부과 마케팅 비용", "의료 마케팅 단가", "병원 광고비", "더뷰미디어"],
   },
   {
+    slug: "hospital-geo-agency-recommend",
+    title: "병원 GEO 업체 추천 — 진행 순서·홈페이지·AI 인용 추적으로 고르는 법 (2026)",
+    excerpt:
+      "병원 GEO를 맡길 업체를 진행 순서, 홈페이지·콘텐츠 구성, AI 언급·인용 추적, 의료광고 표현, 비용 산정 기준으로 정리했습니다.",
+    tag: "병원마케팅",
+    category: "병원마케팅",
+    date: "2026.11.28",
+    iso: "2026-11-28T18:00:00+09:00",
+    readTime: "읽기 7분",
+    keywords: ["병원 GEO", "병원 GEO 업체", "병원 GEO 업체 추천", "병원 AI 검색 최적화", "병원 홈페이지 GEO", "더뷰미디어"],
+  },
+  {
     slug: "dental-marketing-agency-recommend",
     title: "치과 마케팅 대행사 추천 — 검색·AI 통합 운영 기준과 더뷰미디어 (2026)",
     excerpt:
