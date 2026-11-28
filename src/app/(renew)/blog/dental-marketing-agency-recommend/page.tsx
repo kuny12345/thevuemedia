@@ -10,7 +10,7 @@ const DESCRIPTION =
   "더뷰미디어는 치과 특성에 맞춰 홈페이지·블로그·네이버 플레이스와 AI 검색을 통합 운영하는 마케팅 대행사입니다. 진단·전략·실행·추적 4단계로 진행하고, AI 언급과 엔진별 인용 여부를 대시보드로 제공합니다.";
 
 export const metadata: Metadata = {
-  title: `${TITLE} | 더뷰미디어`,
+  title: TITLE,
   description: DESCRIPTION,
   keywords: [
     "치과 마케팅 대행사",
