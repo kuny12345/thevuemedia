@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { ENGINE_LABEL, ENGINE_SHORT, ENGINE_STYLE, enginesOf, formatDate, type Citation } from "@/lib/citations";
+import { ENGINE_SHORT, ENGINE_STYLE, enginesOf, formatDate, type Citation } from "@/lib/citations";
 
 // AI 답변 인용 표시 — 썸네일 엔진 뱃지(EngineBadges, 반짝임)·글 안의 인용 기록(PostCitations).
 // 증빙은 AIRank가 보관한 실제 AI 답변 HTML 원본(새 탭).
@@ -87,48 +87,135 @@ export function PostCitationSummary({ items }: { items: Citation[] }) {
   );
 }
 
-/** 본문 끝 — 이 글이 인용된 AI 답변(날짜 · 엔진 · 질문 · 답변 원본) */
-export function PostCitations({ items }: { items: Citation[] }) {
+function Chevron() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 16 16" className="h-4 w-4 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 6l4 4 4-4" />
+    </svg>
+  );
+}
+
+const ORIGINAL_BTN =
+  "inline-flex min-h-[36px] shrink-0 items-center justify-center gap-1 self-start rounded-full border border-primary/30 px-3.5 text-[13px] font-semibold text-primary transition-colors hover:bg-primary hover:text-white sm:self-center";
+
+/** 질문 한 장 — 엔진 뱃지 + 인용 일수·최근 날짜, 펼치면 날짜별 답변 원본 */
+function QueryCard({ query, items }: { query: string; items: Citation[] }) {
+  const days = new Set(items.map((c) => c.date)).size;
+  const latest = items[0]; // items는 최신순
+  const head = (
+    <div className="min-w-0">
+      <p className="mb-2 text-[16px] font-semibold leading-snug text-gray-900">“{query}”</p>
+      <div className="flex flex-wrap items-center gap-1.5">
+        {enginesOf(items).map((e) => (
+          <EngineBadge key={e} engine={e} />
+        ))}
+        <span className="mono ml-1 text-[12px] text-gray-500">
+          {days > 1 ? `${days}일 인용 · 최근 ` : ""}
+          {formatDate(latest.date)}
+        </span>
+      </div>
+    </div>
+  );
+
+  // 한 건뿐이면 접지 않고 바로 원본
+  if (items.length === 1) {
+    return (
+      <li className="flex flex-col gap-3 rounded-[14px] border border-gray-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
+        {head}
+        {latest.answerUrl && (
+          <a href={latest.answerUrl} target="_blank" rel="noopener nofollow" className={ORIGINAL_BTN}>
+            답변 원본 <ArrowUpRight />
+          </a>
+        )}
+      </li>
+    );
+  }
+
+  const row = (c: Citation) => (
+    <li key={`${c.date}|${c.engine}`} className="flex min-h-[40px] items-center justify-between gap-3">
+      <span className="flex items-center gap-2">
+        <time dateTime={c.date} className="mono w-[86px] text-[13px] text-gray-500">
+          {formatDate(c.date)}
+        </time>
+        <EngineBadge engine={c.engine} />
+      </span>
+      {c.answerUrl && (
+        <a href={c.answerUrl} target="_blank" rel="noopener nofollow" className="inline-flex min-h-[36px] items-center gap-1 text-[13px] font-semibold text-primary hover:underline">
+          원본 <ArrowUpRight />
+        </a>
+      )}
+    </li>
+  );
+  const SHOW = 10;
+  return (
+    <li className="rounded-[14px] border border-gray-200 bg-white">
+      <details className="group">
+        <summary className="flex cursor-pointer list-none flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-5 [&::-webkit-details-marker]:hidden">
+          {head}
+          <span className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap text-[13px] font-semibold text-gray-500 group-open:text-primary">
+            날짜별 원본 {items.length} <Chevron />
+          </span>
+        </summary>
+        <div className="border-t border-gray-100 px-5 py-2">
+          <ul>{items.slice(0, SHOW).map(row)}</ul>
+          {items.length > SHOW && (
+            <details className="group/more">
+              <summary className="inline-flex min-h-[40px] cursor-pointer list-none items-center text-[13px] font-semibold text-gray-500 hover:text-primary group-open/more:hidden [&::-webkit-details-marker]:hidden">
+                이전 {items.length - SHOW}건 더보기
+              </summary>
+              <ul>{items.slice(SHOW).map(row)}</ul>
+            </details>
+          )}
+        </div>
+      </details>
+    </li>
+  );
+}
+
+/** 본문 끝 — 이 글이 인용된 AI 답변. 질문별로 묶고(많이 인용된 순), 4개 넘으면 나머지는 접는다. */
+export function PostCitations({ items, maxQueries = 4 }: { items: Citation[]; maxQueries?: number }) {
   if (!items.length) return null;
+  const sorted = [...items].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+  const byQuery = new Map<string, Citation[]>();
+  for (const c of sorted) byQuery.set(c.query, [...(byQuery.get(c.query) ?? []), c]);
+  const groups = [...byQuery.entries()].sort((a, b) => b[1].length - a[1].length || (a[1][0].date < b[1][0].date ? 1 : -1));
+  const dates = [...new Set(sorted.map((c) => c.date))];
+  const first = dates[dates.length - 1];
+  const last = dates[0];
+  const shown = groups.slice(0, maxQueries);
+  const rest = groups.slice(maxQueries);
+
   return (
     <section id="ai-citations" aria-labelledby="ai-citations-heading" className="mt-14 scroll-mt-24 border-t border-gray-200 pt-10">
       <p className="mb-2 text-[13px] font-bold text-primary">AI Citation</p>
       <h2 id="ai-citations-heading" className="mb-3 text-2xl">
         이 글이 인용된 AI 답변
       </h2>
-      <p className="mb-6 text-[15px] leading-relaxed text-gray-500">
+      <p className="mb-2 text-[15px] leading-relaxed text-gray-500">
         AIRank가 매일 같은 질문으로 AI 답변을 수집해, 출처 링크로 이 글이 잡힌 날만 남겼습니다.
-        &lsquo;답변 원본&rsquo;을 누르면 그날 저장된 실제 답변 화면이 새 탭으로 열립니다.
+        &lsquo;원본&rsquo;을 누르면 그날 저장된 실제 답변 화면이 새 탭으로 열립니다.
+      </p>
+      <p className="mono mb-6 text-[13px] text-gray-500">
+        인용 {items.length}회 · 질문 {groups.length}개 · 엔진 {enginesOf(items).length}개 ·{" "}
+        {first === last ? formatDate(last) : `${formatDate(first)} ~ ${formatDate(last)}`}
       </p>
       <ul className="flex flex-col gap-3">
-        {items.map((c) => (
-          <li
-            key={`${c.date}|${c.engine}|${c.query}`}
-            className="flex flex-col gap-3 rounded-[14px] border border-gray-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:gap-5"
-          >
-            <div className="min-w-0">
-              <div className="mb-2 flex flex-wrap items-center gap-2">
-                <EngineBadge engine={c.engine} />
-                <time dateTime={c.date} className="mono text-[13px] text-gray-500">
-                  {formatDate(c.date)}
-                </time>
-                <span className="text-[13px] text-gray-400">{ENGINE_LABEL[c.engine] ?? c.engine} 답변</span>
-              </div>
-              <p className="text-[16px] font-semibold leading-snug text-gray-900">“{c.query}”</p>
-            </div>
-            {c.answerUrl && (
-              <a
-                href={c.answerUrl}
-                target="_blank"
-                rel="noopener nofollow"
-                className="inline-flex min-h-[40px] shrink-0 items-center justify-center gap-1 self-start rounded-full border border-primary/30 px-4 text-[14px] font-semibold text-primary transition-colors hover:bg-primary hover:text-white sm:self-center"
-              >
-                답변 원본 <ArrowUpRight />
-              </a>
-            )}
-          </li>
+        {shown.map(([q, cs]) => (
+          <QueryCard key={q} query={q} items={cs} />
         ))}
       </ul>
+      {rest.length > 0 && (
+        <details className="group/q mt-3">
+          <summary className="inline-flex min-h-[40px] cursor-pointer list-none items-center text-[14px] font-semibold text-gray-500 hover:text-primary group-open/q:hidden [&::-webkit-details-marker]:hidden">
+            질문 {rest.length}개 더보기
+          </summary>
+          <ul className="flex flex-col gap-3">
+            {rest.map(([q, cs]) => (
+              <QueryCard key={q} query={q} items={cs} />
+            ))}
+          </ul>
+        </details>
+      )}
     </section>
   );
 }
