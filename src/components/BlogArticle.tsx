@@ -6,8 +6,7 @@ import {
 } from "@/lib/schema";
 import { postUrl, relatedPosts } from "@/lib/posts";
 import JsonLd from "@/components/JsonLd";
-import { citationsFor } from "@/lib/citations";
-import { CitationLogFull } from "@/components/blog/CitationLog";
+import { citationsFor, loadCitations } from "@/lib/citations";
 import PostCard from "@/components/blog/PostCard";
 
 // 글 단위 FAQ 항목(스키마는 본문 하단에서 직접 emit). 홈 FaqSection은
@@ -27,7 +26,7 @@ interface BlogArticleProps {
   children: React.ReactNode;
 }
 
-export default function BlogArticle({
+export default async function BlogArticle({
   slug,
   tag,
   title,
@@ -54,7 +53,7 @@ export default function BlogArticle({
     { name: title, path },
   ]);
   const related = relatedPosts(slug, 3);
-  const citations = citationsFor(slug);
+  const citations = await loadCitations();
 
   return (
     <>
@@ -124,7 +123,6 @@ export default function BlogArticle({
               </ul>
             </section>
           )}
-          <CitationLogFull items={citations} />
         </div>
 
         {/* CTA — 홈 상담 섹션으로 연결 */}
@@ -147,7 +145,7 @@ export default function BlogArticle({
           <h3 className="mb-8 text-xl">관련 글 더보기</h3>
           <div className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-3">
             {related.map((r) => (
-              <PostCard key={r.slug} post={r} showCitations={false} />
+              <PostCard key={r.slug} post={r} citations={citationsFor(citations, r.slug)} />
             ))}
           </div>
         </div>

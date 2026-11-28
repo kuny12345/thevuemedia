@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { getPost, posts, postsByDate, postUrl, type Category } from "@/lib/posts";
-import { citationsFor, citationStats, citedSlugs, formatDate } from "@/lib/citations";
+import { posts, postsByDate, postUrl, type Category } from "@/lib/posts";
+import { citationsFor, citationStats, enginesOf, formatDate, loadCitations } from "@/lib/citations";
 import PostCard, { thumbUrl } from "@/components/blog/PostCard";
-import { CitationBadge, CitationLogCompact } from "@/components/blog/CitationLog";
+import { CitationLedger, CitationSeal, EngineChip } from "@/components/blog/CitationLog";
 import { breadcrumbSchema } from "@/lib/schema";
 import JsonLd from "@/components/JsonLd";
 
@@ -43,7 +41,7 @@ const CATEGORY_ORDER: { key: Category; label: string; desc: string }[] = [
   { key: "분석", label: "분석", desc: "데이터로 보는 AIO 인사이트" },
 ];
 
-export default function BlogIndexPage() {
+export default async function BlogIndexPage() {
   const breadcrumb = breadcrumbSchema([
     { name: "홈", path: "/" },
     { name: "블로그", path: "/blog" },
@@ -63,10 +61,8 @@ export default function BlogIndexPage() {
     })),
   };
 
-  const stats = citationStats();
-  const cited = citedSlugs()
-    .map((s) => getPost(s))
-    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+  const citations = await loadCitations();
+  const stats = citationStats(citations);
   const categories = CATEGORY_ORDER.filter((c) => posts.some((p) => p.category === c.key));
 
   return (
@@ -75,7 +71,7 @@ export default function BlogIndexPage() {
       <JsonLd data={collection} />
 
       <div className="paper-section">
-        <header className="border-b border-gray-200 pt-32 pb-12 lg:pt-40 lg:pb-14">
+        <header className="pt-32 pb-12 lg:pt-40 lg:pb-14">
           <div className="mx-auto max-w-5xl px-6 text-center">
             <p className="eyebrow mb-5 justify-center">Insights</p>
             <h1 className="mb-5 text-3xl md:text-4xl lg:text-5xl">
@@ -85,25 +81,59 @@ export default function BlogIndexPage() {
               AI가 브랜드를 추천하게 만드는 모든 전략을 한곳에 모았습니다.
               개념부터 엔진별·업종별 실전까지.
             </p>
-            {stats.total > 0 && (
-              <a
-                href="#cited"
-                className="mt-8 inline-flex min-h-[44px] flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-full border border-gray-200 bg-white px-5 py-2 text-[14px] text-gray-600 transition-colors hover:border-primary"
-              >
-                <span className="flex items-center gap-2 font-bold text-gray-900">
-                  <span className="h-2 w-2 rounded-full bg-primary" />
-                  AI 답변 인용 확인 {stats.posts}편 · {stats.total}건
-                </span>
-                <span className="mono text-[12px] text-gray-400">
-                  AIRank 측정 · 최근 {formatDate(stats.lastDate!)}
-                </span>
-              </a>
-            )}
           </div>
         </header>
 
+        {/* AI 답변 인용 기록 — 글 목록과 구분되는 별도 영역 */}
+        {stats.total > 0 && (
+          <section id="citations" aria-labelledby="citations-heading" className="scroll-mt-20 bg-[#1d2835] text-white">
+            <div className="mx-auto max-w-6xl px-6 py-16 lg:py-20">
+              <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+                <div className="flex items-start gap-5">
+                  <span className="hidden shrink-0 sm:inline-flex">
+                    <CitationSeal count={stats.total} size={92} id="ledger" />
+                  </span>
+                  <div>
+                    <p className="mb-3 text-[14px] font-bold text-[#8cc4ff]">AI Citation Log</p>
+                    <h2 id="citations-heading" className="text-2xl !text-white md:text-3xl">
+                      AI 답변 인용 기록
+                    </h2>
+                    <p className="mt-3 max-w-2xl leading-relaxed text-[#b8c3cf]">
+                      AIRank가 매일 같은 질문을 AI 엔진에 던지고 답변을 저장합니다. 답변의 출처 링크로
+                      더뷰미디어 글이 잡힌 기록만 날짜·질문별로 모았습니다. 매일 자동으로 갱신되며,
+                      &lsquo;답변 원본 보기&rsquo;로 그날 저장된 실제 답변 화면을 열어볼 수 있습니다.
+                    </p>
+                  </div>
+                </div>
+                <dl className="grid shrink-0 grid-cols-3 gap-6 text-center lg:text-right">
+                  <div>
+                    <dt className="text-[12px] text-[#b8c3cf]">인용</dt>
+                    <dd className="mono mt-1 text-2xl font-bold">{stats.total}<span className="ml-0.5 text-sm font-medium text-[#b8c3cf]">건</span></dd>
+                  </div>
+                  <div>
+                    <dt className="text-[12px] text-[#b8c3cf]">인용된 글</dt>
+                    <dd className="mono mt-1 text-2xl font-bold">{stats.posts}<span className="ml-0.5 text-sm font-medium text-[#b8c3cf]">편</span></dd>
+                  </div>
+                  <div>
+                    <dt className="text-[12px] text-[#b8c3cf]">최근 측정</dt>
+                    <dd className="mono mt-1 text-2xl font-bold">{formatDate(stats.lastDate!).slice(5)}</dd>
+                  </div>
+                </dl>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {enginesOf(citations).map((e) => (
+                  <EngineChip key={e} engine={e} size="md" />
+                ))}
+              </div>
+              <div className="mt-10">
+                <CitationLedger items={citations} />
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* 카테고리 바로가기 */}
-        <nav aria-label="카테고리" className="border-b border-gray-200">
+        <nav aria-label="카테고리" className="border-y border-gray-200">
           <div className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-6 py-4 [scrollbar-width:none]">
             {categories.map((c) => (
               <a
@@ -118,64 +148,6 @@ export default function BlogIndexPage() {
         </nav>
 
         <main className="mx-auto max-w-6xl px-6 py-16 lg:py-20">
-          {/* AI가 실제로 인용한 글 */}
-          {cited.length > 0 && (
-            <section id="cited" className="mb-20 scroll-mt-24" aria-labelledby="cited-heading">
-              <div className="mb-8">
-                <p className="eyebrow mb-3">Cited by AI</p>
-                <h2 id="cited-heading" className="text-2xl md:text-3xl">
-                  AI 답변에 실제로 인용된 글
-                </h2>
-                <p className="mt-2 max-w-2xl text-gray-500">
-                  AIRank가 매일 같은 질문을 AI 엔진에 던지고 답변 화면을 저장합니다.
-                  답변의 출처로 이 글들이 표시된 날짜·질문·화면을 그대로 공개합니다.
-                </p>
-              </div>
-              <div className="flex flex-col gap-10">
-                {cited.map((p) => {
-                  const cites = citationsFor(p.slug);
-                  return (
-                    <article key={p.slug} className="group grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
-                      <Link
-                        href={postUrl(p.slug)}
-                        tabIndex={-1}
-                        aria-hidden="true"
-                        className="relative block overflow-hidden rounded-[16px] border border-gray-200 bg-gray-50 lg:col-span-7"
-                      >
-                        <Image
-                          src={thumbUrl(p.slug)}
-                          alt=""
-                          width={1200}
-                          height={630}
-                          priority
-                          sizes="(min-width: 1024px) 640px, 100vw"
-                          className="aspect-[1200/630] h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-                        />
-                        <span className="absolute right-4 top-4">
-                          <CitationBadge count={cites.length} />
-                        </span>
-                      </Link>
-                      <div className="flex flex-col lg:col-span-5">
-                        <div className="flex items-center gap-2 text-[13px]">
-                          <span className="font-bold text-primary">{p.tag}</span>
-                          <span className="text-gray-300" aria-hidden="true">·</span>
-                          <time className="mono text-gray-400" dateTime={p.iso}>{p.date}</time>
-                        </div>
-                        <h3 className="mt-2 text-2xl leading-snug">
-                          <Link href={postUrl(p.slug)} className="transition-colors hover:text-primary">
-                            {p.title}
-                          </Link>
-                        </h3>
-                        <p className="mt-3 text-[15px] leading-relaxed text-gray-500">{p.excerpt}</p>
-                        <CitationLogCompact items={cites} />
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
-            </section>
-          )}
-
           {categories.map((cat) => {
             const items = postsByDate().filter((p) => p.category === cat.key);
             return (
@@ -189,7 +161,7 @@ export default function BlogIndexPage() {
                 </div>
                 <div className="grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
                   {items.map((p) => (
-                    <PostCard key={p.slug} post={p} />
+                    <PostCard key={p.slug} post={p} citations={citationsFor(citations, p.slug)} />
                   ))}
                 </div>
               </section>

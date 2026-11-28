@@ -1,111 +1,182 @@
-import { ENGINE_LABEL, formatDate, type Citation } from "@/lib/citations";
+import Link from "next/link";
+import { ENGINE_COLOR, ENGINE_LABEL, enginesOf, formatDate, type Citation } from "@/lib/citations";
+import { getPost, postUrl } from "@/lib/posts";
 
-// AI 답변 인용 기록 — 목록 카드(compact)와 글 본문 하단(full) 공용.
-// 근거 화면은 AIRank가 측정 당일 저장한 실제 답변 캡처(airank.lol).
+// AI 답변 인용 표시 — 썸네일 인증 마크(CitationSeal)·엔진 칩(EngineChips)·인용 기록 섹션(CitationLedger).
+// 증빙은 AIRank가 보관한 실제 AI 답변 HTML 원본(새 탭).
 
-function ExternalIcon() {
+function ExternalIcon({ className = "h-3.5 w-3.5" }: { className?: string }) {
   return (
-    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
       <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
     </svg>
   );
 }
 
-function EngineChip({ engine }: { engine: string }) {
+// 24꼭지 로제트(인증 인장 테두리) — 정적 path
+const ROSETTE = (() => {
+  const pts: string[] = [];
+  const n = 24;
+  for (let i = 0; i < n * 2; i++) {
+    const r = i % 2 === 0 ? 50 : 45.5;
+    const a = (Math.PI * i) / n - Math.PI / 2;
+    pts.push(`${(50 + r * Math.cos(a)).toFixed(2)},${(50 + r * Math.sin(a)).toFixed(2)}`);
+  }
+  return `M${pts.join("L")}Z`;
+})();
+
+/** 썸네일 위 인증 마크 — "AI CITED · VERIFIED BY AIRANK" 원형 문구 + 체크 + 건수 */
+export function CitationSeal({ count, size = 76, id }: { count: number; size?: number; id: string }) {
+  const arc = `seal-arc-${id}`;
   return (
-    <span className="inline-flex shrink-0 items-center rounded-full border border-primary/25 bg-primary/[0.06] px-2.5 py-0.5 text-[12px] font-bold text-primary">
-      {ENGINE_LABEL[engine] ?? engine}
+    <span
+      className="inline-flex drop-shadow-[0_6px_14px_rgba(10,30,60,0.35)]"
+      title={`AI 답변 인용 ${count}건 (AIRank 측정)`}
+      role="img"
+      aria-label={`AI 답변 인용 인증 ${count}건`}
+    >
+      <svg width={size} height={size} viewBox="0 0 100 100" aria-hidden="true">
+        <path d={ROSETTE} fill="#ffffff" />
+        <circle cx="50" cy="50" r="41.5" fill="#0064e0" />
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#ffffff" strokeOpacity="0.55" strokeWidth="0.8" strokeDasharray="1.6 1.8" />
+        <defs>
+          <path id={arc} d="M50,50 m-30.5,0 a30.5,30.5 0 1,1 61,0 a30.5,30.5 0 1,1 -61,0" />
+        </defs>
+        <text fill="#ffffff" fontSize="8.2" fontWeight="700" letterSpacing="1.6" fontFamily="'JetBrains Mono', ui-monospace, monospace">
+          <textPath href={`#${arc}`} startOffset="0">
+            AI CITED · VERIFIED BY AIRANK ·
+          </textPath>
+        </text>
+        <circle cx="50" cy="50" r="17" fill="#ffffff" />
+        <path d="M42 50.5l5.5 5.5 11-12" fill="none" stroke="#0064e0" strokeWidth="4.2" strokeLinecap="round" strokeLinejoin="round" />
+        {count > 1 && (
+          <g>
+            <circle cx="79" cy="21" r="12" fill="#ffffff" />
+            <text x="79" y="25.2" textAnchor="middle" fontSize="12" fontWeight="800" fill="#0064e0" fontFamily="Pretendard, sans-serif">
+              {count}
+            </text>
+          </g>
+        )}
+      </svg>
     </span>
   );
 }
 
-export function CitationBadge({ count }: { count: number }) {
+export function EngineChip({ engine, size = "sm" }: { engine: string; size?: "sm" | "md" }) {
+  const label = ENGINE_LABEL[engine] ?? engine;
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-[12px] font-bold text-primary shadow-sm backdrop-blur">
-      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-      AI 인용 {count}건
+    <span
+      className={`inline-flex shrink-0 items-center gap-1.5 rounded-full font-bold text-white shadow-[0_2px_8px_rgba(0,0,0,0.25)] ring-1 ring-white/40 ${
+        size === "md" ? "px-3 py-1 text-[13px]" : "px-2.5 py-[3px] text-[11.5px]"
+      }`}
+      style={{ background: ENGINE_COLOR[engine] ?? "#2a3747" }}
+    >
+      <svg aria-hidden="true" viewBox="0 0 12 12" className="h-2.5 w-2.5">
+        <path d="M2.5 6.2l2.2 2.2 4.8-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      {label}
     </span>
   );
 }
 
-export function CitationLogCompact({ items, max = 3 }: { items: Citation[]; max?: number }) {
+/** 썸네일 하단에 엔진별 인용 칩 */
+export function EngineChips({ items }: { items: Citation[] }) {
+  const engines = enginesOf(items);
+  if (!engines.length) return null;
+  return (
+    <span className="flex flex-wrap gap-1.5">
+      {engines.map((e) => (
+        <EngineChip key={e} engine={e} />
+      ))}
+    </span>
+  );
+}
+
+/** 블로그 목록의 "AI 답변 인용 기록" — 날짜 → 질의어 → 엔진별(인용된 글 + 답변 원본) */
+export function CitationLedger({ items, maxDates = 7 }: { items: Citation[]; maxDates?: number }) {
   if (!items.length) return null;
-  const shown = items.slice(0, max);
-  return (
-    <div className="mt-5 rounded-[12px] border border-gray-200 bg-gray-50 p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <span className="text-[13px] font-bold text-gray-900">AI 답변 인용 기록</span>
-        <span className="mono text-[11px] text-gray-400">AIRank 측정</span>
+
+  // 날짜 → 질의어 → 엔진 → 글 slug[]
+  const byDate = new Map<string, Map<string, Map<string, { slugs: string[]; answerUrl: string | null }>>>();
+  for (const c of items) {
+    const d = byDate.get(c.date) ?? new Map();
+    const q = d.get(c.query) ?? new Map();
+    const e = q.get(c.engine) ?? { slugs: [], answerUrl: null };
+    if (!e.slugs.includes(c.slug)) e.slugs.push(c.slug);
+    e.answerUrl = e.answerUrl ?? c.answerUrl;
+    q.set(c.engine, e);
+    d.set(c.query, q);
+    byDate.set(c.date, d);
+  }
+  const dates = [...byDate.keys()].sort((a, b) => (a < b ? 1 : -1));
+
+  const renderDate = (date: string) => {
+    const queries = byDate.get(date)!;
+    return (
+      <div key={date} className="grid grid-cols-1 gap-4 border-t border-white/10 py-8 md:grid-cols-[140px_1fr] md:gap-8">
+        <div className="flex items-baseline gap-3 md:flex-col md:gap-1">
+          <time className="mono text-[15px] font-bold text-white" dateTime={date}>
+            {formatDate(date)}
+          </time>
+          <span className="text-[13px] text-[#b8c3cf]">질문 {queries.size}개</span>
+        </div>
+        <ul className="flex flex-col gap-3">
+          {[...queries.entries()].map(([query, engines]) => (
+            <li key={query} className="rounded-[14px] border border-white/10 bg-white/[0.04] p-5">
+              <p className="text-[16px] font-bold leading-snug text-white">
+                <span className="mr-2 text-[#8cc4ff]" aria-hidden="true">Q.</span>
+                {query}
+              </p>
+              <ul className="mt-4 flex flex-col gap-3">
+                {[...engines.entries()].map(([engine, v]) => (
+                  <li key={engine} className="flex flex-col gap-2 border-t border-white/[0.08] pt-3 sm:flex-row sm:items-center sm:gap-4">
+                    <span className="flex self-start sm:self-auto">
+                      <EngineChip engine={engine} size="md" />
+                    </span>
+                    <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-1.5 gap-y-1 text-[14px] text-[#b8c3cf]">
+                      <span className="shrink-0">출처로 인용된 글</span>
+                      {v.slugs.map((s, i) => (
+                        <span key={s} className="min-w-0">
+                          <Link href={postUrl(s)} className="font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-white">
+                            {getPost(s)?.title ?? s}
+                          </Link>
+                          {i < v.slugs.length - 1 && <span aria-hidden="true">,</span>}
+                        </span>
+                      ))}
+                    </div>
+                    {v.answerUrl && (
+                      <a
+                        href={v.answerUrl}
+                        target="_blank"
+                        rel="noopener nofollow"
+                        className="inline-flex min-h-[40px] shrink-0 items-center justify-center gap-1.5 self-start rounded-full bg-white px-4 text-[13px] font-bold text-[#1d2835] transition-colors hover:bg-[#d6e8ff] sm:self-auto"
+                      >
+                        답변 원본 보기 <ExternalIcon />
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="flex flex-col gap-3">
-        {shown.map((c) => (
-          <li key={`${c.engine}-${c.date}-${c.query}`} className="flex flex-col gap-1.5">
-            <div className="flex items-center gap-2">
-              <EngineChip engine={c.engine} />
-              <time className="mono text-[12px] text-gray-400" dateTime={c.date}>
-                {formatDate(c.date)}
-              </time>
-            </div>
-            <p className="text-[14px] leading-snug text-gray-700">“{c.query}”</p>
-            {c.screenshotUrl && (
-              <a
-                href={c.screenshotUrl}
-                target="_blank"
-                rel="noopener nofollow"
-                className="inline-flex min-h-[28px] items-center gap-1 self-start text-[13px] font-semibold text-primary hover:underline"
-              >
-                인용된 답변 화면 보기 <ExternalIcon />
-              </a>
-            )}
-          </li>
-        ))}
-      </ul>
-      {items.length > max && <p className="mt-3 text-[12px] text-gray-400">외 {items.length - max}건</p>}
-    </div>
-  );
-}
+    );
+  };
 
-export function CitationLogFull({ items }: { items: Citation[] }) {
-  if (!items.length) return null;
+  const recent = dates.slice(0, maxDates);
+  const older = dates.slice(maxDates);
   return (
-    <section className="mt-14" aria-labelledby="article-citations-heading">
-      <p className="eyebrow mb-3">AI Citation Log</p>
-      <h2 id="article-citations-heading" className="mb-2 text-2xl">
-        이 글이 AI 답변에 인용된 기록
-      </h2>
-      <p className="mb-6 text-[15px] leading-relaxed text-gray-500">
-        AIRank가 매일 같은 질문을 AI 엔진에 던지고 답변 화면을 저장합니다. 아래는 답변의 출처로 이 글이 표시된 날짜·질문·실제 화면입니다.
-      </p>
-      <ul className="flex flex-col gap-4">
-        {items.map((c) => (
-          <li key={`${c.engine}-${c.date}-${c.query}`} className="overflow-hidden rounded-[14px] border border-gray-200 bg-white">
-            <div className="flex flex-col gap-2 p-5">
-              <div className="flex flex-wrap items-center gap-2">
-                <EngineChip engine={c.engine} />
-                <time className="mono text-[13px] text-gray-400" dateTime={c.date}>
-                  {formatDate(c.date)}
-                </time>
-              </div>
-              <p className="text-[17px] font-bold leading-snug text-gray-900">“{c.query}”</p>
-            </div>
-            {c.screenshotUrl && (
-              <a href={c.screenshotUrl} target="_blank" rel="noopener nofollow" className="group block border-t border-gray-200 bg-gray-50">
-                {/* eslint-disable-next-line @next/next/no-img-element -- 외부(airank.lol) 원본 캡처를 그대로 보여준다 */}
-                <img
-                  src={c.screenshotUrl}
-                  alt={`${ENGINE_LABEL[c.engine] ?? c.engine}에 “${c.query}”를 물었을 때의 답변 화면 — 출처로 이 글이 표시됨 (${formatDate(c.date)})`}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-auto w-full transition-opacity group-hover:opacity-90"
-                />
-                <span className="flex items-center justify-center gap-1 py-3 text-[14px] font-semibold text-primary">
-                  원본 화면 크게 보기 <ExternalIcon />
-                </span>
-              </a>
-            )}
-          </li>
-        ))}
-      </ul>
-    </section>
+    <>
+      {recent.map(renderDate)}
+      {older.length > 0 && (
+        <details className="group border-t border-white/10">
+          <summary className="flex min-h-[48px] cursor-pointer list-none items-center justify-center text-[14px] font-semibold text-[#b8c3cf] hover:text-white [&::-webkit-details-marker]:hidden">
+            이전 기록 {older.length}일 더보기
+          </summary>
+          {older.map(renderDate)}
+        </details>
+      )}
+    </>
   );
 }
